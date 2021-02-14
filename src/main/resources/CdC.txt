@@ -1,6 +1,0 @@
-Le projet doit permettre de mettre en relation les missions de freelances avec les freelancers 
-Le projet doit permettre de séparer les missions par catégories
-Le projet doit permettre de mettre en place un système de rating des freelancers 
-Le projet doit permettre égalment de recommender à une demande le meilleur freelancer dans son domaine
-Le projet doit permettre d'avoir un historique de toute les missions effectuées par le freelancer
-Le projet doit permettre d'implémenter un système de chat (en option)
