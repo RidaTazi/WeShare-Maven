@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.List;
 
-public class Association extends User implements Serializable {
+public class Association  implements Serializable {
 
     @Id
     private Long idAssoc;
@@ -14,18 +14,20 @@ public class Association extends User implements Serializable {
 	private String descAssoc;
 	private String logoAssoc;
 	private String addrAssoc;
-	public List<Publication> publications;
-	public List<Don> dons;
+	private int etatInfo;
+	private List<Publication> publications;
+	private List<Don> dons;
 
-    public Association(Long idAssoc, String nomAssoc, String codeAssoc, String descAssoc, String logoAssoc, String addrAssoc, List<Publication> publications, List<Don> dons) {
-        this.idAssoc = idAssoc;
+    public Association() {
+    }
+
+    public Association(String nomAssoc, String codeAssoc, String descAssoc, String logoAssoc, String addrAssoc) {
         this.nomAssoc = nomAssoc;
         this.codeAssoc = codeAssoc;
         this.descAssoc = descAssoc;
         this.logoAssoc = logoAssoc;
         this.addrAssoc = addrAssoc;
-        this.publications = publications;
-        this.dons = dons;
+        this.etatInfo = 1;
     }
 
     public Long getIdAssoc() {
@@ -90,6 +92,14 @@ public class Association extends User implements Serializable {
 
     public void setDons(List<Don> dons) {
         this.dons = dons;
+    }
+
+    public int getEtatInfo() {
+        return etatInfo;
+    }
+
+    public void setEtatInfo(int etatInfo) {
+        this.etatInfo = etatInfo;
     }
 }
 
