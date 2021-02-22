@@ -33,6 +33,7 @@ public class AssociationDaoImpl implements AssociationDao {
             preparedStatement.setString(3, association.getDescAssoc());
             preparedStatement.setString(4, association.getAddrAssoc());
             preparedStatement.execute();
+            preparedStatement.close();
             return 0;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -44,13 +45,14 @@ public class AssociationDaoImpl implements AssociationDao {
     public boolean updateAssociation(Long id,Association association)  {
         try {
             init();
-            req="update association " +
-                    "set nomAssoc="+association.getNomAssoc() +
-                    ", descAssoc="+association.getDescAssoc()+
-                    ", addrAssoc="+association.getAddrAssoc()+
-                    "where idAssoc="+id;
-            statement.executeQuery(req);
-            statement.close();
+            req="update association set nomAssoc=?, descAssoc=?, addrAssoc=? where idAssoc=? ";
+            preparedStatement=connection.prepareStatement(req);
+            preparedStatement.setString(1, association.getNomAssoc());
+            preparedStatement.setString(2, association.getDescAssoc());
+            preparedStatement.setString(3, association.getAddrAssoc());
+            preparedStatement.setLong(4, id);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
             return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -63,7 +65,7 @@ public class AssociationDaoImpl implements AssociationDao {
         try {
             init();
             req="update association set etatInfo=0 where idAssoc="+id;
-            statement.executeQuery(req);
+            statement.executeUpdate(req);
             statement.close();
             return true;
         } catch (SQLException throwables) {

@@ -68,7 +68,7 @@ public class AssociationImpl implements IAssociation {
         Gson gson = new Gson();
         com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
         Long id =object.get("idAssoc").getAsLong();
-        association.setCodeAssoc(object.get("nomAssoc").getAsString());
+        association.setNomAssoc(object.get("nomAssoc").getAsString());
         association.setDescAssoc(object.get("descAssoc").getAsString());
         association.setAddrAssoc(object.get("addrAssoc").getAsString());
         try {

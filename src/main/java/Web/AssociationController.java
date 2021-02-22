@@ -34,6 +34,7 @@ public class AssociationController {
     @POST
     @Path("/{id}/delete")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Long deleteAssociation(@PathParam(value = "id") Long id){
         return iAssociation.deleteAssociation(id);
     }
@@ -41,6 +42,7 @@ public class AssociationController {
     @POST
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Long updateAssociation(String data){
         return iAssociation.updateAssociation(data);
     }
@@ -48,6 +50,7 @@ public class AssociationController {
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public int addAssociation(String data){
         return iAssociation.addAssociation(data);
     }
