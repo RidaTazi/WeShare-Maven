@@ -4,10 +4,7 @@ import Entities.Association;
 import Service.IAssociation;
 import ServiceImpl.AssociationImpl;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -30,7 +27,31 @@ public class AssociationController {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getById(@PathParam(value = "id") Long id){
-        return iAssociation.getAssociationById(id).getDescAssoc();
+    public Association getById(@PathParam(value = "id") Long id){
+        return iAssociation.getAssociationById(id);
     }
+
+    @POST
+    @Path("/{id}/delete")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Long deleteAssociation(@PathParam(value = "id") Long id){
+        return iAssociation.deleteAssociation(id);
+    }
+
+    @POST
+    @Path("/update")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Long updateAssociation(String data){
+        return iAssociation.updateAssociation(data);
+    }
+
+    @POST
+    @Path("/add")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public int addAssociation(String data){
+        return iAssociation.addAssociation(data);
+    }
+
+
+
 }

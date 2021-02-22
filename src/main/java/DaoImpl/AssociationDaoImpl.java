@@ -3,10 +3,8 @@ package DaoImpl;
 import Dao.AssociationDao;
 import Entities.Association;
 import Connection.DBConnection;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +12,7 @@ import java.util.List;
 public class AssociationDaoImpl implements AssociationDao {
     private Connection connection;
     private Statement statement;
+    private PreparedStatement preparedStatement;
     private String req;
 
 
@@ -24,15 +23,20 @@ public class AssociationDaoImpl implements AssociationDao {
 
 
     @Override
-    public boolean createAssociation(Association association) {
+    public int createAssociation(Association association) {
         try {
             init();
-            req="insert into association values("+association.getNomAssoc()+","+association.getCodeAssoc()+","+association.getDescAssoc()+","+association.getAddrAssoc()+");";
-            statement.executeQuery(req);
-            return true;
+            req="insert into association (nomAssoc,codeAssoc,descAssoc,addrAssoc) values(?,?,?,?);";
+            preparedStatement=connection.prepareStatement(req);
+            preparedStatement.setString(1, association.getNomAssoc());
+            preparedStatement.setString(2, association.getCodeAssoc());
+            preparedStatement.setString(3, association.getDescAssoc());
+            preparedStatement.setString(4, association.getAddrAssoc());
+            preparedStatement.execute();
+            return 0;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            return false;
+            return -1;
         }
     }
 
@@ -43,7 +47,7 @@ public class AssociationDaoImpl implements AssociationDao {
             req="update association " +
                     "set nomAssoc="+association.getNomAssoc() +
                     ", descAssoc="+association.getDescAssoc()+
-                    ", addrAssoc="+association.getAddrAssoc()+"" +
+                    ", addrAssoc="+association.getAddrAssoc()+
                     "where idAssoc="+id;
             statement.executeQuery(req);
             statement.close();
@@ -74,11 +78,9 @@ public class AssociationDaoImpl implements AssociationDao {
         association.setIdAssoc(id);
         try {
             init();
-            req="select * from association  where idAssoc="+id;
+            req="select * from association  where idAssoc="+id+";";
             ResultSet result = statement.executeQuery(req);
-            System.out.println("i made it to here 1");
-            System.out.println(result.getObject(1));
-            System.out.println("i made it to here 2");
+            result.next();
             association.setNomAssoc(result.getObject("nomAssoc").toString());
             association.setCodeAssoc(result.getObject("codeAssoc").toString());
             association.setDescAssoc(result.getObject("descAssoc").toString());
@@ -99,7 +101,7 @@ public class AssociationDaoImpl implements AssociationDao {
     public List<Association> getAll() throws SQLException {
         List<Association> associations=new ArrayList<>();
         init();
-        req="select idAssoc from association";
+        req="select idAssoc from association where etatInfo=1";
         ResultSet result=statement.executeQuery(req);
         while (result.next()){
             associations.add(getAssociationById(result.getLong("idAssoc")));
