@@ -5,29 +5,29 @@ import java.io.Serializable;
 
 public class MembreAssociation extends User implements Serializable {
     @Id
-    private String idMembre;
+    private Long idMembre;
 	private String nomMembre;
 	private String prenomMembre;
 	private String posteMembre;
-	private Association association;
-	private User user;
+	private Long idAssoc;
+	private Long idUser;
 
     public MembreAssociation() {
     }
 
-    public MembreAssociation(String nomMembre, String prenomMembre, String posteMembre, Association association, User user) {
+    public MembreAssociation(String nomMembre, String prenomMembre, String posteMembre, Long idAssoc, Long idUser) {
         this.nomMembre = nomMembre;
         this.prenomMembre = prenomMembre;
         this.posteMembre = posteMembre;
-        this.association = association;
-        this.user = user;
+        this.idAssoc = idAssoc;
+        this.idUser = idUser;
     }
 
-    public String getIdMembre() {
+    public Long getIdMembre() {
         return idMembre;
     }
 
-    public void setIdMembre(String idMembre) {
+    public void setIdMembre(Long idMembre) {
         this.idMembre = idMembre;
     }
 
@@ -55,19 +55,19 @@ public class MembreAssociation extends User implements Serializable {
         this.posteMembre = posteMembre;
     }
 
-    public Association getAssociation() {
-        return association;
+    public Long getIdAssoc() {
+        return idAssoc;
     }
 
-    public void setAssociation(Association association) {
-        this.association = association;
+    public void setIdAssoc(Long idAssoc) {
+        this.idAssoc = idAssoc;
     }
 
-    public User getUser() {
-        return user;
+    public Long getIdUser() {
+        return idUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 }

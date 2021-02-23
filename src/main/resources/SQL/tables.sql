@@ -1,4 +1,4 @@
-CREATE TABLE 'association' (
+CREATE TABLE association (
     idAssoc INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nomAssoc varchar(100) not null,
     codeAssoc varchar(20) not null,
@@ -9,12 +9,16 @@ CREATE TABLE 'association' (
 );
 
 
-create table 'membreAssociation'(
+create table membreAssociation(
     idMembre INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nomMembre varchar(50) not null,
     prenomMember varchar(50) not null,
-    posteMembre varchar(50) not null
+    posteMembre varchar(50) not null,
+    idAssoc INT NOT NULL,
+    CONSTRAINT FK_membre_assoc FOREIGN KEY (idAssoc)
+    REFERENCES association(idAssoc)
 );
+
 
 
 
