@@ -17,9 +17,10 @@ public class UserController {
     @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public void register(String data)
+    public String register(String data)
     {
         System.out.println("***********");
+        return "helloWorld";
     }
 	
 	@POST
