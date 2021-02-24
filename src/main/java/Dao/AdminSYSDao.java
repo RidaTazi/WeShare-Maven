@@ -6,8 +6,8 @@ import Entities.AdminSYS;
 
 public interface AdminSYSDao 
 {
-	int create(AdminSYS user) throws SQLException;
-    boolean update(Long id, AdminSYS user) throws SQLException;
+	int create(String admin_username, String admin_password, String admin_email) throws SQLException;
+    boolean update(Long id, String username, String password, String email) throws SQLException;
     boolean delete(Long id) throws SQLException;
     AdminSYS get(Long id) throws SQLException;
     List<AdminSYS> filter() throws SQLException;

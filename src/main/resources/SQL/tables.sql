@@ -22,18 +22,20 @@ create table IF NOT EXISTS membreAssociation(
 
 CREATE TABLE IF NOT EXISTS User (
     id_user INT AUTO_INCREMENT,
-    username_user VARCHAR(50),
-    password_user VARCHAR(256),
-    email_user VARCHAR(100),
+    etatInfo_user BOOLEAN,
+    username_user VARCHAR(50) NOT NULL,
+    password_user VARCHAR(256) NOT NULL,
+    email_user VARCHAR(100) NULL,
     PRIMARY KEY (id_user)
 );
 
 CREATE TABLE IF NOT EXISTS AdminSYS (
-    id_user INT AUTO_INCREMENT,
-    username_user VARCHAR(50),
-    password_user VARCHAR(256),
-    email_user VARCHAR(100),
-    PRIMARY KEY (id_user)
+    id_admin INT AUTO_INCREMENT,
+    etatInfo_admin BOOLEAN,
+    username_admin VARCHAR(50) NOT NULL,
+    password_admin VARCHAR(256) NOT NULL,
+    email_admin VARCHAR(100) NULL,
+    PRIMARY KEY (id_admin)
 );
 
 

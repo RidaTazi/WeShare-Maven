@@ -16,9 +16,10 @@ public class AssociationDaoImpl implements AssociationDao {
     private String req;
 
 
-    private void init() throws SQLException {
-        connection= DBConnection.getInstance();
-        statement=connection.createStatement();
+    private void init() throws SQLException 
+    {
+        connection = DBConnection.getInstance();
+        statement = connection.createStatement();
     }
 
 

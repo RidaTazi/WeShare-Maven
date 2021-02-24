@@ -9,6 +9,7 @@ public class AdminSYS extends User
 	
 	public AdminSYS()
 	{
+		
 	}
 	
 	public AdminSYS(long id_user, String username_user, String password_user, String email_user) 

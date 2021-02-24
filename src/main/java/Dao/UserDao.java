@@ -7,8 +7,8 @@ import Entities.User;
 
 public interface UserDao 
 {
-	int create(User user) throws SQLException;
-    boolean update(Long id, User user) throws SQLException;
+	int create(String username, String password, String email) throws SQLException;
+    boolean update(Long id, String username, String password, String email) throws SQLException;
     boolean delete(Long id) throws SQLException;
     User get(Long id) throws SQLException;
     List<User> all() throws SQLException;
