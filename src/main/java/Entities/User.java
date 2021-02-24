@@ -1,11 +1,20 @@
 package Entities;
 
+import Dao.UserDao;
+import DaoImpl.UserDaoImpl;
+
 public class User 
 {
 	protected long id_user;
 	protected String username_user;
 	protected String password_user;
 	protected String email_user;
+	public static UserDaoImpl objects;
+	
+	public User()
+	{
+
+	}
 	
 	public User(long id_user, String username_user, String password_user, String email_user) 
 	{
