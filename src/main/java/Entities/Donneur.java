@@ -10,10 +10,13 @@ public class Donneur extends User {
 	private Long idDonneur;
     private List<Don> dons;
 
-	public Donneur() {
+	public Donneur() 
+	{
+		
 	}
 
-	public Donneur(String nom_donneur,String prenom_donneur,String addr_Donneur) {
+	public Donneur(String nom_donneur,String prenom_donneur,String addr_Donneur) 
+	{
 		this.addr_donneur = addr_Donneur;
 		this.nom_donneur = nom_donneur;
 		this.prenom_donneur = prenom_donneur;
