@@ -38,6 +38,13 @@ CREATE TABLE IF NOT EXISTS AdminSYS (
     PRIMARY KEY (id_admin)
 );
 
+CREATE TABLE IF NOT EXISTS Token (
+    id_token INT AUTO_INCREMENT,
+    value_token VARCHAR(256) NOT NULL,
+    user_token INT NOT NULL,
+    PRIMARY KEY (id_token)
+);
+
 
 
 

@@ -1,4 +1,4 @@
-package DAOImp;
+package DaoImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import Connection.DBConnection;
-import DAO.PublicationDao;
+import Dao.PublicationDao;
 import Entities.Association;
 import Entities.Don;
 import Entities.Publication;

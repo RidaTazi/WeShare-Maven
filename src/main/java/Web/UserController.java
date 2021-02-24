@@ -19,7 +19,7 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public void register(String data)
     {
-        
+        System.out.println("***********");
     }
 	
 	@POST

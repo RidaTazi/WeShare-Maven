@@ -43,15 +43,22 @@ public class AdminSYSDaoImpl implements AdminSYSDao
     
     private String hashPassword(String password)
     {
+    	String salt = "E1F53135E559C253";
+    	String saltedPassword = salt + password + salt;
+    	int numberOfiteration = 50000;
+    
     	try 
     	{
     		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
     		
-        	messageDigest.update(password.getBytes());
+    		for (int counter = 0; counter < numberOfiteration; counter++)
+    		{
+    			messageDigest.update(saltedPassword.getBytes());
+        		
+    			saltedPassword = new String(messageDigest.digest());
+    		}
     		
-    		String hashedPassword = new String(messageDigest.digest());
-    		
-    		return hashedPassword;
+    		return saltedPassword;
     	}
     	catch (NoSuchAlgorithmException e) 
     	{

@@ -1,4 +1,4 @@
-package DAOImp;
+package DaoImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Connection.DBConnection;
-import DAO.DonDao;
+import Dao.DonDao;
 import Entities.Association;
 import Entities.Don;
 import Entities.Donneur;
