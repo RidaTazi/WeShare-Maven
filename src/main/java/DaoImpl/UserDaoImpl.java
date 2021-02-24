@@ -32,6 +32,18 @@ public class UserDaoImpl implements UserDao
         statement = connection.createStatement();
     }
     
+    private void close() throws SQLException
+    {
+    	if (statement != null)
+		{
+			statement.close();
+		}
+		else if (connection != null)
+		{
+			connection.close();
+		}
+    }
+    
     private String hashPassword(String password)
     {
     	try 
@@ -62,14 +74,7 @@ public class UserDaoImpl implements UserDao
 		
 		statement.executeUpdate(sqlQuery);
 		
-		if (statement != null)
-		{
-			statement.close();
-		}
-		else if (connection != null)
-		{
-			connection.close();
-		}
+		close();
 		return 0;
 	}
 	
@@ -84,8 +89,15 @@ public class UserDaoImpl implements UserDao
 				+ "password = " + hashedPassword + " , " + " email = " + email + " WHERE user_id = " + id; 
 		
 		statement.executeQuery(sqlQuery);
-		statement.close();
-		connection.close();
+		
+		if (statement != null)
+		{
+			statement.close();
+		}
+		else if (connection != null)
+		{
+			connection.close();
+		}
     	return true;
     }
     
@@ -95,8 +107,7 @@ public class UserDaoImpl implements UserDao
     	init();
     	sqlQuery = "UPDATE User SET etatInfo_user = 0" + " WHERE user_id = " + id;
     	statement.executeQuery(sqlQuery);
-		statement.close();
-		connection.close();
+    	close();
     	return false;
     }
     
@@ -104,20 +115,13 @@ public class UserDaoImpl implements UserDao
 	public User get(Long id) throws SQLException
     {
     	init();
-    	
     	User user = null;
-    	
     	sqlQuery = "select * from User where id_user = " + id + ";";
-        
         ResultSet result = statement.executeQuery(sqlQuery); result.next();
-    	
     	user.setUsername(result.getObject("username_user").toString());
     	user.setPassword(result.getObject("password_user").toString());
     	user.setEmail(result.getObject("password_user").toString());
-    
-		statement.close();
-		connection.close();
-		
+    	close();
     	return user;
     }
     
@@ -137,8 +141,7 @@ public class UserDaoImpl implements UserDao
         	users.add(get(result.getLong("id_user")));
         }
        
-		statement.close();
-		connection.close();
+        close();
 		return users;
     }
     
@@ -146,9 +149,7 @@ public class UserDaoImpl implements UserDao
     public List<User> filter() throws SQLException
     {
     	init();
-    	
-		statement.close();
-		connection.close();
+    	close();
 		return null;
     }
 }

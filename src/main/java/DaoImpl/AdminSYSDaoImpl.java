@@ -29,6 +29,18 @@ public class AdminSYSDaoImpl implements AdminSYSDao
         statement = connection.createStatement();
     }
     
+    private void close() throws SQLException
+    {
+    	if (statement != null)
+		{
+			statement.close();
+		}
+		else if (connection != null)
+		{
+			connection.close();
+		}
+    }
+    
     private String hashPassword(String password)
     {
     	try 
@@ -59,14 +71,7 @@ public class AdminSYSDaoImpl implements AdminSYSDao
 		
 		statement.executeUpdate(sqlQuery);
 		
-		if (statement != null)
-		{
-			statement.close();
-		}
-		else if (connection != null)
-		{
-			connection.close();
-		}
+		close();
 		return 0;
 	}
 	
@@ -81,8 +86,8 @@ public class AdminSYSDaoImpl implements AdminSYSDao
 				+ " , " + " admin_email = " + email 
 				+ " WHERE admin_id = " + id; 
 		statement.executeQuery(sqlQuery);
-		statement.close();
-		connection.close();
+	
+		close();
     	return true;
     	
     }
@@ -94,8 +99,7 @@ public class AdminSYSDaoImpl implements AdminSYSDao
   
     	sqlQuery = "UPDATE AdminSYS SET etatInfo_admin = 0" + " WHERE admin_id = " + id;
     	statement.executeQuery(sqlQuery);
-		statement.close();
-		connection.close();
+		close();
 		return false;
     	
     }
@@ -115,12 +119,8 @@ public class AdminSYSDaoImpl implements AdminSYSDao
         adminSYS.setPassword(result.getObject("password_admin").toString());
         adminSYS.setEmail(result.getObject("password_admin").toString());
     
-		statement.close();
-		connection.close();
-		
+		close();
     	return adminSYS;
-
-    	
     }
     
     public List<AdminSYS> all() throws SQLException
@@ -138,8 +138,7 @@ public class AdminSYSDaoImpl implements AdminSYSDao
         	admins.add(get(result.getLong("id_admin")));
         }
     	
-		statement.close();
-		connection.close();
+		close();
 		return admins;
     	
     }
@@ -147,8 +146,7 @@ public class AdminSYSDaoImpl implements AdminSYSDao
     public List<AdminSYS> filter() throws SQLException
     {
     	init();
-		statement.close();
-		connection.close();
+		close();
 		return null;
     }
 }

@@ -12,8 +12,8 @@ public class AdminSYS extends User
 		
 	}
 	
-	public AdminSYS(long id_user, String username_user, String password_user, String email_user) 
+	public AdminSYS(long id, String username, String password, String email) 
 	{
-		super(id_user, username_user, password_user, email_user);
+		super(id, username, password, email);
 	}
 }
