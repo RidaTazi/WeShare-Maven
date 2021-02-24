@@ -1,53 +1,56 @@
 package Entities;
 
 
+import java.util.List;
+
 public class Donneur extends User {
-//	private String _nom_Donneur;
-//	private String _prenom_Donneur;
-//	private String _addr_Donneur;
-//	public Array<Don> _proposer = new ArrayList<Don>();
-//
-//	public Donneur() {
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public Donneur(Object aParameter) {
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public String getNom_Donneur() {
-//		return this._nom_Donneur;
-//	}
-//
-//	public void setNom_Donneur(String aNom_Donneur) {
-//		this._nom_Donneur = aNom_Donneur;
-//	}
-//
-//	public String getAddr_Donneur() {
-//		return this._addr_Donneur;
-//	}
-//
-//	public void setAddr_Donneur(String aAddr_Donneur) {
-//		this._addr_Donneur = aAddr_Donneur;
-//	}
-//
-//	public static void createDonneur() {
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public static Donneur getDonneur() {
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public static Array<Donneur> filterDonneur() {
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public static void updateDonneur() {
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public static void deleteDonneur() {
-//		throw new UnsupportedOperationException();
-//	}
+	private String nom_donneur;
+	private String prenom_donneur;
+	private String addr_donneur;
+	private Long idDonneur;
+    private List<Don> dons;
+
+	public Donneur() {
+	}
+
+	public Donneur(String nom_donneur,String prenom_donneur,String addr_Donneur) {
+		this.addr_donneur = addr_Donneur;
+		this.nom_donneur = nom_donneur;
+		this.prenom_donneur = prenom_donneur;
+	}
+
+	public String getNomDonneur() {
+		return this.nom_donneur;
+	}
+
+	public void setNomDonneur(String aNom_Donneur) {
+		this.nom_donneur = aNom_Donneur;
+	}
+
+    public String getPrenomDonneur() {
+        return this.prenom_donneur;
+    }
+
+
+    public void setPrenomDonneur(String prenom_Donneur) {
+        this.prenom_donneur = prenom_Donneur;
+    }
+	public String getAddrDonneur() {
+		return this.addr_donneur;
+	}
+
+	public void setAddrDonneur(String aAddr_Donneur) {
+		this.addr_donneur = aAddr_Donneur;
+	}
+    public List<Don> getDons() {
+	    return this.dons;
+    }
+
+    public void setIdDonneur(Long id){
+	    this.idDonneur = id;
+    }
+
+    public Long getIdDonneur() {
+        return idDonneur;
+    }
 }
