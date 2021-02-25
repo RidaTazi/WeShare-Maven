@@ -64,4 +64,15 @@ public class MembreImpl implements IMembre {
             return null;
         }
     }
+
+    @Override
+    public Long deleteMembre(Long id) {
+        try {
+            membreDao.deleteMembre(id);
+            return id;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return -1L;
+        }
+    }
 }

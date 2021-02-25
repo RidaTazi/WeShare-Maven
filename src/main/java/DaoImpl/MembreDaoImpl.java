@@ -83,4 +83,18 @@ public class MembreDaoImpl implements MembreDao {
             return null;
         }
     }
+
+    @Override
+    public boolean deleteMembre(Long id)  {
+        try {
+            init();
+            req="update membreAssociation set etatInfo=0 where idMembre="+id;
+            statement.executeUpdate(req);
+            statement.close();
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
 }

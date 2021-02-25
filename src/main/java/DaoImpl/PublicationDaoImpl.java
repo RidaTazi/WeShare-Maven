@@ -25,22 +25,17 @@ public class PublicationDaoImpl implements PublicationDao{
 	}
 
 	@Override
-	public void createPub(Publication p) {             // make sure you associate pub to its association
+	public int createPub(Publication p) {      // make sure you associate pub to its association
+		int status = 0;
 		try {
-			prepstatement = connection.prepareStatement("INSERT INTO Publication VALUES (?,?,?,?,?,?,?)");
-			prepstatement.setInt(1, (int)p.getId());
-			prepstatement.setString(2, p.getTitre());
-			prepstatement.setString(3, p.getDesc());
-			prepstatement.setDate(4, p.getDate());
-			prepstatement.setString(5, p.getType());
-			prepstatement.setInt(6, p.getEtatInfo());
-			prepstatement.setInt(7, p.getAssociation().getIdAssoc().intValue());
-			int status = prepstatement.executeUpdate();
-			if(status == 0)
-			{
-				System.out.println("erreur creation publication !!!!");
-			}
-			
+			prepstatement = connection.prepareStatement("INSERT INTO Publication(titrePub,descPub,datePub,typePub,etatInfoPub,associationId) VALUES (?,?,?,?,?,?)");
+			prepstatement.setString(1, p.getTitre());
+			prepstatement.setString(2, p.getDesc());
+			prepstatement.setDate(3, p.getDate());
+			prepstatement.setString(4, p.getType());
+			prepstatement.setInt(5, p.getEtatInfo());
+			prepstatement.setInt(6, p.getAssociation().getIdAssoc().intValue());
+			status = prepstatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -52,11 +47,13 @@ public class PublicationDaoImpl implements PublicationDao{
 				e.printStackTrace();
 			}
 		}
+		return status;
 		
 	}
 
 	@Override
-	public void updatePub(Publication p) {
+	public int updatePub(Publication p) {
+		int status = 0;
 		try {
 			
 			prepstatement = connection.prepareStatement("UPDATE Publication SET titrePub = ?, descPub = ?, datePub = ?, typePub = ?, etatInfoPub = ?, associationId = ? WHERE idPub = ?" );
@@ -68,7 +65,7 @@ public class PublicationDaoImpl implements PublicationDao{
 			prepstatement.setInt(5, p.getEtatInfo());
 			prepstatement.setInt(6, p.getAssociation().getIdAssoc().intValue());
 			prepstatement.setInt(7, (int)p.getId());
-			int status = prepstatement.executeUpdate();
+			status = prepstatement.executeUpdate();
 			if(status == 0)
 			{
 				System.out.println("erreur creation don !!!!");
@@ -84,14 +81,16 @@ public class PublicationDaoImpl implements PublicationDao{
 				e.printStackTrace();
 			}
 		}
+		return status;
 	}
 
 	@Override
-	public void deletePub(long id) {
+	public int deletePub(long id) {
+		int status = 0;
 		try {
 			prepstatement = connection.prepareStatement("DELETE FROM Publication WHERE idPub = ? ");
 			prepstatement.setInt(1,(int)id);
-			int status = prepstatement.executeUpdate();
+			status = prepstatement.executeUpdate();
 			if(status == 0)
 			{
 				System.out.println("erreur suppression publication !!!!");
@@ -106,6 +105,7 @@ public class PublicationDaoImpl implements PublicationDao{
 				e.printStackTrace();
 			}
 		}
+		return status;
 		
 	}
 

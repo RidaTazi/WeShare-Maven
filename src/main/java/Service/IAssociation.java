@@ -12,4 +12,7 @@ public interface IAssociation {
     Long updateAssociation(String data);
     Association getAssociationById(Long id);
     List<Publication> getPublications(Long id);
+    int addPublication(Long id,String pub);
+    int updatePublication(Long idAssoc, Long idPub, String data);
+    int deletePublication(Long id);
 }

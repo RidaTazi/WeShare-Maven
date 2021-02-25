@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="WeShare" />
         <module name="ProjetWeb" />
+        <module name="WeShareapi" />
       </profile>
     </annotationProcessing>
   </component>

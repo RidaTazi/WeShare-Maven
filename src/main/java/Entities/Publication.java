@@ -16,12 +16,12 @@ public class Publication implements Serializable {
 
 	
 	//use this constructor to create an association's pub 
-	public Publication(long id, String titre, String desc, String type, Association assoc) {
-		this.id = id;
+	public Publication(String titre, String desc, String type, Association assoc) {
 		this.titre = titre;
 		this.desc = desc;
 		this.date =	new Date(new java.util.Date().getTime());
 		this.type = type;
+		etatInfo = 1;
 		this.association = assoc;
 	}
 	

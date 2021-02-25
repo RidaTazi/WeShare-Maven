@@ -19,8 +19,7 @@ public class Don implements Serializable {
 	
 	
 	//use this constructor to create a user's donation (no publication or association associated)
-	public Don (long iD, String type, String logo, String desc, String state, Donneur donneur){
-		this.iD = iD;
+	public Don (String type, String logo, String desc, String state, Donneur donneur){
 		this.type = type;
 		this.logo = logo;
 		this.desc = desc;

@@ -6,4 +6,5 @@ public interface IMembre {
     int addMembre(String data);
     Long updateMembre(String data);
     MembreAssociation getMembreById(Long id);
+    Long deleteMembre(Long id);
 }
