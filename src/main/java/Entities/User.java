@@ -5,7 +5,7 @@ import DaoImpl.UserDaoImpl;
 
 public class User 
 {
-	protected long id_user;
+	protected Long id_user;
 	protected int etatInfo_user;
 	protected String username_user;
 	protected String password_user;
@@ -20,7 +20,7 @@ public class User
 
 	}
 	
-	public User(long id_user, int etatInfo_user,  String username_user, String password_user, String role_user) 
+	public User(Long id_user, int etatInfo_user,  String username_user, String password_user, String role_user) 
 	{
 		this.id_user = id_user;
 		this.etatInfo_user = etatInfo_user;
@@ -29,7 +29,7 @@ public class User
 		this.role_user = role_user;
 	}
 	
-	public User(long id_user, int etatInfo_user, String username_user, String password_user, String email_user, String role_user) 
+	public User(Long id_user, int etatInfo_user, String username_user, String password_user, String email_user, String role_user) 
 	{
 		this.id_user = id_user;
 		this.etatInfo_user = etatInfo_user;
@@ -50,7 +50,7 @@ public class User
 		this.role_user = role_user;
 	}
 	
-	public long getIdUser()
+	public Long getIdUser()
 	{
 		return this.id_user;
 	}

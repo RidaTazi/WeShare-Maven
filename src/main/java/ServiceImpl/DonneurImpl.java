@@ -1,11 +1,15 @@
 package ServiceImpl;
 
+import Dao.DonDao;
 import Dao.DonneurDAO;
 import Dao.MembreDao;
+import DaoImpl.DonDaoImpl;
 import DaoImpl.DonneurDaoImpl;
 import DaoImpl.MembreDaoImpl;
+import Entities.Don;
 import Entities.Donneur;
 import Entities.MembreAssociation;
+import Entities.Publication;
 import Service.IDonneur;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -14,9 +18,11 @@ import java.sql.SQLException;
 
 public class DonneurImpl implements IDonneur {
     private DonneurDAO donneurDAO;
+    private DonDao donDao;
 
     public DonneurImpl() {
         this.donneurDAO = new DonneurDaoImpl();
+        this.donDao=new DonDaoImpl();
     }
 
     @Override
