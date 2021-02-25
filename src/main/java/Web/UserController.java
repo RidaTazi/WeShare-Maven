@@ -14,22 +14,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-=======
->>>>>>> 57fa607ba6e07936343a7da8aec5ef582b0392af
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-<<<<<<< HEAD
+
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
-=======
->>>>>>> 57fa607ba6e07936343a7da8aec5ef582b0392af
 
 import Entities.Token;
 import Entities.User;
@@ -37,26 +35,16 @@ import Entities.User;
 @Path("/user")
 public class UserController {
 	
-<<<<<<< HEAD
-	@Retention(RetentionPolicy.RUNTIME)
-	@Target(ElementType.METHOD)
-	public @interface authorize 
-	{
-		public String author() default "DJ";
-	}
 	
 	private Response response(HashMap<String, String> resbody, int status)
 	{
 		return Response.ok(resbody, MediaType.APPLICATION_JSON).status(status).build();
 	}
 	
-=======
->>>>>>> 57fa607ba6e07936343a7da8aec5ef582b0392af
 	@POST
     @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-<<<<<<< HEAD
     public Response register(@Context  HttpHeaders headers, HashMap<String, String> body)
     {
     	String username = body.get("username");
@@ -97,12 +85,6 @@ public class UserController {
 		resbody.put("message", "User successfully created");
 		
 		return response(resbody, 200);
-=======
-    public String register(String data)
-    {
-        System.out.println("***********");
-        return "helloWorld";
->>>>>>> 57fa607ba6e07936343a7da8aec5ef582b0392af
     }
 	
 	@POST
