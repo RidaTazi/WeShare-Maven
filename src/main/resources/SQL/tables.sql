@@ -23,26 +23,28 @@ create table IF NOT EXISTS membreAssociation(
 CREATE TABLE IF NOT EXISTS User (
     id_user INT AUTO_INCREMENT,
     etatInfo_user BOOLEAN,
-    username_user VARCHAR(50) NOT NULL,
+    username_user VARCHAR(50) UNIQUE NOT NULL,
     password_user VARCHAR(256) NOT NULL,
-    email_user VARCHAR(100) NULL,
+    role_user CHAR(1) NOT NULL,
+    email_user VARCHAR(100) UNIQUE NULL,
     PRIMARY KEY (id_user)
 );
 
 CREATE TABLE IF NOT EXISTS AdminSYS (
     id_admin INT AUTO_INCREMENT,
     etatInfo_admin BOOLEAN,
-    username_admin VARCHAR(50) NOT NULL,
+    username_admin VARCHAR(50) UNIQUE NOT NULL,
     password_admin VARCHAR(256) NOT NULL,
-    email_admin VARCHAR(100) NULL,
+    email_admin VARCHAR(100) UNIQUE NULL,
     PRIMARY KEY (id_admin)
 );
 
 CREATE TABLE IF NOT EXISTS Token (
     id_token INT AUTO_INCREMENT,
     value_token VARCHAR(256) NOT NULL,
-    user_token INT NOT NULL,
-    PRIMARY KEY (id_token)
+    user_token INT UNIQUE NOT NULL,
+    PRIMARY KEY (id_token),
+    FOREIGN KEY (user_token) REFERENCES User (id_user)
 );
 
 

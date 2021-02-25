@@ -3,7 +3,7 @@ package Entities;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import Dao.TokenDao;
+import DaoImpl.TokenDaoImpl;
 
 public class Token 
 {
@@ -11,13 +11,15 @@ public class Token
 	private String value_token;
 	private long user_token;
 	
-	public static TokenDao objects;
+	public static TokenDaoImpl objects = new TokenDaoImpl();
 	
 	public static String generateToken(String username, String password)
 	{
 		String salt = "84B03D034B409D4E";
 		int numberOfIterations = 50000;
-    	String salted_username_password = salt + password + salt;
+    	String salted_username_password = username + password + salt;
+    	StringBuffer buffer = new StringBuffer();
+    	byte[] bytes = salted_username_password.getBytes();
     
     	try 
     	{
@@ -25,12 +27,16 @@ public class Token
     		
     		for (int counter = 0; counter < numberOfIterations; counter++)
     		{
-    			messageDigest.update(salted_username_password.getBytes());
-        		
-    			salted_username_password = new String(messageDigest.digest());
+    			messageDigest.update(bytes);
+    			bytes = messageDigest.digest();	
     		}
     		
-    		return salted_username_password;
+			for (byte b : bytes)
+			{
+			    buffer.append(String.format("%02x", b < 0 ? b + 256 : b));
+			}
+    		
+    		return buffer.toString();
     	}
     	catch (NoSuchAlgorithmException e) 
     	{
@@ -65,7 +71,6 @@ public class Token
 	{
 		return user_token;
 	}
-	
 	
 	public void setUserToken(long user_token)
 	{

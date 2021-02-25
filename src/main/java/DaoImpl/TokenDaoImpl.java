@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,17 +42,19 @@ public class TokenDaoImpl implements TokenDao {
     }
     
 	@Override
-	public int create(String username, String password, long user_id) throws SQLException
+	public int create(String username, String password, long user_id) throws SQLIntegrityConstraintViolationException, SQLException
 	{
 		init();
 		
 		String token = Token.generateToken(username, password);
 		
-		sqlQuery = "INSERT INTO Token VALUES " + "(" + token + " , " + user_id + ")";
+		sqlQuery = "INSERT INTO Token (value_token, user_token) VALUES " + "('" + token + "','" + String.valueOf(user_id) + "')";
 		
-		statement.executeUpdate(sqlQuery);
+		int state = statement.executeUpdate(sqlQuery);
+		
 		close();
-		return 0;
+		
+		return state;
 	}
 	
 	@Override
@@ -69,7 +72,6 @@ public class TokenDaoImpl implements TokenDao {
     	return true;
     }
    
-    
     @Override
 	public Token get(Long user_token) throws SQLException
     {
@@ -82,6 +84,30 @@ public class TokenDaoImpl implements TokenDao {
     	token.setIdToken((long)result.getObject("id_token"));
     	close();
     	return token;
+    }
+    
+    @Override
+	public long get(String value_token) throws SQLException
+    {
+    	init();
+    	
+    	sqlQuery = "SELECT user_token FROM Token WHERE value_token = '" + value_token + "';";
+        
+    	ResultSet result = statement.executeQuery(sqlQuery);
+    	
+    	Boolean exists = result.next();
+    	
+    	System.out.println(exists);
+    	
+    	if (exists)
+		{
+			long user_token = result.getLong("user_token");
+			return user_token;
+		}	
+    
+    	close();
+    	
+    	return -1;
     }
     
     @Override

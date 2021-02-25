@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class UserDaoImpl implements UserDao
     private Statement statement;
     private PreparedStatement preparedStatement;
     private String sqlQuery;
+   
 	
     private void init() throws SQLException 
     {
@@ -47,8 +49,10 @@ public class UserDaoImpl implements UserDao
     private String hashPassword(String password)
     {
     	String salt = "E1F53135E559C253";
-    	String saltedPassword = salt + password + salt;
+    	String saltedPassword = password + salt;
     	int numberOfiteration = 50000;
+    	StringBuffer buffer = new StringBuffer();
+    	byte[] bytes = saltedPassword.getBytes();
     
     	try 
     	{
@@ -56,12 +60,16 @@ public class UserDaoImpl implements UserDao
     		
     		for (int counter = 0; counter < numberOfiteration; counter++)
     		{
-    			messageDigest.update(saltedPassword.getBytes());
-        		
-    			saltedPassword = new String(messageDigest.digest());
+    			messageDigest.update(bytes);
+    			bytes = messageDigest.digest();	
     		}
     		
-    		return saltedPassword;
+			for (byte b : bytes)
+			{
+			    buffer.append(String.format("%02x", b < 0 ? b + 256 : b));
+			}
+    		
+    		return buffer.toString();
     	}
     	catch (NoSuchAlgorithmException e) 
     	{
@@ -71,40 +79,40 @@ public class UserDaoImpl implements UserDao
     }
     
 	@Override
-	public int create(String username, String password, String email) throws SQLException
+	public User create(String username, String password, String role) throws SQLIntegrityConstraintViolationException, SQLException
 	{
 		init();
 		
 		String hashedPassword = hashPassword(password);
 		
-		sqlQuery = "INSERT INTO AdminSYS VALUES " + "(" + username + " , " + hashedPassword + ")";
+		sqlQuery = "INSERT INTO User (etatInfo_user, username_user, password_user, role_user) VALUES " + "(" + 1 + ",'" + username + "' , '" + hashedPassword + "','" + role + "')";
 		
-		statement.executeUpdate(sqlQuery);
+		int etat = statement.executeUpdate(sqlQuery);
+		
+		ResultSet resultat = statement.executeQuery( "SELECT id_user, etatInfo_user, username_user, password_user, role_user FROM User WHERE username_user = " + "'" + username + "'" + ";");
+		
+		resultat.next();
+		
+		User user = new User(resultat.getLong("id_user"), resultat.getInt("etatInfo_user"), resultat.getString("username_user"), resultat.getString("password_user"), resultat.getString("role_user"));
 		
 		close();
-		return 0;
+		
+		return user;
 	}
 	
 	@Override
-    public boolean update(Long id, String username, String password, String email) throws SQLException
+    public boolean update(Long id, String username, String password, String email, String role) throws SQLException
     {
 		init();
 		
 		String hashedPassword = hashPassword(password);
 		
-		sqlQuery = "UPDATE User SET username = " + username + " , " 
-				+ "password = " + hashedPassword + " , " + " email = " + email + " WHERE user_id = " + id; 
+		sqlQuery = "UPDATE User SET username_user = '" + username + "' , " 
+				+ "password_user = '" + hashedPassword + "' , " + " email_user = '" + email + "'," + " role_user = '" + role + "' WHERE user_id = " + id; 
 		
 		statement.executeQuery(sqlQuery);
 		
-		if (statement != null)
-		{
-			statement.close();
-		}
-		else if (connection != null)
-		{
-			connection.close();
-		}
+		close();
     	return true;
     }
     
