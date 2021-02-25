@@ -1,4 +1,4 @@
-package Dao;
+package DAO;
 
 import java.util.List;
 
@@ -11,6 +11,6 @@ public interface PublicationDao {
 	public void updatePub(Publication p);
 	public void deletePub(long id);
 	public Publication findById(long id);
-	public List<Association> findByAssociation(Association assoc);
+	public List<Publication> findByAssociation(Association assoc);
 	public List<Publication> findAll(); //a revoir (static)
 }
