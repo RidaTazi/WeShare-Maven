@@ -1,9 +1,8 @@
-package DAO;
+package Dao;
 
 import java.util.List;
 
 import Entities.Association;
-import Entities.Don;
 import Entities.Publication;
 
 public interface PublicationDao {

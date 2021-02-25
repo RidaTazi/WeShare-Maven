@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Connection.DBConnection;
-import DAO.PublicationDao;
+import Dao.PublicationDao;
 import Entities.Association;
 import Entities.Don;
 import Entities.Publication;

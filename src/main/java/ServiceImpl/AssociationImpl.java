@@ -1,8 +1,11 @@
 package ServiceImpl;
 
 import Dao.AssociationDao;
+import Dao.PublicationDao;
 import DaoImpl.AssociationDaoImpl;
+import DaoImpl.PublicationDaoImpl;
 import Entities.Association;
+import Entities.Publication;
 import Service.IAssociation;
 
 
@@ -94,9 +97,10 @@ public class AssociationImpl implements IAssociation {
         }
     }
     
-    List<Publication> getPublications(Long id) {
+    @Override
+    public List<Publication> getPublications(Long id) {
     	try {
-    	return publicationDaoImpl.findByAssociation(associationDao.getAssociationById(id));
+    	return publicationDao.findByAssociation(associationDao.getAssociationById(id));
     	} catch (SQLException throwables) {
             throwables.printStackTrace();
             return null;

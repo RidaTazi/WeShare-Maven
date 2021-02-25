@@ -1,6 +1,7 @@
 package Service;
 
 import Entities.Association;
+import Entities.Publication;
 
 import java.util.List;
 
