@@ -42,5 +42,16 @@ public class MembreController {
         return iMembre.addMembre(data);
     }
 
+    @POST
+    @Path("/{id}/delete")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Long deleteMembre(@PathParam(value = "id") Long id){
+        return iMembre.deleteMembre(id);
+    }
+
+
+
+
 
 }

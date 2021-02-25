@@ -3,5 +3,5 @@
 .project
 .settings
 WeShare.iml
-.idea
+/.idea/
 /bin/

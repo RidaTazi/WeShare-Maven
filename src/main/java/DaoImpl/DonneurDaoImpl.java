@@ -23,7 +23,7 @@ public class DonneurDaoImpl implements DonneurDAO {
     }
 
     @Override
-    public int createDonneur(Donneur donneur) throws SQLException {
+    public int createDonneur(Donneur donneur)  {
         try {
             init();
             req="insert into donneur (nom_donneur,prenom_donneur,addr_donneur) values(?,?,?);";
@@ -41,7 +41,7 @@ public class DonneurDaoImpl implements DonneurDAO {
     }
 
     @Override
-    public boolean updateDonneur(Long id, Donneur donneur) throws SQLException {
+    public boolean updateDonneur(Long id, Donneur donneur)  {
         try {
             init();
             //idDonneur from user table?
@@ -62,16 +62,22 @@ public class DonneurDaoImpl implements DonneurDAO {
         }
     }
 
-    //To delete row or add column ???
-    //
-    //
     @Override
-    public boolean deleteDonneur(Long id) throws SQLException {
-        return false;
+    public boolean deleteDonneur(Long id){
+        try {
+            init();
+            req="update donneur set etatInfo=0 where idDonneur="+id;
+            statement.executeUpdate(req);
+            statement.close();
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
     }
 
     @Override
-    public Donneur getDonneurById(Long id) throws SQLException {
+    public Donneur getDonneurById(Long id) {
         Donneur donneur = new Donneur();
         donneur.setIdDonneur(id);
         try {
@@ -90,12 +96,12 @@ public class DonneurDaoImpl implements DonneurDAO {
             return null;
         }
     }
-    // Wach 7ta ana ndir EtatInfo ???
+    // Wach 7ta ana ndir EtatInfo ??? <YES>
     @Override
     public List<Donneur> getAllDonneur() throws SQLException {
         List<Donneur> donneurs = new ArrayList<>();
         init();
-        req="select idDonneur from donneur";
+        req="select idDonneur from donneur where etatInfo=1";
         ResultSet result=statement.executeQuery(req);
         while (result.next()){
             donneurs.add(getDonneurById(result.getLong("idDonneur")));

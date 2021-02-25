@@ -8,4 +8,5 @@ public interface MembreDao {
     boolean createMembreAssoc(MembreAssociation membre) throws SQLException;
     Long updateMembreAssoc(MembreAssociation membre) throws SQLException;
     MembreAssociation getMembreById(Long id)  throws SQLException;
+    boolean deleteMembre(Long id) throws SQLException;
 }

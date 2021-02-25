@@ -1,6 +1,5 @@
 package Dao;
 
-import Entities.Association;
 import Entities.Donneur;
 
 import java.sql.SQLException;
