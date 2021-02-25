@@ -62,7 +62,32 @@ public class AssociationController {
     public List<Publication> getPublications(@PathParam(value = "id") Long id){
         return iAssociation.getPublications(id);
     }
-
+    
+    @POST
+    @Path("/{id}/addPublication")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int addPublication(@PathParam(value = "id") Long id,String data){
+        return iAssociation.addPublication(id,data);
+    }
+    
+    
+    @POST
+    @Path("/{idAssoc}/{idPub}/update")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int updatePublication(@PathParam(value = "idAssoc") Long idAssoc,@PathParam(value = "idPub") Long idPub, String data){
+        return iAssociation.updatePublication(idAssoc, idPub,data);
+    }
+    
+    
+    @POST
+    @Path("/{idAssoc}/{idPub}/delete")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int deletePublication(@PathParam(value = "idPub") Long idPub){
+        return iAssociation.deletePublication(idPub);
+    }
 
 
 }

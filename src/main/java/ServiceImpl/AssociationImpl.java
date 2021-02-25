@@ -106,4 +106,47 @@ public class AssociationImpl implements IAssociation {
             return null;
         }
     }
+
+	@Override
+	public int addPublication(Long idAssoc,String data) {
+		Gson gson = new Gson();
+        com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
+        String titre = object.get("titrePub").getAsString();
+        String desc = object.get("descPub").getAsString();
+        String type = object.get("typePub").getAsString();
+        
+        try {
+        	Publication pub = new Publication(titre,desc, type, associationDao.getAssociationById(idAssoc));
+           return publicationDao.createPub(pub);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return -1;
+        }
+	}
+
+	@Override
+	public int updatePublication(Long idAssoc, Long idPub, String data) {
+		Gson gson = new Gson();
+        com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
+        String titre = object.get("titrePub").getAsString();
+        String desc = object.get("descPub").getAsString();
+        String type = object.get("typePub").getAsString();
+        int etatInfo = object.get("etatInfo").getAsInt();
+        try {
+        	Publication pub = new Publication(titre,desc, type, associationDao.getAssociationById(idAssoc));
+        	pub.setEtatInfo(etatInfo);
+        	pub.setId(idPub);
+           return publicationDao.updatePub(pub);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return -1;
+        }
+	}
+
+	@Override
+	public int deletePublication(Long id) {
+		 return publicationDao.deletePub(id);
+	}
+
+
 }
