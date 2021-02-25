@@ -16,13 +16,13 @@ import Entities.Donneur;
 import Entities.Publication;
 
 
-public class DonDaoImp implements DonDao{
+public class DonDaoImpl implements DonDao{
 	Connection connection;
 	PreparedStatement prepstatement;
 	ResultSet res;
 	
 	
-	public DonDaoImp() {
+	public DonDaoImpl() {
 		
 		this.connection = DBConnection.getInstance();
 	}

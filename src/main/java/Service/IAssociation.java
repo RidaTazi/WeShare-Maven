@@ -1,6 +1,7 @@
 package Service;
 
 import Entities.Association;
+import Entities.Publication;
 
 import java.util.List;
 
@@ -10,4 +11,5 @@ public interface IAssociation {
     int addAssociation(String data);
     Long updateAssociation(String data);
     Association getAssociationById(Long id);
+    List<Publication> getPublications(Long id);
 }

@@ -2,8 +2,9 @@ package Entities;
 
 import java.util.List;
 import java.sql.Date;
+import java.io.Serializable;
 
-public class Publication {
+public class Publication implements Serializable {
 	private long id;
 	private String titre;
 	private String desc;
@@ -14,12 +15,14 @@ public class Publication {
 	private List<Don> dons;
 
 	
-	public Publication(long id, String titre, String desc, String type) {
+	//use this constructor to create an association's pub 
+	public Publication(long id, String titre, String desc, String type, Association assoc) {
 		this.id = id;
 		this.titre = titre;
 		this.desc = desc;
 		this.date =	new Date(new java.util.Date().getTime());
 		this.type = type;
+		this.association = assoc;
 	}
 	
 	public Publication(long id, String titre, String desc,Date date, String type, int etatInfo) {
