@@ -1,4 +1,4 @@
-package DAOImp;
+package DaoImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,13 +14,13 @@ import Entities.Association;
 import Entities.Don;
 import Entities.Publication;
 
-public class PublicationDaoImp implements PublicationDao{
+public class PublicationDaoImpl implements PublicationDao{
 	Connection connection;
 	PreparedStatement prepstatement;
 	ResultSet res;
 	
 	
-	public PublicationDaoImp(){
+	public PublicationDaoImpl(){
 		this.connection = DBConnection.getInstance();
 	}
 

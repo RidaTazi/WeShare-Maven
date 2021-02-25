@@ -54,6 +54,13 @@ public class AssociationController {
     public int addAssociation(String data){
         return iAssociation.addAssociation(data);
     }
+    
+    @GET
+    @Path("/{id}/publications")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Association getById(@PathParam(value = "id") Long id){
+        return iAssociation.getPublications(id);
+    }
 
 
 

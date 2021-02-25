@@ -4,6 +4,8 @@ import Dao.AssociationDao;
 import DaoImpl.AssociationDaoImpl;
 import Entities.Association;
 import Service.IAssociation;
+
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.codehaus.jettison.json.JSONObject;
@@ -16,9 +18,11 @@ import java.util.List;
 @Transactional
 public class AssociationImpl implements IAssociation {
     private AssociationDao associationDao;
+    private PublicationDao publicationDao;
 
     public AssociationImpl() {
         this.associationDao = new AssociationDaoImpl();
+        this.publicationDao = new PublicationDaoImpl();
     }
 
     @Override
@@ -85,6 +89,15 @@ public class AssociationImpl implements IAssociation {
         try {
             return associationDao.getAssociationById(id);
         } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+    
+    List<Publication> getPublications(Long id) {
+    	try {
+    	return publicationDaoImpl.findByAssociation(associationDao.getAssociationById(id));
+    	} catch (SQLException throwables) {
             throwables.printStackTrace();
             return null;
         }

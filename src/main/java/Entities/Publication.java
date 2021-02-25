@@ -2,8 +2,9 @@ package Entities;
 
 import java.util.List;
 import java.sql.Date;
+import java.io.Serializable;
 
-public class Publication {
+public class Publication implements Serializable {
 	private long id;
 	private String titre;
 	private String desc;

@@ -1,9 +1,10 @@
 package Entities;
 
 import java.sql.Date;
+import java.io.Serializable;
 
 
-public class Don {
+public class Don implements Serializable {
 	private long iD;
 	private String type;
 	private String logo;
