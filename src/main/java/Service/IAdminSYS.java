@@ -1,5 +1,5 @@
 package Service;
 
-public class IAdminSYS {
+public interface IAdminSYS {
 
 }

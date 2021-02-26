@@ -79,4 +79,36 @@ public class DonneurImpl implements IDonneur {
             return -1L;
         }
     }
+
+    //Don (String type, String logo, String desc, String state, Donneur donneur)
+    @Override
+    public int addDon(Long id, String data) {
+        Gson gson = new Gson();
+        com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
+        String type=object.get("typeDon").getAsString();
+        String logo=object.get("logoDon").getAsString();
+        String desc=object.get("descDon").getAsString();
+        String state=object.get("stateDon").getAsString();
+        try {
+            Donneur donneur=donneurDAO.getDonneurById(object.get("donneurId").getAsLong());
+            Don don=new Don(type, logo, desc, state, donneur);
+            donDao.createDon(don);
+            return 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return -1;
+        }
+    }
+
+    @Override
+    public int updateDon(Long idAssoc, Long idDon, String data) {
+        return 0;
+        //Zakaria qad m3ak hadi xD
+    }
+
+    @Override
+    public int deleteDon(Long id) {
+        donDao.deleteDon(id);
+        return 1;
+    }
 }
