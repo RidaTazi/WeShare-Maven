@@ -1,10 +1,13 @@
 package ServiceImpl;
 
 import Dao.AssociationDao;
+import Dao.DonDao;
 import Dao.PublicationDao;
 import DaoImpl.AssociationDaoImpl;
+import DaoImpl.DonDaoImpl;
 import DaoImpl.PublicationDaoImpl;
 import Entities.Association;
+import Entities.Don;
 import Entities.Publication;
 import Service.IAssociation;
 
@@ -14,6 +17,8 @@ import com.google.gson.JsonObject;
 import org.codehaus.jettison.json.JSONObject;
 
 import javax.transaction.Transactional;
+
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +27,13 @@ import java.util.List;
 public class AssociationImpl implements IAssociation {
     private AssociationDao associationDao;
     private PublicationDao publicationDao;
+    private DonDao donDao;
 
     public AssociationImpl() {
         this.associationDao = new AssociationDaoImpl();
         this.publicationDao = new PublicationDaoImpl();
-    }
+        this.donDao = new DonDaoImpl();
+        }
 
     @Override
     public List<String> getAssociationsName() {
@@ -147,6 +154,23 @@ public class AssociationImpl implements IAssociation {
 	public int deletePublication(Long id) {
 		 return publicationDao.deletePub(id);
 	}
+
+	@Override
+	public int acceptRefuseDon(String data) {
+		Gson gson = new Gson();
+        com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
+        Long id = object.get("idDon").getAsLong();
+        String type=object.get("typeDon").getAsString();
+        String logo=object.get("logoDon").getAsString();
+        String desc=object.get("descDon").getAsString();
+        String state=object.get("stateDon").getAsString();
+        int etatInfo=object.get("etatInfo").getAsInt();
+        Don don=new Don(id.longValue(),type, logo, desc, new Date(5), state, etatInfo); //the date doesn't change anyways
+        donDao.updateDon(don);
+        return 0;
+	}
+	
+	
 
 
 }

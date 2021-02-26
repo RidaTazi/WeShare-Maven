@@ -28,7 +28,8 @@ public class DonDaoImpl implements DonDao{
 	}
 
 	@Override
-	public void createDon(Don d){
+	public int createDon(Don d){
+		int status = 0;
 		try {
 			if(d.getAssociation() != null)
 			{
@@ -57,7 +58,7 @@ public class DonDaoImpl implements DonDao{
 			prepstatement.setString(6, d.getState());
 			prepstatement.setInt(7, d.getEtatInfo());
 			prepstatement.setInt(10, d.getDonneur().getIdDonneur().intValue());
-			int status = prepstatement.executeUpdate();
+			status = prepstatement.executeUpdate();
 			if(status == 0)
 			{
 				System.out.println("erreur creation don !!!!");
@@ -73,12 +74,14 @@ public class DonDaoImpl implements DonDao{
 			
 				e.printStackTrace();
 			}
+			
 		}
+		return status;
 	}
 
 	@Override
-	public void updateDon(Don d) {
-		
+	public int updateDon(Don d) {
+		int status = 0;
 		try {
 			if(d.getAssociation() != null)
 			{
@@ -106,7 +109,7 @@ public class DonDaoImpl implements DonDao{
 			prepstatement.setString(4, d.getState());
 			prepstatement.setInt(5, d.getEtatInfo());
 			prepstatement.setInt(8, (int)(d.getiD()));
-			int status = prepstatement.executeUpdate();
+			status = prepstatement.executeUpdate();
 			if(status == 0)
 			{
 				System.out.println("erreur creation don !!!!");
@@ -122,15 +125,16 @@ public class DonDaoImpl implements DonDao{
 				e.printStackTrace();
 			}
 		}
+		return status;
 	}
 
 	@Override
-	public void deleteDon(long id) {
-		
+	public int deleteDon(long id) {
+		int status = 0;
 		try {
 			prepstatement = connection.prepareStatement("DELETE FROM Don WHERE idDon = ? ");
 			prepstatement.setInt(1,(int)id);
-			int status = prepstatement.executeUpdate();
+			status = prepstatement.executeUpdate();
 			if(status == 0)
 			{
 				System.out.println("erreur suppression don !!!!");
@@ -145,6 +149,7 @@ public class DonDaoImpl implements DonDao{
 				e.printStackTrace();
 			}
 		}
+		return status;
 	}
 
 	@Override

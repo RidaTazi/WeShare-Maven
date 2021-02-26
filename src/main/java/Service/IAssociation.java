@@ -15,4 +15,5 @@ public interface IAssociation {
     int addPublication(Long id,String pub);
     int updatePublication(Long idAssoc, Long idPub, String data);
     int deletePublication(Long id);
+    int acceptRefuseDon(String data);
 }

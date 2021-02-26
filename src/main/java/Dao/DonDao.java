@@ -8,9 +8,9 @@ import Entities.Donneur;
 import Entities.Publication;
 
 public interface DonDao {
-	void createDon(Don d);
-	void updateDon(Don p);
-	void deleteDon(long id);
+	int createDon(Don d);
+	int updateDon(Don p);
+	int deleteDon(long id);
 	Don findById(long id);
 	List<Don> findByDonneur(Donneur donneur);
 	List<Don> findByPublication(Publication pub);

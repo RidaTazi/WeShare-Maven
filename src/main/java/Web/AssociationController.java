@@ -80,6 +80,14 @@ public class AssociationController {
         return iAssociation.updatePublication(idAssoc, idPub,data);
     }
     
+    @POST
+    @Path("/acceptOrRefuse")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int AcceptRefuseDon(String data){
+        return iAssociation.acceptRefuseDon(data);          // we get the whole object don
+    }
+    
     
     @POST
     @Path("/{idAssoc}/{idPub}/delete")

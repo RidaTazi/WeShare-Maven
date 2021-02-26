@@ -12,4 +12,6 @@ public interface IDonneur {
     int addDon(Long id,String don);
     int updateDon(Long idDon, String data);
     int deleteDon(Long id);
+    int donateToPub(Long idPub,String data);
+    int donateToAssociation(Long idAssoc,String data);
 }

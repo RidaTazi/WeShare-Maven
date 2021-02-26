@@ -74,4 +74,20 @@ public class DonneurController {
     public int deleteDon(@PathParam(value = "idDon") Long idDon){
         return iDonneur.deleteDon(idDon);
     }
+    
+    @POST
+    @Path("/{idPub}/donateToPublication")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int donateToPublication(@PathParam(value = "idPub") Long idPub, String data){
+        return iDonneur.donateToPub(idPub, data);
+    }
+    
+    @POST
+    @Path("/{idPub}/donateToAssociation")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int donateToAssociation(@PathParam(value = "idAssociation") Long idAssoc, String data){
+        return iDonneur.donateToAssociation(idAssoc, data);
+    }
 }

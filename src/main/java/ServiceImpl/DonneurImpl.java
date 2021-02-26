@@ -1,11 +1,15 @@
 package ServiceImpl;
 
+import Dao.AssociationDao;
 import Dao.DonDao;
 import Dao.DonneurDAO;
 import Dao.MembreDao;
+import Dao.PublicationDao;
+import DaoImpl.AssociationDaoImpl;
 import DaoImpl.DonDaoImpl;
 import DaoImpl.DonneurDaoImpl;
 import DaoImpl.MembreDaoImpl;
+import DaoImpl.PublicationDaoImpl;
 import Entities.Don;
 import Entities.Donneur;
 import Entities.MembreAssociation;
@@ -20,10 +24,15 @@ import java.sql.SQLException;
 public class DonneurImpl implements IDonneur {
     private DonneurDAO donneurDAO;
     private DonDao donDao;
+    private PublicationDao publicationDao;
+    private AssociationDao associationDao;
+    
 
     public DonneurImpl() {
         this.donneurDAO = new DonneurDaoImpl();
         this.donDao=new DonDaoImpl();
+        this.publicationDao = new PublicationDaoImpl();
+        this.associationDao = new AssociationDaoImpl();
     }
 
     @Override
@@ -121,4 +130,38 @@ public class DonneurImpl implements IDonneur {
         donDao.deleteDon(id);
         return 1;
     }
+
+	@Override
+	public int donateToPub(Long idPub, String data) {
+		 Gson gson = new Gson();
+         com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
+         Long idDon = object.get("idDon").getAsLong();
+         String type=object.get("typeDon").getAsString();
+         String logo=object.get("logoDon").getAsString();
+         String desc=object.get("descDon").getAsString();
+         String state=object.get("stateDon").getAsString();
+         int etatInfo=object.get("etatInfo").getAsInt();
+         Don don=new Don(idDon.longValue(),type, logo, desc, new Date(5), state, etatInfo); //the date doesn't change anyways
+         don.setPublication(publicationDao.findById(idPub));
+         return donDao.updateDon(don);
+	}
+
+	@Override
+	public int donateToAssociation(Long idAssoc, String data) {
+		Gson gson = new Gson();
+        com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
+        Long idDon = object.get("idDon").getAsLong();
+        String type=object.get("typeDon").getAsString();
+        String logo=object.get("logoDon").getAsString();
+        String desc=object.get("descDon").getAsString();
+        String state=object.get("stateDon").getAsString();
+        int etatInfo=object.get("etatInfo").getAsInt();
+        Don don=new Don(idDon.longValue(),type, logo, desc, new Date(5), state, etatInfo); //the date doesn't change anyways
+        try {
+        	don.setAssociation(associationDao.getAssociationById(idAssoc));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+        return donDao.updateDon(don);
+	}
 }
