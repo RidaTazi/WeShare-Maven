@@ -4,6 +4,8 @@ package Web;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -111,41 +113,52 @@ public class UserController {
 	
 	@GET
     @Path("/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public void getUsernameAndEmail(@Context  HttpHeaders headers, HashMap<String, String> body, @PathParam(value = "id") Long id)
+    public Response getProfile(@Context  HttpHeaders headers, HashMap<String, String> body)
 	{
-        UserController.authorize(headers, body);
+		HashMap<String, String> resbody = new HashMap<String, String>();
+        Response res = UserController.authorize(headers, body);
+        
+        if (res.getStatus() == 400 || res.getStatus() == 500)
+        {
+        	return res;
+        }
+        
+        return res;
+        
     }
 	
 	@POST
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void updateUsernameOrPasswordOrEmail(@Context  HttpHeaders headers, HashMap<String, String> body, @PathParam(value = "id") Long id)
+    public Response updateProfile(@Context  HttpHeaders headers, HashMap<String, String> body, @PathParam(value = "id") Long id)
 	{
-        
+		HashMap<String, String> resbody = new HashMap<String, String>();
+        UserController.authorize(headers, body);
+        resbody.put("message", "updateProfile");
+        return response(body, 200);
     }
 		
-	public static Response response(HashMap<String, String> resbody, int status)
-	{
-		return Response.ok(resbody, MediaType.APPLICATION_JSON).status(status).build();
-	}
-
 	public static Response authorize(@Context  HttpHeaders headers, HashMap<String, String> body)
 	{
+		System.out.println("Authorization check...");
 		MultivaluedMap<String, String> mmap = headers.getRequestHeaders();
-		
-		String token = mmap.get("Authorization").get(0);
-		
 		HashMap<String, String> resbody = new HashMap<String, String>();
-		
-		if (token == null)
+		List<String> authorization = mmap.get("Authorization");
+		String token = null;
+		long user_id = -1;
+				
+		if (authorization == null)
 		{
 			resbody.put("message", "Unauthorized access");
 			return response(resbody, 400);
 		}
+
+		token = authorization.get(0).substring(6);
 		
-		long user_id = -1;
-		
+		System.out.println(token);
+	
 		try
 		{
 			user_id = Token.objects.get(token);
@@ -166,6 +179,11 @@ public class UserController {
 	
 		resbody.put("message", "Authorized access");
 		return response(resbody, 200);
+	}
+	
+	public static Response response(HashMap<String, String> resbody, int status)
+	{
+		return Response.ok(resbody, MediaType.APPLICATION_JSON).status(status).build();
 	}
 
 }
