@@ -68,7 +68,7 @@ public class DonneurController {
 
 
     @POST
-    @Path("/{idDon}/delete")
+    @Path("/{idDon}/deleteDon")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public int deleteDon(@PathParam(value = "idDon") Long idDon){
