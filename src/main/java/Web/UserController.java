@@ -1,18 +1,9 @@
 package Web;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import java.net.http.HttpResponse;
+
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -22,24 +13,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
-
-
 import Entities.Token;
 import Entities.User;
 
+
+
 @Path("/user")
 public class UserController {
-	
-	
-	private Response response(HashMap<String, String> resbody, int status)
-	{
-		return Response.ok(resbody, MediaType.APPLICATION_JSON).status(status).build();
-	}
-	
+		
 	@POST
     @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -129,38 +112,60 @@ public class UserController {
 	@GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void getUsernameAndEmail(@PathParam(value = "id") Long id)
+    public void getUsernameAndEmail(@Context  HttpHeaders headers, HashMap<String, String> body, @PathParam(value = "id") Long id)
 	{
-        
+        UserController.authorize(headers, body);
     }
 	
 	@POST
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void updateUsernameOrPasswordOrEmail(@PathParam(value = "id") Long id)
+    public void updateUsernameOrPasswordOrEmail(@Context  HttpHeaders headers, HashMap<String, String> body, @PathParam(value = "id") Long id)
 	{
         
     }
-	
-	
-	/* to iterate through hashmap
-	 
-	for (Map.Entry<String, String> entry : data.entrySet()) 
-	{     
-		System.out.println(entry.getKey() + ": " + entry.getValue()); 
-	}
-	*/
-	//SQL Injection filter
-	
-	private HashMap<String, String> multiValueMapToMap(MultivaluedMap<String, String> mmap)
+		
+	public static Response response(HashMap<String, String> resbody, int status)
 	{
-		HashMap<String, String> hmap = new HashMap<String, String>();
-		for (Map.Entry<String, List<String>> entry : mmap.entrySet()) 
-		{
-		    String key = entry.getKey();
-		    String value = entry.getValue().get(0);
-		    hmap.put(key, value);
-		}
-		return hmap;
+		return Response.ok(resbody, MediaType.APPLICATION_JSON).status(status).build();
 	}
+
+	public static Response authorize(@Context  HttpHeaders headers, HashMap<String, String> body)
+	{
+		MultivaluedMap<String, String> mmap = headers.getRequestHeaders();
+		
+		String token = mmap.get("Authorization").get(0);
+		
+		HashMap<String, String> resbody = new HashMap<String, String>();
+		
+		if (token == null)
+		{
+			resbody.put("message", "Unauthorized access");
+			return response(resbody, 400);
+		}
+		
+		long user_id = -1;
+		
+		try
+		{
+			user_id = Token.objects.get(token);
+			
+		} 
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			resbody.put("message", "Internal server error");
+			return response(resbody, 500);
+		}
+		
+		if (user_id == -1)
+		{
+			resbody.put("message", "Unauthorized access");
+			return response(resbody, 400);
+		}
+	
+		resbody.put("message", "Authorized access");
+		return response(resbody, 200);
+	}
+
 }
