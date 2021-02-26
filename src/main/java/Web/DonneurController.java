@@ -48,4 +48,30 @@ public class DonneurController {
     public Long deleteDonneur(@PathParam(value = "id") Long id){
         return iDonneur.deleteDonneur(id);
     }
+
+    @POST
+    @Path("/{id}/addDon")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int addDon(@PathParam(value = "id") Long id,String data){
+        return iDonneur.addDon(id, data);
+    }
+
+
+    @POST
+    @Path("/{idAssoc}/{idDon}/update")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int updateDon(@PathParam(value = "idAssoc") Long idAssoc,@PathParam(value = "idDon") Long idDon, String data){
+        return iDonneur.updateDon(idAssoc, idDon, data);
+    }
+
+
+    @POST
+    @Path("/{idAssoc}/{idDon}/delete")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int deleteDon(@PathParam(value = "idDon") Long idDon){
+        return iDonneur.deleteDon(idDon);
+    }
 }
