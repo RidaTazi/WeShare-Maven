@@ -3,3 +3,5 @@
 WeShare.iml
 /.idea/
 /bin/
+.classpath
+.project

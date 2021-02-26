@@ -59,16 +59,16 @@ public class DonneurController {
 
 
     @POST
-    @Path("/{idAssoc}/{idDon}/update")
+    @Path("/{idDon}/update")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public int updateDon(@PathParam(value = "idAssoc") Long idAssoc,@PathParam(value = "idDon") Long idDon, String data){
-        return iDonneur.updateDon(idAssoc, idDon, data);
+    public int updateDon(@PathParam(value = "idDon") Long idDon, String data){
+        return iDonneur.updateDon(idDon, data);
     }
 
 
     @POST
-    @Path("/{idAssoc}/{idDon}/delete")
+    @Path("/{idDon}/delete")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public int deleteDon(@PathParam(value = "idDon") Long idDon){

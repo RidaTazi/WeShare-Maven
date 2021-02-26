@@ -14,6 +14,7 @@ import Service.IDonneur;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 public class DonneurImpl implements IDonneur {
@@ -101,9 +102,18 @@ public class DonneurImpl implements IDonneur {
     }
 
     @Override
-    public int updateDon(Long idAssoc, Long idDon, String data) {
-        return 0;
-        //Zakaria qad m3ak hadi xD
+    public int updateDon(Long idDon, String data) {
+    	 Gson gson = new Gson();
+         com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
+         String type=object.get("typeDon").getAsString();
+         String logo=object.get("logoDon").getAsString();
+         String desc=object.get("descDon").getAsString();
+         String state=object.get("stateDon").getAsString();
+         int etatInfo=object.get("etatInfo").getAsInt();
+         Don don=new Don(idDon.longValue(),type, logo, desc, new Date(5), state, etatInfo); //the date doesn't change anyways
+         donDao.updateDon(don);
+         return 0;
+       
     }
 
     @Override

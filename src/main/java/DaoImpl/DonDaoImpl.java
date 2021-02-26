@@ -82,33 +82,30 @@ public class DonDaoImpl implements DonDao{
 		try {
 			if(d.getAssociation() != null)
 			{
-				prepstatement = connection.prepareStatement("UPDATE Don SET typeDon = ?, logoDon = ?, descDon = ?, dateDon = ?, stateDon = ?, etatInfo = ?, associationId = ?, publicationId = ? WHERE idDon = ?");
-				prepstatement.setInt(7, d.getAssociation().getIdAssoc().intValue());
-				prepstatement.setInt(8, Types.NULL);
+				prepstatement = connection.prepareStatement("UPDATE Don SET typeDon = ?, logoDon = ?, descDon = ?, stateDon = ?, etatInfo = ?, associationId = ?, publicationId = ? WHERE idDon = ?");
+				prepstatement.setInt(6, d.getAssociation().getIdAssoc().intValue());
+				prepstatement.setInt(7, Types.NULL);
 			}
 			else {
 				if(d.getPublication() != null)
 				{
-					prepstatement = connection.prepareStatement("UPDATE Don SET typeDon = ?, logoDon = ?, descDon = ?, dateDon = ?, stateDon = ?, etatInfo = ?, associationId = ?, publicationId = ? WHERE idDon = ?");
-					prepstatement.setInt(7, Types.NULL);
-					prepstatement.setInt(8, (int)d.getPublication().getId());
+					prepstatement = connection.prepareStatement("UPDATE Don SET typeDon = ?, logoDon = ?, descDon = ?, stateDon = ?, etatInfo = ?, associationId = ?, publicationId = ? WHERE idDon = ?");
+					prepstatement.setInt(6, Types.NULL);
+					prepstatement.setInt(7, (int)d.getPublication().getId());
 				}
 				else {
-					prepstatement = connection.prepareStatement("UPDATE Don SET typeDon = ?, logoDon = ?, descDon = ?, dateDon = ?, stateDon = ?, etatInfo = ?, associationId = ?, publicationId = ? WHERE idDon = ?");
+					prepstatement = connection.prepareStatement("UPDATE Don SET typeDon = ?, logoDon = ?, descDon = ?, stateDon = ?, etatInfo = ?, associationId = ?, publicationId = ? WHERE idDon = ?");
+					prepstatement.setInt(6, Types.NULL);
 					prepstatement.setInt(7, Types.NULL);
-					prepstatement.setInt(8, Types.NULL);
 				}		
 			}
-			
-			prepstatement = connection.prepareStatement("UPDATE Don SET typeDon = ?, logoDon = ?, descDon = ?, dateDon = ?, stateDon = ?, etatInfo = ?, associationId = ?, publicationId = ? WHERE idDon = ?" );
 			
 			prepstatement.setString(1, d.getType());
 			prepstatement.setString(2, d.getLogo());
 			prepstatement.setString(3, d.getDesc());
-			prepstatement.setDate(4, d.getDate());
-			prepstatement.setString(5, d.getState());
-			prepstatement.setInt(6, d.getEtatInfo());
-			prepstatement.setInt(9, (int)(d.getiD()));
+			prepstatement.setString(4, d.getState());
+			prepstatement.setInt(5, d.getEtatInfo());
+			prepstatement.setInt(8, (int)(d.getiD()));
 			int status = prepstatement.executeUpdate();
 			if(status == 0)
 			{

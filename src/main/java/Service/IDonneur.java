@@ -10,6 +10,6 @@ public interface IDonneur {
     Donneur getDonneurById(Long id);
     Long deleteDonneur(Long id);
     int addDon(Long id,String don);
-    int updateDon(Long idAssoc, Long idDon, String data);
+    int updateDon(Long idDon, String data);
     int deleteDon(Long id);
 }
