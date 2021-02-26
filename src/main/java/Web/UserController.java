@@ -1,6 +1,5 @@
 package Web;
 
-
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
@@ -19,7 +18,6 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import Entities.Token;
 import Entities.User;
-
 
 
 @Path("/user")
@@ -110,39 +108,30 @@ public class UserController {
 			return response(resbody, 500);
 		}
     }
-	
+
 	@GET
-    @Path("/{id}")
+	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProfile(@Context  HttpHeaders headers, HashMap<String, String> body)
+    public Response get(@Context  HttpHeaders headers, HashMap<String, String> body)
 	{
 		HashMap<String, String> resbody = new HashMap<String, String>();
-        Response res = UserController.authorize(headers, body);
-        
-        if (res.getStatus() == 400 || res.getStatus() == 500)
-        {
-        	return res;
-        }
-        
-        return res;
-        
+        resbody.put("message", "get");
+        return response(body, 200);
     }
 	
 	@POST
-    @Path("/{id}")
+	@Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateProfile(@Context  HttpHeaders headers, HashMap<String, String> body, @PathParam(value = "id") Long id)
+    public Response update(@Context  HttpHeaders headers, HashMap<String, String> body, @PathParam(value = "id") Long id)
 	{
 		HashMap<String, String> resbody = new HashMap<String, String>();
-        UserController.authorize(headers, body);
-        resbody.put("message", "updateProfile");
+        resbody.put("message", "update");
         return response(body, 200);
     }
 		
 	public static Response authorize(@Context  HttpHeaders headers, HashMap<String, String> body)
 	{
-		System.out.println("Authorization check...");
 		MultivaluedMap<String, String> mmap = headers.getRequestHeaders();
 		HashMap<String, String> resbody = new HashMap<String, String>();
 		List<String> authorization = mmap.get("Authorization");
@@ -162,7 +151,6 @@ public class UserController {
 		try
 		{
 			user_id = Token.objects.get(token);
-			
 		} 
 		catch (SQLException e)
 		{
@@ -177,7 +165,6 @@ public class UserController {
 			return response(resbody, 400);
 		}
 	
-		resbody.put("message", "Authorized access");
 		return response(resbody, 200);
 	}
 	
