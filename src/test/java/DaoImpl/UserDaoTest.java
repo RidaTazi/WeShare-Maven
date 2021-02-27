@@ -6,6 +6,6 @@ public class UserDaoTest {
     @Test
     public void hashPasswordTest() throws Exception{
         UserDaoImpl user = new UserDaoImpl();
-        // Can't test it cuz private
+        // Can't test it
     }
 }
