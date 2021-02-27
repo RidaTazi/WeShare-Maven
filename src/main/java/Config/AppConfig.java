@@ -1,3 +1,5 @@
+package Config;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
