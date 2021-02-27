@@ -19,7 +19,7 @@ public class DBConnectionTest {
     @Test
     public void testDataInsertion() throws Exception{
 
-        String data = "insert into donneur values (tamtaoui, abdelwadoud, harhoura, 1, 999)";
+        String data = "insert into donneur values ('tamtaoui', 'abdelwadoud', 'harhoura', 1, 999)";
         try{
             Connection connection;
             connection= DBConnection.getInstance();
@@ -27,7 +27,6 @@ public class DBConnectionTest {
             preparedStatement = connection.prepareStatement(data);
             preparedStatement.execute();
             preparedStatement.close();
-
         }
         catch (Exception e){
             e.printStackTrace();
@@ -44,7 +43,7 @@ public class DBConnectionTest {
             String addr = result.getObject("addr_donneur").toString();
 
             assertEquals("tamtaoui",nom);
-            assertEquals("abdelwadoud",nom);
+            assertEquals("abdelwadoud",prenom);
             assertEquals("harhoura",addr);
 
             result.close();
@@ -54,6 +53,6 @@ public class DBConnectionTest {
             e.printStackTrace();
         }
 
-
     }
+
 }
