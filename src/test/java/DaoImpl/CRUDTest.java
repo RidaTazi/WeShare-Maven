@@ -1,4 +1,4 @@
-package Connection;
+package DaoImpl;
 
 import static org.junit.Assert.assertEquals;
 
