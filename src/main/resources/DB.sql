@@ -47,6 +47,34 @@ CREATE TABLE IF NOT EXISTS Token (
     FOREIGN KEY (user_token) REFERENCES User (id_user)
 );
 
+CREATE TABLE IF NOT EXISTS Don (idDon int auto_increment,
+							  typeDon varchar(100),
+							  logoDon varchar(100),
+							  descDon varchar(200),
+							  dateDon date,
+							  stateDon varchar(20),
+							  etatInfo int,
+							  associationId int,
+							  publicationId int,
+							  donneurId int,
+							  primary key (idDon),
+							  foreign key (associationId) references association(idAssoc),
+							  foreign key (publicationId) references Publication(idPub),
+							  foreign key (donneurId) references donneur(idDonneur)
+										);	
+	
+
+CREATE TABLE IF NOT EXISTS Publication (idPub int auto_increment,
+                          titrePub varchar(100),
+                          descPub varchar(200),
+                          datePub date,
+                          typePub varchar(100),
+                          etatInfoPub int,
+                          logoPub varchar(100),
+                          associationId int,
+                          primary key (id),
+                          foreign key (associationId) references association(idAssoc)
+                            );
 
 
 
