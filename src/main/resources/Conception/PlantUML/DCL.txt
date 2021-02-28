@@ -30,12 +30,12 @@ class User {
     +List<User> filter()
 }
 class AdminSYS {
-    int create(String admin_username, String admin_password, String admin_email)
-    boolean update(Long id, String username, String password, String email)
-    boolean delete(Long id)
-    AdminSYS get(Long id)
-    List<AdminSYS> filter()
-    List<AdminSYS> all()
+    +int create(String admin_username, String admin_password, String admin_email)
+    +boolean update(Long id, String username, String password, String email)
+    +boolean delete(Long id)
+    +AdminSYS get(Long id)
+    +List<AdminSYS> filter()
+    +List<AdminSYS> all()
 }
 class Donneur{
     -String nom_donneur
