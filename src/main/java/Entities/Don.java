@@ -17,6 +17,9 @@ public class Don implements Serializable {
 	private Donneur donneur;
 	
 	
+	public Don() {
+		
+	}
 	
 	//use this constructor to create a user's donation (no publication or association associated)
 	public Don (String type, String logo, String desc, String state, Donneur donneur){

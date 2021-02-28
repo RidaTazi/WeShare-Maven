@@ -17,9 +17,9 @@ import Entities.Publication;
 
 
 public class DonDaoImpl implements DonDao{
-	Connection connection;
-	PreparedStatement prepstatement;
-	ResultSet res;
+	private Connection connection;
+	private PreparedStatement prepstatement;
+	private ResultSet res;
 	
 	
 	public DonDaoImpl() {
@@ -33,48 +33,35 @@ public class DonDaoImpl implements DonDao{
 		try {
 			if(d.getAssociation() != null)
 			{
-				prepstatement = connection.prepareStatement("INSERT INTO Don (idDon,typeDon,logoDon,descDon,dateDon,stateDon,etatInfo,associationId,publicationId,donneurId) VALUES (?,?,?,?,?,?,?,?,?,?)");
-				prepstatement.setInt(8, d.getAssociation().getIdAssoc().intValue());
-				prepstatement.setInt(9, Types.NULL);
+				prepstatement = connection.prepareStatement("INSERT INTO Don (typeDon,logoDon,descDon,dateDon,stateDon,etatInfo,associationId,publicationId,donneurId) VALUES (?,?,?,?,?,?,?,?,?)");
+				prepstatement.setInt(7, d.getAssociation().getIdAssoc().intValue());
+				prepstatement.setNull(8, Types.NULL);
 			}
 			else {
 				if(d.getPublication() != null)
 				{
-					prepstatement = connection.prepareStatement("INSERT INTO Don (idDon,typeDon,logoDon,descDon,dateDon,stateDon,etatInfo,associationId,publicationId,donneurId) VALUES (?,?,?,?,?,?,?,?,?,?)");
-					prepstatement.setInt(8, Types.NULL);
-					prepstatement.setInt(9, (int)d.getPublication().getId());
+					prepstatement = connection.prepareStatement("INSERT INTO Don (typeDon,logoDon,descDon,dateDon,stateDon,etatInfo,associationId,publicationId,donneurId) VALUES (?,?,?,?,?,?,?,?,?)");
+					prepstatement.setNull(7, Types.NULL);
+					prepstatement.setInt(8, (int)d.getPublication().getId());
 				}
 				else {
-					prepstatement = connection.prepareStatement("INSERT INTO Don (idDon,typeDon,logoDon,descDon,dateDon,stateDon,etatInfo,associationId,publicationId,donneurId) VALUES (?,?,?,?,?,?,?,?,?,?)");
-					prepstatement.setInt(8, Types.NULL);
-					prepstatement.setInt(9, Types.NULL);
+					prepstatement = connection.prepareStatement("INSERT INTO Don (typeDon,logoDon,descDon,dateDon,stateDon,etatInfo,associationId,publicationId,donneurId) VALUES (?,?,?,?,?,?,?,?,?)");
+					prepstatement.setNull(7, Types.NULL);
+					prepstatement.setNull(8, Types.NULL);
 				}		
 			}
-			prepstatement.setInt(1, (int)(d.getiD()));
-			prepstatement.setString(2, d.getType());
-			prepstatement.setString(3, d.getLogo());
-			prepstatement.setString(4, d.getDesc());
-			prepstatement.setDate(5, d.getDate());
-			prepstatement.setString(6, d.getState());
-			prepstatement.setInt(7, d.getEtatInfo());
-			prepstatement.setInt(10, d.getDonneur().getIdDonneur().intValue());
+			prepstatement.setString(1, d.getType());
+			prepstatement.setString(2, d.getLogo());
+			prepstatement.setString(3, d.getDesc());
+			prepstatement.setDate(4, d.getDate());
+			prepstatement.setString(5, d.getState());
+			prepstatement.setInt(6, d.getEtatInfo());
+			prepstatement.setInt(9, d.getDonneur().getIdDonneur().intValue());
 			status = prepstatement.executeUpdate();
-			if(status == 0)
-			{
-				System.out.println("erreur creation don !!!!");
-			}
-			
+			prepstatement.close();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
-			try {
-				prepstatement.close();
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-			}
-			
 		}
 		return status;
 	}
@@ -87,19 +74,19 @@ public class DonDaoImpl implements DonDao{
 			{
 				prepstatement = connection.prepareStatement("UPDATE Don SET typeDon = ?, logoDon = ?, descDon = ?, stateDon = ?, etatInfo = ?, associationId = ?, publicationId = ? WHERE idDon = ?");
 				prepstatement.setInt(6, d.getAssociation().getIdAssoc().intValue());
-				prepstatement.setInt(7, Types.NULL);
+				prepstatement.setNull(7, Types.NULL);
 			}
 			else {
 				if(d.getPublication() != null)
 				{
 					prepstatement = connection.prepareStatement("UPDATE Don SET typeDon = ?, logoDon = ?, descDon = ?, stateDon = ?, etatInfo = ?, associationId = ?, publicationId = ? WHERE idDon = ?");
-					prepstatement.setInt(6, Types.NULL);
+					prepstatement.setNull(6, Types.NULL);
 					prepstatement.setInt(7, (int)d.getPublication().getId());
 				}
 				else {
 					prepstatement = connection.prepareStatement("UPDATE Don SET typeDon = ?, logoDon = ?, descDon = ?, stateDon = ?, etatInfo = ?, associationId = ?, publicationId = ? WHERE idDon = ?");
-					prepstatement.setInt(6, Types.NULL);
-					prepstatement.setInt(7, Types.NULL);
+					prepstatement.setNull(6, Types.NULL);
+					prepstatement.setNull(7, Types.NULL);
 				}		
 			}
 			
@@ -110,6 +97,7 @@ public class DonDaoImpl implements DonDao{
 			prepstatement.setInt(5, d.getEtatInfo());
 			prepstatement.setInt(8, (int)(d.getiD()));
 			status = prepstatement.executeUpdate();
+			prepstatement.close();
 			if(status == 0)
 			{
 				System.out.println("erreur creation don !!!!");
@@ -117,13 +105,6 @@ public class DonDaoImpl implements DonDao{
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				prepstatement.close();
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-			}
 		}
 		return status;
 	}
@@ -135,19 +116,13 @@ public class DonDaoImpl implements DonDao{
 			prepstatement = connection.prepareStatement("DELETE FROM Don WHERE idDon = ? ");
 			prepstatement.setInt(1,(int)id);
 			status = prepstatement.executeUpdate();
+			prepstatement.close();
 			if(status == 0)
 			{
 				System.out.println("erreur suppression don !!!!");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				prepstatement.close();
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-			}
 		}
 		return status;
 	}
@@ -168,15 +143,9 @@ public class DonDaoImpl implements DonDao{
 									  res.getString(6),
 									  res.getInt(7)
 									  );
+			prepstatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				prepstatement.close();
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-			}
 		}
 		return returnedDon;
 	}
@@ -198,16 +167,10 @@ public class DonDaoImpl implements DonDao{
 										  );
 				returnedList.add(returnedDon);
 			}
+			prepstatement.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				prepstatement.close();
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-			}
 		}
 	
 		return returnedList;
@@ -231,16 +194,9 @@ public class DonDaoImpl implements DonDao{
 										  );
 				returnedList.add(returnedDon);
 			}
-			
+			prepstatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				prepstatement.close();
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-			}
 		}
 	
 		return returnedList;
@@ -264,18 +220,11 @@ public class DonDaoImpl implements DonDao{
 										  );
 				returnedList.add(returnedDon);
 			}
+			prepstatement.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				prepstatement.close();
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-			}
 		}
-	
 		return returnedList;
 	}
 
@@ -297,16 +246,10 @@ public class DonDaoImpl implements DonDao{
 										  );
 				returnedList.add(returnedDon);
 			}
+			prepstatement.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				prepstatement.close();
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-			}
 		}
 	
 		return returnedList;

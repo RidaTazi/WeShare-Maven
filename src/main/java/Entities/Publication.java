@@ -14,6 +14,9 @@ public class Publication implements Serializable {
 	private Association association;
 	private List<Don> dons;
 
+	public Publication() {
+		
+	}
 	
 	//use this constructor to create an association's pub 
 	public Publication(String titre, String desc, String type, Association assoc) {

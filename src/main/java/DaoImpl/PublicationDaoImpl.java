@@ -15,9 +15,9 @@ import Entities.Don;
 import Entities.Publication;
 
 public class PublicationDaoImpl implements PublicationDao{
-	Connection connection;
-	PreparedStatement prepstatement;
-	ResultSet res;
+	private Connection connection;
+	private PreparedStatement prepstatement;
+	private ResultSet res;
 	
 	
 	public PublicationDaoImpl(){
@@ -36,16 +36,9 @@ public class PublicationDaoImpl implements PublicationDao{
 			prepstatement.setInt(5, p.getEtatInfo());
 			prepstatement.setInt(6, p.getAssociation().getIdAssoc().intValue());
 			status = prepstatement.executeUpdate();
+			prepstatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
-			try {
-				prepstatement.close();
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-			}
 		}
 		return status;
 		
@@ -66,20 +59,10 @@ public class PublicationDaoImpl implements PublicationDao{
 			prepstatement.setInt(6, p.getAssociation().getIdAssoc().intValue());
 			prepstatement.setInt(7, (int)p.getId());
 			status = prepstatement.executeUpdate();
-			if(status == 0)
-			{
-				System.out.println("erreur creation don !!!!");
-			}
+			prepstatement.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				prepstatement.close();
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-			}
 		}
 		return status;
 	}
@@ -91,19 +74,9 @@ public class PublicationDaoImpl implements PublicationDao{
 			prepstatement = connection.prepareStatement("DELETE FROM Publication WHERE idPub = ? ");
 			prepstatement.setInt(1,(int)id);
 			status = prepstatement.executeUpdate();
-			if(status == 0)
-			{
-				System.out.println("erreur suppression publication !!!!");
-			}
+			prepstatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				prepstatement.close();
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-			}
 		}
 		return status;
 		
@@ -124,15 +97,9 @@ public class PublicationDaoImpl implements PublicationDao{
 									  res.getString(5),
 									  res.getInt(6)
 									  );
+			prepstatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				prepstatement.close();
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-			}
 		}
 		return returnedPub;
 	}
@@ -153,17 +120,11 @@ public class PublicationDaoImpl implements PublicationDao{
 						  res.getInt(6)
 						  );
 				returnedList.add(returnedPub);
+				prepstatement.close();
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				prepstatement.close();
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-			}
 		}
 		return returnedList;
 	}
@@ -186,16 +147,10 @@ public class PublicationDaoImpl implements PublicationDao{
 						  );
 				returnedList.add(returnedPub);
 			}
+			prepstatement.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				prepstatement.close();
-			} catch (SQLException e) {
-			
-				e.printStackTrace();
-			}
 		}
 		return returnedList;
 	}
