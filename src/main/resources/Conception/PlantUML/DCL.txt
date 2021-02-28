@@ -1,0 +1,96 @@
+@startuml
+class Association {
+    -Long idAssoc
+    -String nomAssoc
+    -String codeAssoc
+    -String descAssoc
+    -String logoAssoc
+    -String addrAssoc
+    -int etatInfo
+    -List<Publication> publications
+    -List<Don> dons
+    +int createAssociation(Association association)
+    +boolean updateAssociation(Long id, Association association)
+    +boolean deleteAssociation(Long id)
+    +Association getAssociationById(Long id)
+    +List<Association> getAll()
+}
+class User {
+    #Long id_user
+    #int etatInfo_user
+    #String username_user
+    #String password_user
+    #String email_user
+    #String role_user
+    +User create(String username, String password, String role)
+    +boolean update(Long id, String username, String password, String email, String role)
+    +boolean delete(Long id)
+    +User get(Long id)
+    +List<User> all()
+    +List<User> filter()
+}
+class AdminSYS {
+    int create(String admin_username, String admin_password, String admin_email)
+    boolean update(Long id, String username, String password, String email)
+    boolean delete(Long id)
+    AdminSYS get(Long id)
+    List<AdminSYS> filter()
+    List<AdminSYS> all()
+}
+class Donneur{
+    -String nom_donneur
+    -String prenom_donneur
+    -String addr_donneur
+    -Long idDonneur
+    -List<Don> dons
+    +int createDonneur(Donneur donneur)
+    +boolean updateDonneur(Long id, Donneur donneur)
+    +boolean deleteDonneur(Long id)
+    +Donneur getDonneurById(Long id)
+    +List<Donneur> getAllDonneur()
+}
+class Don {
+    -long iD
+    -String type
+    -String logo
+    -String desc
+    -Date date
+    -String state
+    -int etatInfo
+    -Association association
+    -Publication publication
+    -Donneur donneur
+    +int createDon(Don d)
+    +int updateDon(Don p)
+    +int deleteDon(long id)
+    +Don findById(long id)
+    +List<Don> findByDonneur(Donneur donneur)
+    +List<Don> findByPublication(Publication pub)
+    +List<Don> findByAssociation(Association assoc)
+    +List<Don> findAll()
+}
+class Publication{
+    -long id
+    -String titre
+    -String desc
+    -Date date
+    -String type
+    -int etatInfo
+    -Association association
+    -List<Don> dons
+    +public int createPub(Publication p)
+    +public int updatePub(Publication p)
+    +public int deletePub(long id)
+    +public Publication findById(long id)
+    +public List<Publication> findByAssociation(Association assoc)
+    +public List<Publication> findAll()
+}
+
+Association --|> User
+AdminSYS --|> User
+Donneur --|> User
+Don "0..*" -- "1" Association : < recevoir 
+Don "0..*" -- "1" Donneur : < Proposer
+Don "0..*" -- "0..1" Publication : < Avoir
+Association -- Publication : Ajouter >
+@enduml
