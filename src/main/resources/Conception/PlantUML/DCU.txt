@@ -1,0 +1,47 @@
+@startuml
+left to right direction
+:Utilisateur: as UT
+:Compte Association: as CA
+:Compte Donneur: as CD
+:Administrateur Système: as AS
+
+rectangle "Système de gestion des dons"{
+
+    usecase "Consulter la liste de ses dons" as UC1
+    usecase "Proposer don" as UC2
+    usecase "S'authentifier" as (auth)
+    usecase "S'inscrire" as UC3
+    usecase "Modifier publication" as UC4
+    usecase "Supprimer publication" as UC5
+    usecase "Accepter proposition" as UC6
+    usecase "Rejeter proposition" as UC7
+    usecase "Consulter la page des annoces (toutes les annonces)" as UC8
+    usecase "Consulter ses annonces (activité/besoin)" as UC9
+    usecase "Publier annonce de besoin/activité" as UC10
+    usecase "Consulter la liste des propositions des dons" as UC11
+}
+
+auth <.. UC3  : extends
+UC9 <.. UC4  : extends
+UC9 <.. UC5   : extends
+UC11 <.. UC6 : extends
+UC11 <.. UC7 : extends
+
+
+AS -left-|> UT
+CA -left-|> UT
+CD -left-|> UT
+
+
+UT --> UC8
+UT --> auth
+CD --> UC1
+CD --> UC2
+
+
+CA --> UC11
+CA --> UC9
+CA --> UC10
+
+UC9 <.. UC10 : extends
+@enduml
