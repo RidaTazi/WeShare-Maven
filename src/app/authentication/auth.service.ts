@@ -61,14 +61,13 @@ export class AuthService {
             role: this._role,
             token: this._token
           }));
-
+          
           if (this._role === 'A') {
-            this.router.navigate(['/association']);
+            this.router.navigate(['/publication']);
           }
           else if (this._role === 'D') {
-            this.router.navigate(['/donneur']);
+            this.router.navigate(['/accueil']);
           }
-          
         }
 
       }, error => {
@@ -106,11 +105,12 @@ export class AuthService {
             token: this._token
         }));
 
+
         if (this._role === 'A') {
-          this.router.navigate(['/association']);
+          this.router.navigate(['/publication']);
         }
         else if (this._role === 'D') {
-          this.router.navigate(['/donneur']);
+          this.router.navigate(['/accueil']);
         }
 
       }
@@ -144,10 +144,10 @@ export class AuthService {
       this._token = userData.token;
 
       if (this._role === 'A') {
-        this.router.navigate(['/association']);
+        this.router.navigate(['/publication']);
       }
       else if (this._role === 'D') {
-        this.router.navigate(['/donneur']);
+        this.router.navigate(['/accueil']);
       }
     }
   }
@@ -160,6 +160,6 @@ export class AuthService {
     this._token = null;
     
     localStorage.removeItem("userData");
-    this.router.navigate(["/login"]);
+    this.router.navigate(["/"]);
   }
 }
