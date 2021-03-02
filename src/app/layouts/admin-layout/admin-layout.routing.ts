@@ -7,13 +7,14 @@ import { TablesComponent } from '../../pages/tables/tables.component';
 import { StockComponent } from 'src/app/pages/stock/stock.component';
 import { AccueilComponent } from 'src/app/pages/accueil/accueil.component';
 import { DonComponent } from 'src/app/pages/don/don.component';
+import { RoleGuard } from 'src/app/authentication/guards/role.guard';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'user-profile', component: UserProfileComponent },
-    { path: 'publication', component: PublicationComponent },
-    { path: 'stock', component: StockComponent },
+    { path: 'publication', component: PublicationComponent,  canActivate: [RoleGuard], data: { roles: ['A'] } },
+    { path: 'stock', component: StockComponent, canActivate: [RoleGuard], data: { roles: ['A'] } },
+    { path: 'accueil', component: AccueilComponent, canActivate: [RoleGuard], data: { roles: ['D'] } },
+    { path: 'don', component: DonComponent, canActivate: [RoleGuard], data: { roles: ['D'] } },
+    { path: 'user-profile', component: UserProfileComponent},
     { path: 'tables', component: TablesComponent },
     { path: 'icons', component: IconsComponent },
-    { path: 'accueil', component: AccueilComponent },
-    { path: 'don', component: DonComponent },
 ];
