@@ -1,1 +1,24 @@
-<p>publication works!</p>
+<div class="header pt-3 pt-lg-8 d-flex align-items-center" style="min-height: 100px; background-size: cover; background-position: center top;">
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center">
+    <div class="row">
+      <div class="col-lg-7 col-md-10">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cards">
+  	<div class="card" style="width: 18rem;">
+    <div class="card-body"  >
+      <h4 class="card-title" (click)="showDons()" >{{titre}}</h4>
+      <p class="card-text" (click)="showDons()" >{{desc}}</p>
+      <h5 class="card-title">{{date}}</h5>
+      <a class="btn btn-primary">Supprimer</a>
+      <a class="btn btn-primary">Modifier</a>
+    </div>
+  	</div>
+
+</div>

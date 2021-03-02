@@ -15,6 +15,7 @@ import { ComponentsModule } from './components/components.module';
 import { DonComponent } from './pages/don/don.component';
 import { StockComponent } from './pages/stock/stock.component';
 import { AccueilComponent } from './pages/accueil/accueil.component';
+import { PublicationDonsComponent } from './pages/publication-dons/publication-dons.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { AccueilComponent } from './pages/accueil/accueil.component';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
+    PublicationDonsComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
