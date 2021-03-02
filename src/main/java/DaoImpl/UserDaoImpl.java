@@ -46,7 +46,7 @@ public class UserDaoImpl implements UserDao
 		}
     }
     
-    private String hashPassword(String password)
+    static String hashPassword(String password)
     {
     	String salt = "E1F53135E559C253";
     	String saltedPassword = password + salt;

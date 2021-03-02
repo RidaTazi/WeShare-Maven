@@ -42,7 +42,7 @@ public class TokenDaoImpl implements TokenDao {
     }
     
 	@Override
-	public int create(String username, String password, long user_id) throws SQLIntegrityConstraintViolationException, SQLException
+	public String create(String username, String password, long user_id) throws SQLIntegrityConstraintViolationException, SQLException
 	{
 		init();
 		
@@ -54,7 +54,7 @@ public class TokenDaoImpl implements TokenDao {
 		
 		close();
 		
-		return state;
+		return token;
 	}
 	
 	@Override

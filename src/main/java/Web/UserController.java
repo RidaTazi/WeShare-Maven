@@ -4,12 +4,9 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
@@ -19,9 +16,9 @@ import javax.ws.rs.core.Response;
 import Entities.Token;
 import Entities.User;
 
-
 @Path("/user")
-public class UserController {
+public class UserController 
+{
 		
 	@POST
     @Path("/register")
@@ -29,19 +26,27 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response register(@Context  HttpHeaders headers, HashMap<String, String> body)
     {
-    	String username = body.get("username");
+		String username = body.get("username");
 		String password = body.get("password");
 		String role = body.get("role");
+		HashMap<String, String> resbody = new HashMap<String, String>();
+		User user = null;
+		String token = null;
+    	
 		
-    	HashMap<String, String> resbody = new HashMap<String, String>();
-   
+		if ((username == null) || (password == null) || (role == null))
+		{
+			resbody.put("message", "Incorrect format of http request");
+			return response(resbody, 400);
+		}
+		
 		try 
 		{
-			User user = User.objects.create(username, password, role); //create the user
+			user = User.objects.create(username, password, role); //create the user
 			
 			try 
 			{
-				Token.objects.create(user.getUsername(), password, user.getIdUser());	
+				token = Token.objects.create(user.getUsername(), password, user.getIdUser());	
 			}
 			catch (Exception e) 
 			{
@@ -65,6 +70,10 @@ public class UserController {
 		}
 		
 		resbody.put("message", "User successfully created");
+		resbody.put("userId", String.valueOf(user.getIdUser()));
+		resbody.put("username", user.getUsername());
+		resbody.put("token", token);
+		resbody.put("role", user.getRoleUser());
 		
 		return response(resbody, 200);
     }
@@ -108,28 +117,7 @@ public class UserController {
 			return response(resbody, 500);
 		}
     }
-
-	@GET
-	@Path("/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response get(@Context  HttpHeaders headers, HashMap<String, String> body)
-	{
-		HashMap<String, String> resbody = new HashMap<String, String>();
-        resbody.put("message", "get");
-        return response(body, 200);
-    }
 	
-	@POST
-	@Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response update(@Context  HttpHeaders headers, HashMap<String, String> body, @PathParam(value = "id") Long id)
-	{
-		HashMap<String, String> resbody = new HashMap<String, String>();
-        resbody.put("message", "update");
-        return response(body, 200);
-    }
-		
 	public static Response authorize(@Context  HttpHeaders headers, HashMap<String, String> body)
 	{
 		MultivaluedMap<String, String> mmap = headers.getRequestHeaders();
