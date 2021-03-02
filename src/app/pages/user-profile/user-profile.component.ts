@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import { AuthService } from 'src/app/authentication/services/auth.service';
 import { DonneurService } from 'src/app/services/donneur/donneur.service';
-
 
 
 @Component({
