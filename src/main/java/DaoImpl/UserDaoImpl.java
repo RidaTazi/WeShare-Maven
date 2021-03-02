@@ -130,12 +130,14 @@ public class UserDaoImpl implements UserDao
 	public User get(Long id) throws SQLException
     {
     	init();
-    	User user = null;
-    	sqlQuery = "select * from User where id_user = " + id + ";";
-        ResultSet result = statement.executeQuery(sqlQuery); result.next();
-    	user.setUsername(result.getObject("username_user").toString());
+    	User user = new User();
+    	sqlQuery = "SELECT * FROM User WHERE id_user = " + id + ";";
+        ResultSet result = statement.executeQuery(sqlQuery);
+        result.next();
+        
+        user.setUsername(result.getObject("username_user").toString());
     	user.setPassword(result.getObject("password_user").toString());
-    	user.setEmail(result.getObject("password_user").toString());
+    	user.setRoleUser(result.getObject("role_user").toString());
     	close();
     	return user;
     }

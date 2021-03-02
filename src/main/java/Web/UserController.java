@@ -36,7 +36,7 @@ public class UserController
 		
 		if ((username == null) || (password == null) || (role == null))
 		{
-			resbody.put("message", "Incorrect format of http request");
+			resbody.put("message", "Missing data");
 			return response(resbody, 400);
 		}
 		
@@ -69,7 +69,7 @@ public class UserController
 			return response(resbody, 500);
 		}
 		
-		resbody.put("message", "User successfully created");
+		resbody.put("message", "Registration succeeded");
 		resbody.put("userId", String.valueOf(user.getIdUser()));
 		resbody.put("username", user.getUsername());
 		resbody.put("token", token);
@@ -84,10 +84,16 @@ public class UserController
     @Produces(MediaType.APPLICATION_JSON)
     public Response authenticate(@Context  HttpHeaders headers, HashMap<String, String> body)
     {
-    	HashMap<String, String> resbody = new HashMap<String, String>();
-    	
     	String username = body.get("username");
 		String password = body.get("password");
+		HashMap<String, String> resbody = new HashMap<String, String>();
+		
+		if ((username == null) || (password == null))
+		{
+			resbody.put("message", "Missing data");
+			return response(resbody, 400);
+		}
+		
     	
     	String token = Token.generateToken(username, password);
     	
@@ -99,8 +105,12 @@ public class UserController
 			
 			if (user_token != -1)
 			{
-				resbody.put("user_token", token);
-				resbody.put("user_id",  String.valueOf(user_token));
+				User u = User.objects.get(user_token);
+				
+				resbody.put("userId", String.valueOf(user_token));
+				resbody.put("username", u.getUsername());
+				resbody.put("role", u.getRoleUser());
+				resbody.put("token",  token);
 				resbody.put("message", "Authentication succeeded");
 				return response(resbody, 200);
 			}
