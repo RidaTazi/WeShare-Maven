@@ -11,8 +11,8 @@ import { RegisterComponent } from '../../authentication/register/register.compon
   imports: [
     CommonModule,
     RouterModule.forChild(AuthLayoutRoutes),
-    FormsModule
-    // NgbModule
+    FormsModule,
+    //NgbModule,
   ],
   declarations: [
     LoginComponent,

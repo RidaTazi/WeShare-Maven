@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { NgbToastConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, public ngbToast: NgbToastConfig) { }
 
   ngOnInit() {
 

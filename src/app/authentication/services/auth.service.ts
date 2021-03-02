@@ -13,7 +13,7 @@ export class AuthService {
   private _role: string;
   private _token: string;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   get userId(): string {
     return this._userId;
