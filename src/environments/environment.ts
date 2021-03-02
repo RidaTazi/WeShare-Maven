@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 
-export const SERVER_ADDRESS = "http://localhost:9000/weshare/api";
+export const SERVER_ADDRESS = "http://localhost:9090/weshare/api";
 
 export const environment = {
   production: false

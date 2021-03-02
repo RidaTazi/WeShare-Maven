@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    //this.navController.back();
+    this.router.navigate(['../']);
     console.log("You are not allowed to access the page");
     return false;
   }

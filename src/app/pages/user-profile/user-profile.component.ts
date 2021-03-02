@@ -12,7 +12,7 @@ import { DataService } from './data.service';
 
 
 export class UserProfileComponent implements OnInit {
-  donneur = [{
+  donneur = {
     "idDonneur": 1,
     "dons": null,
     "nomDonneur": "tazi",
@@ -23,13 +23,13 @@ export class UserProfileComponent implements OnInit {
     "username": null,
     "password": null,
     "idUser": null
-  }];
+  };
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.dataService.sendGetRequest().subscribe((data: any[])=>{
       console.log(data);
-      this.donneur = data;
+      //this.donneur = data;
     })  
 
   }

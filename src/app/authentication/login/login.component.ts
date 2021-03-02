@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.authService.login(username, password);
 
-    authentificationForm.reset();
+    //authentificationForm.reset();
 
   }
 
