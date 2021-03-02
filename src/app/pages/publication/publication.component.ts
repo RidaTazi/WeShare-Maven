@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AssociationService } from 'src/app/services/association/association.service';
 
 @Component({
   selector: 'app-publication',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublicationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private associationService: AssociationService) { }
 
   ngOnInit(): void {
+
+  }
+
+
+  onSubmit() {
+    //this.associationService.
   }
 
 }
