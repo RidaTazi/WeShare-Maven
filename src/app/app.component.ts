@@ -9,16 +9,12 @@ import { AuthService } from './authentication/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'argon-dashboard-angular';
-
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService) {
 
   }
 
   ngOnInit() {
-    this.authService.autoLogin();
-    this.router.navigate(['/login']);
+      this.authService.autoLogin();
   }
-
-
   
 }

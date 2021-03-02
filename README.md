@@ -51,6 +51,7 @@ argon-dashboard-angular
 │   │   │       ├── auth-layout.component.ts
 │   │   │       ├── auth-layout.module.ts
 │   │   │       └── auth-layout.routing.ts
+|   |   ├── Authentication
 │   │   ├── pages
 │   │   │   ├── dashboard
 │   │   │   │   ├── dashboard.component.html

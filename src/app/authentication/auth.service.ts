@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SERVER_ADDRESS } from 'src/environments/environment';
 
 @Injectable({
@@ -8,15 +8,15 @@ import { SERVER_ADDRESS } from 'src/environments/environment';
 })
 export class AuthService {
 
-  private _id: string;
+  private _userId: string;
   private _username: string;
   private _role: string;
   private _token: string;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   get userId(): string {
-    return this._id;
+    return this._userId;
   }
 
   get username(): string {
@@ -33,7 +33,7 @@ export class AuthService {
 
   signUp(username: string, password: string, role: string) {
 
-    const SERVER_URL = SERVER_ADDRESS + "/register";
+    const SERVER_URL = SERVER_ADDRESS + "/user/register";
     
     const BODY = {
       username: username,
@@ -41,12 +41,14 @@ export class AuthService {
       role: role
     };
 
+    console.log(BODY);
+
     this.http.post(SERVER_URL, BODY)
       .subscribe((response: { id: string, username: string, role: string, token: string }) => {
         
         console.log(response);
 
-        this._id = response.id;
+        this._userId = response.id;
         this._username = response.username;
         this._role = response.role;
         this._token = response.token;
@@ -54,7 +56,7 @@ export class AuthService {
         if (this._token) {
 
           localStorage.setItem("userData", JSON.stringify({
-            id: this._id,
+            userId: this._userId,
             username: this._username,
             role: this._role,
             token: this._token
@@ -77,7 +79,7 @@ export class AuthService {
 
   login(username: string, password: string) {
 
-    const SERVER_URL = SERVER_ADDRESS + "auth/";
+    const SERVER_URL = SERVER_ADDRESS + "/user/auth";
     
     const BODY = {
       username: username,
@@ -85,12 +87,12 @@ export class AuthService {
     }
 
     this.http.post(SERVER_URL, BODY)
-    .subscribe((response: {id: string, username: string, role: string, token: string}) => {
+    .subscribe((response: {userId: string, username: string, role: string, token: string}) => {
       
       console.log(response);
     
 
-      this._id = response.id;
+      this._userId = response.userId;
       this._username = response.username;
       this._role = response.role; //must be change to reponse.role
       this._token = response.token;
@@ -98,7 +100,7 @@ export class AuthService {
       if (this._token) {
 
         localStorage.setItem("userData", JSON.stringify({
-            id: this._id,
+            userId: this._userId,
             username: this._username,
             role: this._role,
             token: this._token
@@ -108,7 +110,7 @@ export class AuthService {
           this.router.navigate(['/association']);
         }
         else if (this._role === 'D') {
-          this.router.navigate(['/Donneur']);
+          this.router.navigate(['/donneur']);
         }
 
       }
@@ -124,32 +126,40 @@ export class AuthService {
   autoLogin() {
 
     const userData : {
-      id: string;
+      userId: string;
       username: string;
       role: string;
       token: string;
     } = JSON.parse(localStorage.getItem('userData'));
 
     if (!userData) {
+      this.router.navigate(['/login']);
       return;
     }
 
     if (userData.token) {
-      this._id = userData.id;
+      this._userId = userData.userId;
       this._username = userData.username;
       this._role = userData.role;
       this._token = userData.token;
+
+      if (this._role === 'A') {
+        this.router.navigate(['/association']);
+      }
+      else if (this._role === 'D') {
+        this.router.navigate(['/donneur']);
+      }
     }
   }
 
   logout() {
     
     this._username = null;
-    this._id = null;
+    this._userId = null;
     this._role = null;
     this._token = null;
     
     localStorage.removeItem("userData");
-    this.router.navigate(['/']);
+    this.router.navigate(["/login"], { relativeTo: this.route });
   }
 }

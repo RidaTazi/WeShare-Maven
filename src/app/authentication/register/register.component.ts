@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    
   }
 
   passwordStrengthChecker(password: String) {
@@ -87,7 +88,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     
     this.authService.signUp(username, password, role);
     
-    registrationForm.reset(); //reset the form
+    //registrationForm.reset(); //reset the form
 
   }
 
