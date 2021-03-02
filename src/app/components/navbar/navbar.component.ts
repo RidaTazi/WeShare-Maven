@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/authentication/services/auth.service';
 })
 
 export class NavbarComponent implements OnInit {
+  username: string;
   public focus;
   public listTitles: any[];
   public location: Location;
@@ -25,6 +26,7 @@ export class NavbarComponent implements OnInit {
     else {
       this.listTitles = DonneurRoutes.filter(menuItem => menuItem);
     }
+    this.username = this.authService.username;
   }
   
   getTitle(){
