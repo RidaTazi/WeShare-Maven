@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { DataService } from './data.service';
+import { AuthService } from 'src/app/authentication/services/auth.service';
+import { DonneurService } from 'src/app/services/donneur/donneur.service';
 
 
 
@@ -12,6 +14,7 @@ import { DataService } from './data.service';
 
 
 export class UserProfileComponent implements OnInit {
+  
   donneur = {
     "idDonneur": 1,
     "dons": null,
@@ -24,13 +27,13 @@ export class UserProfileComponent implements OnInit {
     "password": null,
     "idUser": null
   };
-  constructor(private dataService: DataService) { }
+
+  constructor(private authService: AuthService, private donneurService: DonneurService) { }
 
   ngOnInit() {
-    this.dataService.sendGetRequest().subscribe((data: any[])=>{
-      console.log(data);
-      //this.donneur = data;
-    })  
+    this.donneurService.getUserchihaja().subscribe((response: { id: string, username: string}) => {
+     
+    })
 
   }
 

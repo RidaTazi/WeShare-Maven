@@ -160,6 +160,6 @@ export class AuthService {
     this._token = null;
     
     localStorage.removeItem("userData");
-    this.router.navigate(["/"]);
+    this.router.navigate(["/login"]);
   }
 }
