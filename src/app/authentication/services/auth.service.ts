@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SERVER_ADDRESS } from 'src/environments/environment';
+import { LoginComponent } from '../login/login.component';
 
 @Injectable({
   providedIn: 'root'
@@ -117,7 +118,6 @@ export class AuthService {
       else {
         console.log("You are not authorized");
       }
-
     }, error => {
       console.log(error);
     })
@@ -160,6 +160,6 @@ export class AuthService {
     this._token = null;
     
     localStorage.removeItem("userData");
-    this.router.navigate(["/login"]);
+    this.router.navigate(['/login']);
   }
 }

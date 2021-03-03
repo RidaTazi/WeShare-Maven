@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { NgbToastConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +9,12 @@ import { NgbToastConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   
-  constructor(private authService: AuthService, public ngbToast: NgbToastConfig) { }
+  public isLoading: boolean;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-
+    this.isLoading = false;
   }
 
   onSubmit(authentificationForm: NgForm) {
@@ -27,8 +28,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     const username = authentificationForm.value.username;
     const password = authentificationForm.value.password;
 
+    this.isLoading = true;
     this.authService.login(username, password);
-
+    
     //authentificationForm.reset();
 
   }
@@ -38,3 +40,4 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
 }
+
