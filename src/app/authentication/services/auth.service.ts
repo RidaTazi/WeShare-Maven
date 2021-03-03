@@ -108,13 +108,14 @@ export class AuthService {
 
       if (this._token) {
 
-        localStorage.setItem("userData", JSON.stringify({
-            userId: this._userId,
-            username: this._username,
-            role: this._role,
-            token: this._token
-        }));
-
+        if (this.exchangeService.data['rememberMe']) {
+          localStorage.setItem("userData", JSON.stringify({
+              userId: this._userId,
+              username: this._username,
+              role: this._role,
+              token: this._token
+          }));
+        }
 
         if (this._role === 'A') {
           this.router.navigate(['/publication']);

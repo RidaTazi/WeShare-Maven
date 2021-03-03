@@ -131,8 +131,8 @@
             <progress max="100" value="0" id="meter"></progress>
             <div class="row my-4">
               <div class="col-12">
-                <div class="custom-control custom-control-alternative custom-checkbox">
-                  <input class="custom-control-input" id="customCheckRegister" type="checkbox">
+                <div class="custom-control custom-control-alternative custom-checkbox"  (click)="checkbox.checked=!checkbox.checked">
+                  <input #checkbox class="custom-control-input" id="customCheckRegister" type="checkbox">
                   <label class="custom-control-label" for="customCheckRegister">
                     <span class="text-muted">Je suis d'accord avec la <a [routerLink]="[]">Politique de confidentialité</a></span>
                   </label>
@@ -142,7 +142,8 @@
             <div class="text-center">
               <button 
                 [disabled]="!registrationForm.valid || 
-                !checkPasswordConfirmation(password.value, password_confirmation.value)" 
+                !checkPasswordConfirmation(password.value, password_confirmation.value) || 
+                (checkbox.checked == false)" 
                 type="submit" 
                 class="btn btn-primary mt-4">
                 Créer compte

@@ -19,7 +19,14 @@ export class RoleGuard implements CanActivate, CanActivateChild {
 
       console.log(roles[0] + " " + this.authService.role);
 
-      if (roles[0] == this.authService.role) {
+      const userData: {
+        userId: string;
+        username: string;
+        role: string;
+        token: string;
+      } = JSON.parse(localStorage.getItem("userData"));
+
+      if ((roles[0] == this.authService.role) || (roles[0] == userData['role'])) {
         console.log("You are authorized");
         return true;
       }
