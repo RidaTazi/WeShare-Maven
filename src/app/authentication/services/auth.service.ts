@@ -71,8 +71,11 @@ export class AuthService {
           }
         }
 
+        this.exchangeService.data['isLoading'] = false;
+
       }, error => {
         console.log(error);
+        this.exchangeService.data['isLoading'] = false;
       })
       
   }
@@ -118,10 +121,10 @@ export class AuthService {
       else {
         console.log("You are not authorized");
       }
-      this.exchangeService.data = false;
+      this.exchangeService.data['isLoading'] = false;
     }, error => {
       console.log(error);
-      this.exchangeService.data = false;
+      this.exchangeService.data['isLoading'] = false;
     })
   }
 

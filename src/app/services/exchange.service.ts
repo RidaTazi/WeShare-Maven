@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ExchangeService {
 
-  private _data: any;
+  private _data: { } = { };
 
   constructor() { }
 
