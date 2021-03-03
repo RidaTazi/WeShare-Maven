@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ExchangeService } from 'src/app/services/exchange.service';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -9,12 +10,10 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   
-  public isLoading: boolean;
-
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, public exchangeService: ExchangeService) { }
 
   ngOnInit() {
-    this.isLoading = false;
+    this.exchangeService.data = false;
   }
 
   onSubmit(authentificationForm: NgForm) {
@@ -28,7 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const username = authentificationForm.value.username;
     const password = authentificationForm.value.password;
 
-    this.isLoading = true;
+    this.exchangeService.data = true;
     this.authService.login(username, password);
     
     authentificationForm.reset();

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { ExchangeService } from 'src/app/services/exchange.service';
 import { SERVER_ADDRESS } from 'src/environments/environment';
-import { LoginComponent } from '../login/login.component';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AuthService {
   private _role: string;
   private _token: string;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, public exchangeService: ExchangeService) { }
 
   get userId(): string {
     return this._userId;
@@ -118,8 +118,10 @@ export class AuthService {
       else {
         console.log("You are not authorized");
       }
+      this.exchangeService.data = false;
     }, error => {
       console.log(error);
+      this.exchangeService.data = false;
     })
   }
 
