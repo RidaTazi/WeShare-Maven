@@ -106,7 +106,7 @@ public class AssociationImpl implements IAssociation {
     @Override
     public List<Publication> getPublications(Long id) {
     	try {
-    	return publicationDao.findByAssociation(associationDao.getAssociationById(id));
+    	return publicationDao.findByAssociation(associationDao.getAssociationById(membreDao.getAssociationId(id)));
     	} catch (SQLException throwables) {
             throwables.printStackTrace();
             return null;
