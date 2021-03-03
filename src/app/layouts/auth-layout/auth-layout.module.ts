@@ -12,7 +12,7 @@ import { RegisterComponent } from '../../authentication/register/register.compon
     CommonModule,
     RouterModule.forChild(AuthLayoutRoutes),
     FormsModule,
-    //NgbModule,
+    NgbModule
   ],
   declarations: [
     LoginComponent,

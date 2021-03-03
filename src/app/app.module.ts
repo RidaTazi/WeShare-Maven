@@ -24,7 +24,6 @@ import { PublicationDonsComponent } from './pages/publication-dons/publication-d
     FormsModule,
     HttpClientModule,
     ComponentsModule,
-    NgbModule,
     RouterModule,
     AppRoutingModule
   ],

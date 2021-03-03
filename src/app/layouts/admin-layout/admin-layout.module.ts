@@ -14,7 +14,6 @@ import { PublicationComponent } from 'src/app/pages/publication/publication.comp
 import { DonComponent } from 'src/app/pages/don/don.component';
 import { AccueilComponent } from 'src/app/pages/accueil/accueil.component';
 import { StockComponent } from 'src/app/pages/stock/stock.component';
-// import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [

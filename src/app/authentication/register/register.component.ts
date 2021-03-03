@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ExchangeService } from 'src/app/services/exchange.service';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -10,10 +11,10 @@ import { AuthService } from '../services/auth.service';
 
 export class RegisterComponent implements OnInit, OnDestroy {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, public exchangeService: ExchangeService) { }
 
   ngOnInit() {
-    
+    this.exchangeService.data['isLoading'] = false;
   }
 
   passwordStrengthChecker(password: String) {
@@ -86,9 +87,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
     const password = registrationForm.value.password;
     const password_confirmation = registrationForm.value.password;
     
+    this.exchangeService.data['isLoading'] = true;
     this.authService.signUp(username, password, role);
     
-    //registrationForm.reset(); //reset the form
+    registrationForm.reset(); //reset the form
 
   }
 
