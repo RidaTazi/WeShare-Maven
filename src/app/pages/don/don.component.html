@@ -1,1 +1,97 @@
-<p>don works!</p>
+<div class="header bg-gradient-info pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body text-right">
+      <button class="btn btn-outline-info mb-2 mr-2" slot="end" (click)="openXl(content)">Ajouter Don</button>
+
+      <!-- Modal -->
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Ajout Don</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #addDonForm="ngForm" (ngSubmit)="onSubmit(addDonForm)">
+            <div class="form-group mb-3">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">Type</label>
+                </div>
+                <select class="custom-select form-control" id="inputGroupSelect01"
+                ngModel
+                name="type"
+                placeholder="choisit"
+                required>
+                  <option *ngFor="let type of types; index as i">{{types[i]}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <div class="input-group mb-3">
+                <div class="custom-file">
+                  <input type="file" name="image" ngModel class="custom-file-input form-control" id="inputGroupFile02">
+                  <label class="custom-file-label" for="inputGroupFile02">image </label>
+                </div>
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">Upload</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Description </span>
+                </div>
+                <textarea  ngModel class="form-control" name="description" style="height: 8em;" required ></textarea>
+              </div>
+            </div>
+          <div class="text-right">
+            <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+            <button [disabled]="!addDonForm.valid" type="submit" class="btn btn-info">Add</button>
+          </div>
+
+          </form>
+
+
+        </div>
+        <div class="modal-footer">
+
+        </div>
+
+      </ng-template>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container-fluid mt--5">
+  <!-- Table -->
+  <div class="row">
+    <div class="card-group">
+      <div class="col" *ngFor="let don of dons">
+        <div class="card" style="width: 25rem; margin-bottom: 5em;">
+          <img class="card-img-top" src="../../../assets/img/theme/team-4-800x800.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{don.type}}</h5>
+            <p class="card-text">{{don.desc}}</p>
+            <div class="row">
+              <div class="col-md-4">
+                <a href="#" class="btn btn-outline-primary">Modifier</a>
+              </div>
+              <div class="col-md-4 offset-md-4">
+                <a href="#" class="btn btn-outline-danger">Supprimer</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
