@@ -92,7 +92,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.authService.signUp(username, password, role);
     
     registrationForm.reset(); //reset the form
-
+    (<HTMLInputElement>document.getElementById("meter")).value = "0";
   }
 
   ngOnDestroy() {
