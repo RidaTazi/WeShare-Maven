@@ -32,7 +32,7 @@ import { PublicationDonsComponent } from './pages/publication-dons/publication-d
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    PublicationDonsComponent,
+    PublicationDonsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

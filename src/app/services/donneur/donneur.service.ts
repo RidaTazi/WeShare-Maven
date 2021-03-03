@@ -10,7 +10,7 @@ export class DonneurService {
 
 
   constructor(private authService: AuthService, private httpClient: HttpClient) { }
-  //registration 
+  //registration
   //authentication
 
   //http request (refresh_token,)
@@ -22,12 +22,32 @@ export class DonneurService {
     this.http.get<RequestInformationVerification[]>(SERVER_URL, { headers: HEADERS })
   */
 
-  public getUserchihaja(){
+  public getUserDons(){
 
-    const SERVER_URL = SERVER_ADDRESS + `/donneur/${this.authService.userId}`;
+    const SERVER_URL = SERVER_ADDRESS + `/donneur/${this.authService.userId}/dons`;
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
     return this.httpClient.get(SERVER_URL, { headers: HEADERS });
   }
 
+  public addDon(don){
+    const SERVER_URL = SERVER_ADDRESS + `/donneur/${this.authService.userId}/addDon`;
+    const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
+
+    return this.httpClient.post(SERVER_URL,don,{headers : HEADERS})
+  }
+
   //methodes ici
+}
+
+interface Don {
+  association,
+  date,
+  desc,
+  donneur,
+  etatInfo,
+  iD,
+  logo,
+  publication,
+  state,
+  type
 }
