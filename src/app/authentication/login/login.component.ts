@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.authService.login(username, password);
     
-    //authentificationForm.reset();
+    authentificationForm.reset();
 
   }
 
