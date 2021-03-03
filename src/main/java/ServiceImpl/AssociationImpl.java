@@ -2,9 +2,11 @@ package ServiceImpl;
 
 import Dao.AssociationDao;
 import Dao.DonDao;
+import Dao.MembreDao;
 import Dao.PublicationDao;
 import DaoImpl.AssociationDaoImpl;
 import DaoImpl.DonDaoImpl;
+import DaoImpl.MembreDaoImpl;
 import DaoImpl.PublicationDaoImpl;
 import Entities.Association;
 import Entities.Don;
@@ -23,11 +25,13 @@ public class AssociationImpl implements IAssociation {
     private final AssociationDao associationDao;
     private final PublicationDao publicationDao;
     private final DonDao donDao;
+    private final MembreDao membreDao;
 
     public AssociationImpl() {
         this.associationDao = new AssociationDaoImpl();
         this.publicationDao = new PublicationDaoImpl();
         this.donDao = new DonDaoImpl();
+        this.membreDao=new MembreDaoImpl();
         }
 
     @Override
@@ -102,7 +106,7 @@ public class AssociationImpl implements IAssociation {
     @Override
     public List<Publication> getPublications(Long id) {
     	try {
-    	return publicationDao.findByAssociation(associationDao.getAssociationById(id));
+    	return publicationDao.findByAssociation(associationDao.getAssociationById(membreDao.getAssociationId(id)));
     	} catch (SQLException throwables) {
             throwables.printStackTrace();
             return null;

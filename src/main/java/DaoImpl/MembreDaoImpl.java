@@ -98,4 +98,22 @@ public class MembreDaoImpl implements MembreDao {
             return false;
         }
     }
+
+    @Override
+    public Long getAssociationId(Long id){
+        Long idAssoc;
+        try {
+            init();
+            req="select idAssoc from membreAssociation where idMembre="+id;
+            ResultSet result = statement.executeQuery(req);
+            result.next();
+            idAssoc=result.getLong(1);
+            statement.close();
+            System.out.println(idAssoc);
+            return idAssoc;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return -1L;
+        }
+    }
 }

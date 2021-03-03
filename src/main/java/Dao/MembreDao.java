@@ -1,5 +1,6 @@
 package Dao;
 
+import Entities.Association;
 import Entities.MembreAssociation;
 
 import java.sql.SQLException;
@@ -9,4 +10,5 @@ public interface MembreDao {
     Long updateMembreAssoc(MembreAssociation membre) throws SQLException;
     MembreAssociation getMembreById(Long id)  throws SQLException;
     boolean deleteMembre(Long id) throws SQLException;
+    Long getAssociationId(Long id ) throws SQLException;
 }
