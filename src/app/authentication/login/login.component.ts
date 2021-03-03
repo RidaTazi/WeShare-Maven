@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, public exchangeService: ExchangeService) { }
 
   ngOnInit() {
-    this.exchangeService.data.isLoading = false;
+    this.exchangeService.data['isLoading'] = false;
   }
 
   onSubmit(authentificationForm: NgForm) {
