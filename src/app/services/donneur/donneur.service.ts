@@ -26,7 +26,6 @@ export class DonneurService {
 
     const SERVER_URL = SERVER_ADDRESS + `/donneur/${this.authService.userId}/dons`;
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
-
     return this.httpClient.get(SERVER_URL, { headers: HEADERS });
   }
 

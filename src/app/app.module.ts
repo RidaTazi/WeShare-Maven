@@ -25,7 +25,8 @@ import { PublicationDonsComponent } from './pages/publication-dons/publication-d
     HttpClientModule,
     ComponentsModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   declarations: [
     AppComponent,

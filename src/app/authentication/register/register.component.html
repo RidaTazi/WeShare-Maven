@@ -1,20 +1,19 @@
-<div class="header bg-gradient-danger py-7 py-lg-8">
+<div class="header bg-gradient-default py-7 py-lg-8">
   <div class="container">
     <div class="header-body text-center mb-7">
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-6">
           <h1 class="text-white">Bienvenue!</h1>
-          <!-- <p class="text-lead text-light">Use these awesome forms to login or create new account in your project for free.</p> -->
-          <p class="text-lead text-light">Veuillez remplir le formulaire d'inscription</p>
+          <h4 class="text-lead text-light">Veuillez remplir le formulaire d'inscription</h4>
         </div>
       </div>
     </div>
   </div>
-  <div class="separator separator-bottom separator-skew zindex-100">
+  <!-- <div class="separator separator-bottom separator-skew zindex-100">
     <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
     </svg>
-  </div>
+  </div> -->
 </div>
 <!-- Page content -->
 <div class="container mt--8 pb-5">
@@ -34,6 +33,10 @@
               <span class="btn-inner--text">Google</span>
             </a>
           </div>
+        </div>
+
+        <div *ngIf="this.exchangeService.data['registrationFailed']" class="alert alert-danger text-center" role="alert">
+          Inscription échouée
         </div>
 
         <div *ngIf="exchangeService.data['isLoading']" class="progress">
@@ -120,6 +123,10 @@
                   required>
               </div>
             </div>
+            <div *ngIf="!checkPasswordConfirmation(password.value, password_confirmation.value)" class="alert alert-danger text-center" role="alert">
+              Merci de vérifier que vos mots de passe se correspondent
+            </div>
+            
             <div class="text-muted font-italic"><small>Fiabilité du mot de passe</small></div>
             <progress max="100" value="0" id="meter"></progress>
             <div class="row my-4">
@@ -127,7 +134,7 @@
                 <div class="custom-control custom-control-alternative custom-checkbox">
                   <input class="custom-control-input" id="customCheckRegister" type="checkbox">
                   <label class="custom-control-label" for="customCheckRegister">
-                    <span class="text-muted">Je suis d'accord avec la <a href="#">Politique de confidentialité</a></span>
+                    <span class="text-muted">Je suis d'accord avec la <a [routerLink]="[]">Politique de confidentialité</a></span>
                   </label>
                 </div>
               </div>

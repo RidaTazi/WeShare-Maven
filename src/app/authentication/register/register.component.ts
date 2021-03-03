@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.exchangeService.data['isLoading'] = false;
+    this.exchangeService.data['registrationFailed'] = false;
   }
 
   passwordStrengthChecker(password: String) {

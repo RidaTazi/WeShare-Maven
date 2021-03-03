@@ -76,6 +76,12 @@ export class AuthService {
       }, error => {
         console.log(error);
         this.exchangeService.data['isLoading'] = false;
+        this.exchangeService.data['registrationFailed'] = true;
+
+        setTimeout(() => {
+          this.exchangeService.data['registrationFailed'] = false;
+        }, 2000);
+        
       })
       
   }
@@ -125,6 +131,10 @@ export class AuthService {
     }, error => {
       console.log(error);
       this.exchangeService.data['isLoading'] = false;
+      this.exchangeService.data['registrationFailed'] = true;
+      setTimeout(() => {
+        this.exchangeService.data['registrationFailed'] = false;
+      }, 2000);
     })
   }
 

@@ -17,21 +17,28 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private authService: AuthService, private donneurService: DonneurService) { }
   donneur = {	
+    desc_donneur: "description",
     idDonneur: 1,	
     dons: null,	
-    nomDonneur: "tazi",	
-    prenomDonneur: "rida",	
-    addrDonneur: "rabat qamra Ahsen dar fl3alam",	
+    pays: "pays",
+    ville: "ville",
+    nomDonneur: "nom",	
+    prenomDonneur: "prenom",	
+    addrDonneur: "adresse",	
     roleUser: null,	
-    email: null,	
-    username: null,	
+    email: "email",	
+    username: "username",	
     password: null,	
-    idUser: null	
+    idUser: 1	
   };
+
   ngOnInit() {
     this.donneurService.getUserchihaja().subscribe((response :{	
+      desc_donneur: string,
       idDonneur: number,	
       dons: string,	
+      pays: string,
+      ville: string,
       nomDonneur: string,	
       prenomDonneur: string,	
       addrDonneur: string,	
@@ -39,10 +46,13 @@ export class UserProfileComponent implements OnInit {
       email:string,	
       username: string,	
       password: string,	
-      idUser: string	
-    })=>{console.log("AAAAAAAAAAAAAAAAAAA");
+      idUser: number	
+    })=>{
+      console.log(`role` + this.authService.role);
       console.log(response)
-      this.donneur = response;}
+      this.donneur = response;
+    }
      
     )}
+
   }
