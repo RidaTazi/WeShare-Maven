@@ -5,7 +5,6 @@ import { SERVER_ADDRESS } from 'src/environments/environment';
 import {Publication} from 'src/app/models/publication';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -23,4 +22,11 @@ export class AssociationService {
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
     return this.httpClient.get<Publication[]>(SERVER_URL, { headers: HEADERS });
   }
+  public getAssociationById(){
+    const SERVER_URL = SERVER_ADDRESS + `/association/${this.authService.userId}`;
+    const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
+
+    return this.httpClient.get(SERVER_URL, { headers: HEADERS });
+  }
+  //methode ici
 }

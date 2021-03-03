@@ -5,8 +5,8 @@
   <div class="container-fluid d-flex align-items-center">
     <div class="row">
       <div class="col-lg-7 col-md-10">
-        <h1 class="display-2 text-white">Hello Jesse</h1>
-        <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
+        <h1 class="display-2 text-white">Hello {{donneur.username}}</h1>
+        <p class="text-white mt-0 mb-5">This is your profile page. You can see your info and les dons dyalek (maybe).</p>
         <a href="#!" class="btn btn-info">Edit profile</a>
       </div>
     </div>
@@ -37,25 +37,18 @@
               <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                 <div>
                   <span class="heading">22</span>
-                  <span class="description">Friends</span>
+                  <span class="description">Dons</span>
                 </div>
-                <div>
-                  <span class="heading">10</span>
-                  <span class="description">Photos</span>
-                </div>
-                <div>
-                  <span class="heading">89</span>
-                  <span class="description">Comments</span>
-                </div>
+               
               </div>
             </div>
           </div>
           <div class="text-center">
             <h3>
-              Jessica Jones<span class="font-weight-light">, 27</span>
+              {{donneur.nomDonneur}} {{donneur.prenomDonneur}}<span class="font-weight-light">, {{donneur.age}}</span>
             </h3>
             <div class="h5 font-weight-300">
-              <i class="ni location_pin mr-2"></i>Bucharest, Romania
+              <i class="ni location_pin mr-2"></i>{{donneur.ville}}, {{donneur.pays}}
             </div>
             <div class="h5 mt-4">
               <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
@@ -64,7 +57,7 @@
               <i class="ni education_hat mr-2"></i>University of Computer Science
             </div>
             <hr class="my-4" />
-            <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
+            <p>{{donneur.desc_donneur}}</p>
             <a href="javascript:void(0)">Show more</a>
           </div>
         </div>
@@ -96,7 +89,7 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-email">Email address</label>
-                    <input type="email" id="input-email" class="form-control form-control-alternative" placeholder={{donneur.email}}>
+                    <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="email" value={{donneur.email}}>
                   </div>
                 </div>
               </div>
@@ -131,13 +124,13 @@
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label class="form-control-label" for="input-city">City</label>
-                    <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York">
+                    <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value={{donneur.ville}}>
                   </div>
                 </div>
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label class="form-control-label" for="input-country">Country</label>
-                    <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="United States">
+                    <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value={{donneur.pays}}>
                   </div>
                 </div>
                 <div class="col-lg-4">
@@ -154,7 +147,7 @@
             <div class="pl-lg-4">
               <div class="form-group">
                 <label>About Me</label>
-                <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ..." value={{donneur.desc_donneur}}></textarea>
               </div>
             </div>
           </form>
