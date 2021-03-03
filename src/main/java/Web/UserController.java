@@ -13,12 +13,29 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
+
+import Dao.DonneurDAO;
+import Dao.MembreDao;
+import DaoImpl.DonneurDaoImpl;
+import DaoImpl.MembreDaoImpl;
+import Entities.Donneur;
+import Entities.MembreAssociation;
 import Entities.Token;
 import Entities.User;
+import Service.IAssociation;
+import Service.IMembre;
+import ServiceImpl.AssociationImpl;
+import ServiceImpl.MembreImpl;
 
 @Path("/user")
-public class UserController 
-{
+public class UserController {
+	private final MembreDao membreDao;
+	private final DonneurDAO donneurDAO;
+
+	public UserController() {
+		this.membreDao = new MembreDaoImpl();
+		this.donneurDAO=new DonneurDaoImpl();
+	}
 		
 	@POST
     @Path("/register")
@@ -43,6 +60,31 @@ public class UserController
 		try 
 		{
 			user = User.objects.create(username, password, role); //create the user
+			Long idUser=user.getIdUser();
+			switch (user.getRoleUser()){
+				case "A":
+					//create row in assoc aka membre
+					MembreAssociation membreAssociation=new MembreAssociation();
+					membreAssociation.setIdMembre(idUser);
+					membreAssociation.setIdAssoc(6L);
+					membreAssociation.setPosteMembre(body.get("posteMembre"));
+					membreAssociation.setNomMembre(body.get("nomMembre"));
+					membreAssociation.setPrenomMembre(body.get("prenomMembre"));
+					membreDao.createMembreAssoc(membreAssociation);
+					break;
+				case "D":
+					//create row in donneur
+					Donneur donneur=new Donneur();
+					donneur.setIdDonneur(idUser);
+					donneur.setNomDonneur(body.get("nom_donneur"));
+					donneur.setPrenomDonneur(body.get("prenom_donneur"));
+					donneur.setAddrDonneur(body.get("addr_donneur"));
+					donneurDAO.createDonneur(donneur);
+					break;
+				default:
+					resbody.put("message", "User Type Undefined");
+					return response(resbody, 400);
+			}
 			
 			try 
 			{

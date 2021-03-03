@@ -27,12 +27,13 @@ public class MembreDaoImpl implements MembreDao {
     public boolean createMembreAssoc(MembreAssociation membre){
         try {
             connection= DBConnection.getInstance();
-            req="insert into membreAssociation (nomMembre,prenomMember,posteMembre,idAssoc) values(?,?,?,?);";
+            req="insert into membreAssociation (idMembre,nomMembre,prenomMember,posteMembre,idAssoc) values(?,?,?,?,?);";
             preparedStatement=connection.prepareStatement(req);
-            preparedStatement.setString(1, membre.getNomMembre());
-            preparedStatement.setString(2, membre.getPrenomMembre());
-            preparedStatement.setString(3, membre.getPosteMembre());
-            preparedStatement.setLong(4, membre.getIdAssoc());
+            preparedStatement.setLong(1, membre.getIdMembre());
+            preparedStatement.setString(2, membre.getNomMembre());
+            preparedStatement.setString(3, membre.getPrenomMembre());
+            preparedStatement.setString(4, membre.getPosteMembre());
+            preparedStatement.setLong(5,membre.getIdAssoc());
             preparedStatement.execute();
             preparedStatement.close();
             return true;

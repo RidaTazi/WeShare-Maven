@@ -9,6 +9,7 @@
         <module name="WeShare" />
         <module name="ProjetWeb" />
         <module name="WeShareapi" />
+        <module name="WeShareApi" />
       </profile>
     </annotationProcessing>
   </component>

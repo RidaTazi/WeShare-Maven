@@ -12,7 +12,7 @@ import java.util.List;
 
 @Path("/association")
 public class AssociationController {
-    private IAssociation iAssociation;
+    private final IAssociation iAssociation;
 
     public AssociationController() {
         this.iAssociation = new AssociationImpl();
@@ -96,6 +96,7 @@ public class AssociationController {
     public int deletePublication(@PathParam(value = "idPub") Long idPub){
         return iAssociation.deletePublication(idPub);
     }
+
 
 
 }

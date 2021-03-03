@@ -154,6 +154,8 @@ public class PublicationDaoImpl implements PublicationDao{
 		}
 		return returnedList;
 	}
-	
+
+
+
 
 }

@@ -26,11 +26,12 @@ public class DonneurDaoImpl implements DonneurDAO {
     public int createDonneur(Donneur donneur)  {
         try {
             init();
-            req="insert into donneur (nom_donneur,prenom_donneur,addr_donneur) values(?,?,?);";
+            req="insert into donneur (idDonneur,nom_donneur,prenom_donneur,addr_donneur) values(?,?,?,?);";
             preparedStatement=connection.prepareStatement(req);
-            preparedStatement.setString(1, donneur.getNomDonneur());
-            preparedStatement.setString(2, donneur.getPrenomDonneur());
-            preparedStatement.setString(3, donneur.getAddrDonneur());
+            preparedStatement.setLong(1, donneur.getIdDonneur());
+            preparedStatement.setString(2, donneur.getNomDonneur());
+            preparedStatement.setString(3, donneur.getPrenomDonneur());
+            preparedStatement.setString(4, donneur.getAddrDonneur());
             preparedStatement.execute();
             preparedStatement.close();
             return 0;

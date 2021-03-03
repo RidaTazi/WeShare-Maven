@@ -10,14 +10,9 @@ import Entities.Association;
 import Entities.Don;
 import Entities.Publication;
 import Service.IAssociation;
-
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import org.codehaus.jettison.json.JSONObject;
-
 import javax.transaction.Transactional;
-
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,9 +20,9 @@ import java.util.List;
 
 @Transactional
 public class AssociationImpl implements IAssociation {
-    private AssociationDao associationDao;
-    private PublicationDao publicationDao;
-    private DonDao donDao;
+    private final AssociationDao associationDao;
+    private final PublicationDao publicationDao;
+    private final DonDao donDao;
 
     public AssociationImpl() {
         this.associationDao = new AssociationDaoImpl();
@@ -165,7 +160,7 @@ public class AssociationImpl implements IAssociation {
         String desc=object.get("descDon").getAsString();
         String state=object.get("stateDon").getAsString();
         int etatInfo=object.get("etatInfo").getAsInt();
-        Don don=new Don(id.longValue(),type, logo, desc, new Date(5), state, etatInfo); //the date doesn't change anyways
+        Don don=new Don(id,type, logo, desc, new Date(5), state, etatInfo); //the date doesn't change anyways
         donDao.updateDon(don);
         return 0;
 	}
