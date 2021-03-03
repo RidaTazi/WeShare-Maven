@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AssociationService } from 'src/app/services/association/association.service';
 import {Router} from '@angular/router';
+import { Observable } from 'rxjs';
+import {Publication} from 'src/app/models/publication';
+
 
 @Component({
   selector: 'app-publication',
@@ -8,21 +11,16 @@ import {Router} from '@angular/router';
   styleUrls: ['./publication.component.css']
 })
 export class PublicationComponent implements OnInit {
-	titre : String;
-	desc : String;
-	date : Date;
-
+	public pubs: Publication[]=[]; 
   constructor(private associationService: AssociationService,private router: Router) { }
 
   ngOnInit(): void {
-  	this.titre="Card title";
-  	this.desc="Some quick example text to build on the card title and make up the bulk of the card's content.";
-  	this.date=new Date("2019-01-16");
-  }
-
-
-  onSubmit() {
-    //this.associationService.
+  	this.associationService.getPubsByAssocId().subscribe(response=>{
+  		this.pubs=response;
+  		console.log(this.pubs);
+  	},err=>{
+  		alert("Server Problem !")
+  	})
   }
 
   showDons(){
