@@ -20,6 +20,7 @@ import com.google.gson.JsonObject;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.List;
 
 public class DonneurImpl implements IDonneur {
     private DonneurDAO donneurDAO;
@@ -163,5 +164,18 @@ public class DonneurImpl implements IDonneur {
 			e.printStackTrace();
 		}
         return donDao.updateDon(don);
+	}
+
+	@Override
+	public List<Don> getDons(Long id) {
+		Donneur donneur = null;
+		try {
+			donneur = donneurDAO.getDonneurById(id);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return donDao.findByDonneur(donneur);
 	}
 }

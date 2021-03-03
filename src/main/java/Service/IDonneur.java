@@ -1,5 +1,7 @@
 package Service;
 
+import java.util.List;
+
 import Entities.Don;
 import Entities.Donneur;
 import Entities.MembreAssociation;
@@ -9,6 +11,7 @@ public interface IDonneur {
     Long updateDonneur(String data);
     Donneur getDonneurById(Long id);
     Long deleteDonneur(Long id);
+    List<Don> getDons(Long id);
     int addDon(Long id,String don);
     int updateDon(Long idDon, String data);
     int deleteDon(Long id);

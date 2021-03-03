@@ -1,11 +1,14 @@
 package Web;
 
+import Entities.Don;
 import Entities.Donneur;
 import Entities.MembreAssociation;
 import Service.IDonneur;
 import Service.IMembre;
 import ServiceImpl.DonneurImpl;
 import ServiceImpl.MembreImpl;
+
+import java.util.List;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -47,6 +50,13 @@ public class DonneurController {
     @Produces(MediaType.APPLICATION_JSON)
     public Long deleteDonneur(@PathParam(value = "id") Long id){
         return iDonneur.deleteDonneur(id);
+    }
+    
+    @GET
+    @Path("/{id}/dons")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Don> getDons(@PathParam(value = "id") Long id){
+        return iDonneur.getDons(id);
     }
 
     @POST
