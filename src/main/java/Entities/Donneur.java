@@ -7,8 +7,11 @@ public class Donneur extends User {
 	private String nom_donneur;
 	private String prenom_donneur;
 	private String addr_donneur;
+	private String desc_donneur;
 	private Long idDonneur;
     private List<Don> dons;
+    private String pays;
+    private String ville;
 
 	public Donneur() 
 	{
@@ -56,4 +59,26 @@ public class Donneur extends User {
     public Long getIdDonneur() {
         return idDonneur;
     }
+	public String getDesc_donneur() {
+		return desc_donneur;
+	}
+
+	public void setDesc_donneur(String desc_donneur) {
+		this.desc_donneur = desc_donneur;
+	}
+	public String getPays() {
+		return pays;
+	}
+
+	public void setPays(String pays) {
+		this.pays = pays;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
 }

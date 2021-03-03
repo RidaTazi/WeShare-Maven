@@ -83,12 +83,17 @@ public class DonneurDaoImpl implements DonneurDAO {
         donneur.setIdDonneur(id);
         try {
             init();
-            req="select * from donneur  where idDonneur = "+id+";";
+            req="select * from donneur INNER JOIN User ON User.id_user=donneur.idDonneur where idDonneur = " + id + ";";
             ResultSet result = statement.executeQuery(req);
             result.next();
             donneur.setNomDonneur(result.getObject("nom_donneur").toString());
             donneur.setPrenomDonneur(result.getObject("prenom_donneur").toString());
             donneur.setAddrDonneur(result.getObject("addr_donneur").toString());
+            donneur.setUsername(result.getObject("username_user").toString());
+            donneur.setPays((String)result.getObject("pays_donneur"));
+            donneur.setVille((String)result.getObject("ville_donneur"));
+            donneur.setDesc_donneur((String) result.getObject("desc_donneur"));
+            donneur.setEmail((String) result.getObject("email_user"));
             result.close();
             statement.close();
             return donneur;
@@ -97,6 +102,7 @@ public class DonneurDaoImpl implements DonneurDAO {
             return null;
         }
     }
+
     // Wach 7ta ana ndir EtatInfo ??? <YES>
     @Override
     public List<Donneur> getAllDonneur() throws SQLException {
