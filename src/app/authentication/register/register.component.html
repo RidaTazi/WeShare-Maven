@@ -132,7 +132,7 @@
             <div class="row my-4">
               <div class="col-12">
                 <div class="custom-control custom-control-alternative custom-checkbox"  (click)="checkbox.checked=!checkbox.checked">
-                  <input #checkbox class="custom-control-input" id="customCheckRegister" type="checkbox">
+                  <input #checkbox type="checkbox" name="policy" ngModel class="custom-control-input" id="customCheckRegister" >
                   <label class="custom-control-label" for="customCheckRegister">
                     <span class="text-muted">Je suis d'accord avec la <a [routerLink]="[]">Politique de confidentialité</a></span>
                   </label>

@@ -83,6 +83,8 @@
               <input 
                 #checkbox 
                 type="checkbox" 
+                name="rememberMe"
+                ngModel
                 [checked]="this.exchangeService.data['rememberMe']"
                 (click)="checkTheBox()"
                 class="custom-control-input"
