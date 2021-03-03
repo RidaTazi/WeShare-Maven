@@ -35,6 +35,10 @@
           </div>
         </div>
 
+        <div *ngIf="this.exchangeService.data['registrationFailed']" class="alert alert-danger text-center" role="alert">
+          Inscription échouée
+        </div>
+
         <div *ngIf="exchangeService.data['isLoading']" class="progress">
           <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
         </div>
@@ -119,9 +123,10 @@
                   required>
               </div>
             </div>
-            <div *ngIf="!checkPasswordConfirmation(password.value, password_confirmation.value)" class="alert alert-danger" role="alert">
+            <div *ngIf="!checkPasswordConfirmation(password.value, password_confirmation.value)" class="alert alert-danger text-center" role="alert">
               Merci de vérifier que vos mots de passe se correspondent
             </div>
+            
             <div class="text-muted font-italic"><small>Fiabilité du mot de passe</small></div>
             <progress max="100" value="0" id="meter"></progress>
             <div class="row my-4">

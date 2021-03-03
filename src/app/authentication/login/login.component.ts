@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.exchangeService.data['isLoading'] = false;
+    this.exchangeService.data['registrationFailed'] = false;
   }
 
   onSubmit(authentificationForm: NgForm) {
