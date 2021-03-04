@@ -1,11 +1,8 @@
 package Web;
 
 
-import Entities.Association;
 import Entities.MembreAssociation;
-import Service.IAssociation;
 import Service.IMembre;
-import ServiceImpl.AssociationImpl;
 import ServiceImpl.MembreImpl;
 
 import javax.ws.rs.*;
@@ -13,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/membre")
 public class MembreController {
-    private IMembre iMembre;
+    private final IMembre iMembre;
     public MembreController() {
         this.iMembre = new MembreImpl();
     }

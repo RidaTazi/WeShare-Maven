@@ -1,11 +1,8 @@
 package DaoImpl;
 
 import Dao.MembreDao;
-import Entities.Association;
 import Entities.MembreAssociation;
-
 import java.sql.*;
-
 import Connection.DBConnection;
 
 
@@ -101,7 +98,7 @@ public class MembreDaoImpl implements MembreDao {
 
     @Override
     public Long getAssociationId(Long id){
-        Long idAssoc;
+        long idAssoc;
         try {
             init();
             req="select idAssoc from membreAssociation where idMembre="+id;

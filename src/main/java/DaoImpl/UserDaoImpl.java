@@ -2,29 +2,21 @@ package DaoImpl;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
 import Connection.DBConnection;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-
 import Dao.UserDao;
-import Entities.Association;
 import Entities.User;
-import java.security.MessageDigest;
 
 
 public class UserDaoImpl implements UserDao 
 {
 	private Connection connection;
     private Statement statement;
-    private PreparedStatement preparedStatement;
     private String sqlQuery;
    
 	
@@ -51,7 +43,7 @@ public class UserDaoImpl implements UserDao
     	String salt = "E1F53135E559C253";
     	String saltedPassword = password + salt;
     	int numberOfiteration = 50000;
-    	StringBuffer buffer = new StringBuffer();
+    	StringBuilder buffer = new StringBuilder();
     	byte[] bytes = saltedPassword.getBytes();
     
     	try 
@@ -79,7 +71,7 @@ public class UserDaoImpl implements UserDao
     }
     
 	@Override
-	public User create(String username, String password, String role) throws SQLIntegrityConstraintViolationException, SQLException
+	public User create(String username, String password, String role) throws SQLException
 	{
 		init();
 		
@@ -87,7 +79,7 @@ public class UserDaoImpl implements UserDao
 		
 		sqlQuery = "INSERT INTO User (etatInfo_user, username_user, password_user, role_user) VALUES " + "(" + 1 + ",'" + username + "' , '" + hashedPassword + "','" + role + "')";
 		
-		int etat = statement.executeUpdate(sqlQuery);
+		statement.executeUpdate(sqlQuery);
 		
 		ResultSet resultat = statement.executeQuery( "SELECT id_user, etatInfo_user, username_user, password_user, role_user FROM User WHERE username_user = " + "'" + username + "'" + ";");
 		
@@ -147,7 +139,7 @@ public class UserDaoImpl implements UserDao
     {
     	init();
     	
-    	ArrayList<User> users = new ArrayList<User>();
+    	ArrayList<User> users = new ArrayList<>();
 
         sqlQuery = "select id_user from User";
         

@@ -18,7 +18,7 @@ public class Token
 		String salt = "84B03D034B409D4E";
 		int numberOfIterations = 50000;
     	String salted_username_password = username + password + salt;
-    	StringBuffer buffer = new StringBuffer();
+    	StringBuilder buffer = new StringBuilder();
     	byte[] bytes = salted_username_password.getBytes();
     
     	try 

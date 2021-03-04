@@ -4,18 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-
 import Connection.DBConnection;
 import Dao.PublicationDao;
 import Entities.Association;
-import Entities.Don;
 import Entities.Publication;
 
 public class PublicationDaoImpl implements PublicationDao{
-	private Connection connection;
+	private final Connection connection;
 	private PreparedStatement prepstatement;
 	private ResultSet res;
 	
@@ -90,7 +87,7 @@ public class PublicationDaoImpl implements PublicationDao{
 			prepstatement.setInt(1,(int)id);
 			res = prepstatement.executeQuery();
 			res.next();
-			returnedPub = new Publication((long)res.getInt(1),
+			returnedPub = new Publication(res.getInt(1),
 									  res.getString(2),
 									  res.getString(3),
 									  res.getDate(4),
@@ -106,13 +103,13 @@ public class PublicationDaoImpl implements PublicationDao{
 
 	@Override
 	public List<Publication> findAll() {
-		List<Publication> returnedList = new ArrayList<Publication>();
-		Publication returnedPub = null;
+		List<Publication> returnedList = new ArrayList<>();
+		Publication returnedPub;
 		try {
 			prepstatement = connection.prepareStatement("SELECT * FROM Publication");
 			res = prepstatement.executeQuery();
 			while(res.next()) {
-				returnedPub = new Publication((long)res.getInt(1),
+				returnedPub = new Publication(res.getInt(1),
 						  res.getString(2),
 						  res.getString(3),
 						  res.getDate(4),
@@ -131,14 +128,14 @@ public class PublicationDaoImpl implements PublicationDao{
 
 	@Override
 	public List<Publication> findByAssociation(Association assoc) {
-		List<Publication> returnedList = new ArrayList<Publication>();
-		Publication returnedPub = null;
+		List<Publication> returnedList = new ArrayList<>();
+		Publication returnedPub;
 		try {
 			prepstatement = connection.prepareStatement("SELECT * FROM Publication WHERE associationId = ?");
 			prepstatement.setInt(1, assoc.getIdAssoc().intValue());
 			res = prepstatement.executeQuery();
 			while(res.next()) {
-				returnedPub = new Publication((long)res.getInt(1),
+				returnedPub = new Publication(res.getInt(1),
 						  res.getString(2),
 						  res.getString(3),
 						  res.getDate(4),

@@ -2,16 +2,14 @@ package ServiceImpl;
 
 import Dao.MembreDao;
 import DaoImpl.MembreDaoImpl;
-import Entities.Association;
 import Entities.MembreAssociation;
 import Service.IMembre;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-
 import java.sql.SQLException;
 
 public class MembreImpl implements IMembre {
-    private MembreDao membreDao;
+    private final MembreDao membreDao;
 
     public MembreImpl() {
         this.membreDao = new MembreDaoImpl();

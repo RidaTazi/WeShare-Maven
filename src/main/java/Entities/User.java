@@ -1,6 +1,5 @@
 package Entities;
 
-import Dao.UserDao;
 import DaoImpl.UserDaoImpl;
 
 public class User 

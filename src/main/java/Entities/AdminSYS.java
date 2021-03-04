@@ -1,12 +1,9 @@
 package Entities;
 
-import Dao.AdminSYSDao;
-import DaoImpl.UserDaoImpl;
 
 public class AdminSYS extends User 
 {
-	public static AdminSYSDao objects;
-	
+
 	public AdminSYS()
 	{
 		

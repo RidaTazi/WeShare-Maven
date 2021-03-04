@@ -17,7 +17,7 @@ import Entities.Publication;
 
 
 public class DonDaoImpl implements DonDao{
-	private Connection connection;
+	private final Connection connection;
 	private PreparedStatement prepstatement;
 	private ResultSet res;
 	
@@ -135,7 +135,7 @@ public class DonDaoImpl implements DonDao{
 			prepstatement.setInt(1,(int)id);
 			res = prepstatement.executeQuery();
 			res.next();
-			returnedDon = new Don((long)res.getInt(1),
+			returnedDon = new Don(res.getInt(1),
 									  res.getString(2),
 									  res.getString(3),
 									  res.getString(4),
@@ -152,12 +152,12 @@ public class DonDaoImpl implements DonDao{
 
 	@Override
 	public List<Don> findAll() {
-		List<Don> returnedList = new ArrayList<Don>();
+		List<Don> returnedList = new ArrayList<>();
 		try {
 			prepstatement = connection.prepareStatement("SELECT * FROM Don");
 			res = prepstatement.executeQuery();
 			while(res.next()) {
-				Don returnedDon = new Don((long)res.getInt(1),
+				Don returnedDon = new Don(res.getInt(1),
 										  res.getString(2),
 										  res.getString(3),
 										  res.getString(4),
@@ -178,13 +178,13 @@ public class DonDaoImpl implements DonDao{
 
 	@Override
 	public List<Don> findByDonneur(Donneur donneur) {
-		List<Don> returnedList = new ArrayList<Don>();
+		List<Don> returnedList = new ArrayList<>();
 		try {
 			prepstatement = connection.prepareStatement("SELECT * FROM Don WHERE donneurId = ?");
 			prepstatement.setInt(1,donneur.getIdDonneur().intValue());
 			res = prepstatement.executeQuery();
 			while(res.next()) {
-				Don returnedDon = new Don((long)res.getInt(1),
+				Don returnedDon = new Don(res.getInt(1),
 										  res.getString(2),
 										  res.getString(3),
 										  res.getString(4),
@@ -204,13 +204,13 @@ public class DonDaoImpl implements DonDao{
 
 	@Override
 	public List<Don> findByPublication(Publication pub) {
-		List<Don> returnedList = new ArrayList<Don>();
+		List<Don> returnedList = new ArrayList<>();
 		try {
 			prepstatement = connection.prepareStatement("SELECT * FROM Don WHERE publicationId = ?");
 			prepstatement.setInt(1,(int)pub.getId());
 			res = prepstatement.executeQuery();
 			while(res.next()) {
-				Don returnedDon = new Don((long)res.getInt(1),
+				Don returnedDon = new Don(res.getInt(1),
 										  res.getString(2),
 										  res.getString(3),
 										  res.getString(4),
@@ -230,13 +230,13 @@ public class DonDaoImpl implements DonDao{
 
 	@Override
 	public List<Don> findByAssociation(Association assoc) {
-		List<Don> returnedList = new ArrayList<Don>();
+		List<Don> returnedList = new ArrayList<>();
 		try {
 			prepstatement = connection.prepareStatement("SELECT * FROM Don WHERE associationId = ?");
 			prepstatement.setInt(1,assoc.getIdAssoc().intValue());
 			res = prepstatement.executeQuery();
 			while(res.next()) {
-				Don returnedDon = new Don((long)res.getInt(1),
+				Don returnedDon = new Don(res.getInt(1),
 										  res.getString(2),
 										  res.getString(3),
 										  res.getString(4),

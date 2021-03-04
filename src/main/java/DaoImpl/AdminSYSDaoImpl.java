@@ -3,7 +3,6 @@ package DaoImpl;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,13 +12,11 @@ import java.util.List;
 import Connection.DBConnection;
 import Dao.AdminSYSDao;
 import Entities.AdminSYS;
-import Entities.User;
 
 public class AdminSYSDaoImpl implements AdminSYSDao 
 {
 	private Connection connection;
     private Statement statement;
-    private PreparedStatement preparedStatement;
     private String sqlQuery;
 	
     
@@ -121,8 +118,9 @@ public class AdminSYSDaoImpl implements AdminSYSDao
     	sqlQuery = "select * from AdminSYS where id_admin = " + id + ";";
         
         ResultSet result = statement.executeQuery(sqlQuery); result.next();
-    	
-        adminSYS.setUsername(result.getObject("username_admin").toString());
+
+		assert false;
+		adminSYS.setUsername(result.getObject("username_admin").toString());
         adminSYS.setPassword(result.getObject("password_admin").toString());
         adminSYS.setEmail(result.getObject("password_admin").toString());
     
@@ -134,7 +132,7 @@ public class AdminSYSDaoImpl implements AdminSYSDao
     {
     	init();
     	
-    	ArrayList<AdminSYS> admins = new ArrayList<AdminSYS>();
+    	ArrayList<AdminSYS> admins = new ArrayList<>();
 
         sqlQuery = "select id_admin from AdminSYS";
         

@@ -3,30 +3,25 @@ package ServiceImpl;
 import Dao.AssociationDao;
 import Dao.DonDao;
 import Dao.DonneurDAO;
-import Dao.MembreDao;
 import Dao.PublicationDao;
 import DaoImpl.AssociationDaoImpl;
 import DaoImpl.DonDaoImpl;
 import DaoImpl.DonneurDaoImpl;
-import DaoImpl.MembreDaoImpl;
 import DaoImpl.PublicationDaoImpl;
 import Entities.Don;
 import Entities.Donneur;
-import Entities.MembreAssociation;
-import Entities.Publication;
 import Service.IDonneur;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
 public class DonneurImpl implements IDonneur {
-    private DonneurDAO donneurDAO;
-    private DonDao donDao;
-    private PublicationDao publicationDao;
-    private AssociationDao associationDao;
+    private final DonneurDAO donneurDAO;
+    private final DonDao donDao;
+    private final PublicationDao publicationDao;
+    private final AssociationDao associationDao;
     
 
     public DonneurImpl() {
@@ -120,7 +115,7 @@ public class DonneurImpl implements IDonneur {
          String desc=object.get("descDon").getAsString();
          String state=object.get("stateDon").getAsString();
          int etatInfo=object.get("etatInfo").getAsInt();
-         Don don=new Don(idDon.longValue(),type, logo, desc, new Date(5), state, etatInfo); //the date doesn't change anyways
+         Don don=new Don(idDon,type, logo, desc, new Date(5), state, etatInfo); //the date doesn't change anyways
          donDao.updateDon(don);
          return 0;
        
@@ -136,13 +131,13 @@ public class DonneurImpl implements IDonneur {
 	public int donateToPub(Long idPub, String data) {
 		 Gson gson = new Gson();
          com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
-         Long idDon = object.get("idDon").getAsLong();
+         long idDon = object.get("idDon").getAsLong();
          String type=object.get("typeDon").getAsString();
          String logo=object.get("logoDon").getAsString();
          String desc=object.get("descDon").getAsString();
          String state=object.get("stateDon").getAsString();
          int etatInfo=object.get("etatInfo").getAsInt();
-         Don don=new Don(idDon.longValue(),type, logo, desc, new Date(5), state, etatInfo); //the date doesn't change anyways
+         Don don=new Don(idDon,type, logo, desc, new Date(5), state, etatInfo); //the date doesn't change anyways
          don.setPublication(publicationDao.findById(idPub));
          return donDao.updateDon(don);
 	}
@@ -151,13 +146,13 @@ public class DonneurImpl implements IDonneur {
 	public int donateToAssociation(Long idAssoc, String data) {
 		Gson gson = new Gson();
         com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
-        Long idDon = object.get("idDon").getAsLong();
+        long idDon = object.get("idDon").getAsLong();
         String type=object.get("typeDon").getAsString();
         String logo=object.get("logoDon").getAsString();
         String desc=object.get("descDon").getAsString();
         String state=object.get("stateDon").getAsString();
         int etatInfo=object.get("etatInfo").getAsInt();
-        Don don=new Don(idDon.longValue(),type, logo, desc, new Date(5), state, etatInfo); //the date doesn't change anyways
+        Don don=new Don(idDon,type, logo, desc, new Date(5), state, etatInfo); //the date doesn't change anyways
         try {
         	don.setAssociation(associationDao.getAssociationById(idAssoc));
 		} catch (SQLException e) {
@@ -173,7 +168,6 @@ public class DonneurImpl implements IDonneur {
 			donneur = donneurDAO.getDonneurById(id);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return donDao.findByDonneur(donneur);

@@ -6,10 +6,10 @@ import Entities.Association;
 import Entities.Publication;
 
 public interface PublicationDao {
-	public int createPub(Publication p);
-	public int updatePub(Publication p);
-	public int deletePub(long id);
-	public Publication findById(long id);
-	public List<Publication> findByAssociation(Association assoc);
-	public List<Publication> findAll(); //a revoir (static)
+	int createPub(Publication p);
+	int updatePub(Publication p);
+	int deletePub(long id);
+	Publication findById(long id);
+	List<Publication> findByAssociation(Association assoc);
+	List<Publication> findAll(); //a revoir (static)
 }

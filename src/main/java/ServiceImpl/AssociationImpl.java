@@ -158,7 +158,7 @@ public class AssociationImpl implements IAssociation {
 	public int acceptRefuseDon(String data) {
 		Gson gson = new Gson();
         com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
-        Long id = object.get("idDon").getAsLong();
+        long id = object.get("idDon").getAsLong();
         String type=object.get("typeDon").getAsString();
         String logo=object.get("logoDon").getAsString();
         String desc=object.get("descDon").getAsString();
@@ -176,7 +176,7 @@ public class AssociationImpl implements IAssociation {
 
 	@Override
 	public List<Don> getDonsByPublication(Long pubId) {
-		return donDao.findByPublication(publicationDao.findById(pubId.longValue()));
+		return donDao.findByPublication(publicationDao.findById(pubId));
 	}
 	
 	

@@ -121,7 +121,6 @@ public class DonneurDaoImpl implements DonneurDAO {
         }
     }
 
-    // Wach 7ta ana ndir EtatInfo ??? <YES>
     @Override
     public List<Donneur> getAllDonneur() throws SQLException {
         List<Donneur> donneurs = new ArrayList<>();

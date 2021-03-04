@@ -3,7 +3,6 @@ package Service;
 import Entities.Association;
 import Entities.Don;
 import Entities.Publication;
-
 import java.util.List;
 
 public interface IAssociation {

@@ -2,20 +2,16 @@ package Web;
 
 import Entities.Don;
 import Entities.Donneur;
-import Entities.MembreAssociation;
 import Service.IDonneur;
-import Service.IMembre;
 import ServiceImpl.DonneurImpl;
-import ServiceImpl.MembreImpl;
-
 import java.util.List;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @Path("/donneur")
 public class DonneurController {
-    private IDonneur iDonneur;
+    private final IDonneur iDonneur;
+
     public DonneurController() {
         this.iDonneur = new DonneurImpl();
     }

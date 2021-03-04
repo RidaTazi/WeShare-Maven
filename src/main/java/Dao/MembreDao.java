@@ -1,6 +1,5 @@
 package Dao;
 
-import Entities.Association;
 import Entities.MembreAssociation;
 
 import java.sql.SQLException;

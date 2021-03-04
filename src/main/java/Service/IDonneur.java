@@ -4,7 +4,6 @@ import java.util.List;
 
 import Entities.Don;
 import Entities.Donneur;
-import Entities.MembreAssociation;
 
 public interface IDonneur {
     int addDonneur(String data);
