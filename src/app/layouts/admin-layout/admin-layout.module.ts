@@ -22,7 +22,9 @@ import { StockComponent } from 'src/app/pages/stock/stock.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     UserProfileComponent,
