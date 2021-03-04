@@ -1,6 +1,7 @@
 package Web;
 
 import Entities.Association;
+import Entities.Don;
 import Entities.Publication;
 import Service.IAssociation;
 import ServiceImpl.AssociationImpl;
@@ -54,6 +55,20 @@ public class AssociationController {
     @Produces(MediaType.APPLICATION_JSON)
     public int addAssociation(String data){
         return iAssociation.addAssociation(data);
+    }
+    
+    @GET
+    @Path("/publications")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Publication> getAllPublications(@PathParam(value = "id") Long id){
+        return iAssociation.getAllPublications();
+    }
+    
+    @GET
+    @Path("/{idPub}/dons")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Don> getDonsByPublications(@PathParam(value = "idPub") Long idPub){
+        return iAssociation.getDonsByPublication(idPub);
     }
     
     @GET

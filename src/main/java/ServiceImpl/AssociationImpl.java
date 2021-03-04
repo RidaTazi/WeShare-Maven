@@ -168,8 +168,16 @@ public class AssociationImpl implements IAssociation {
         donDao.updateDon(don);
         return 0;
 	}
+
+	@Override
+	public List<Publication> getAllPublications() {
+		return publicationDao.findAll();
+	}
+
+	@Override
+	public List<Don> getDonsByPublication(Long pubId) {
+		return donDao.findByPublication(publicationDao.findById(pubId.longValue()));
+	}
 	
 	
-
-
 }

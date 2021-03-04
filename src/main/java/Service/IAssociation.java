@@ -1,6 +1,7 @@
 package Service;
 
 import Entities.Association;
+import Entities.Don;
 import Entities.Publication;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface IAssociation {
     int updatePublication(Long idAssoc, Long idPub, String data);
     int deletePublication(Long id);
     int acceptRefuseDon(String data);
+    List<Publication> getAllPublications();
+    List<Don> getDonsByPublication(Long pubId);
 }
