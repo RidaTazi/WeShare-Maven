@@ -101,7 +101,7 @@ public class DonneurImpl implements IDonneur {
         String desc=object.get("descDon").getAsString();
         String state=object.get("stateDon").getAsString();
         try {
-            Donneur donneur=donneurDAO.getDonneurById(object.get("donneurId").getAsLong());
+            Donneur donneur=donneurDAO.getDonneurById(id);
             Don don=new Don(type, logo, desc, state, donneur);
             donDao.createDon(don);
             return 0;
@@ -168,7 +168,7 @@ public class DonneurImpl implements IDonneur {
 
 	@Override
 	public List<Don> getDons(Long id) {
-		Donneur donneur = null;
+		Donneur donneur= null;
 		try {
 			donneur = donneurDAO.getDonneurById(id);
 			

@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 
 public class Don implements Serializable {
-	private long iD;
+	private long id;
 	private String type;
 	private String logo;
 	private String desc;
@@ -34,7 +34,7 @@ public class Don implements Serializable {
 	
 	//use this constructor to retrieve a user's donations
 	public Don (long iD, String type, String logo, String desc,Date date, String state, int etatInfo){
-		this.iD = iD;
+		this.id = iD;
 		this.type = type;
 		this.logo = logo;
 		this.desc = desc;
@@ -79,12 +79,12 @@ public class Don implements Serializable {
 
 
 	public long getiD() {
-		return iD;
+		return id;
 	}
 
 
 	public void setiD(long iD) {
-		this.iD = iD;
+		this.id = iD;
 	}
 
 
