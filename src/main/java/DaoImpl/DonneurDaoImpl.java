@@ -42,18 +42,19 @@ public class DonneurDaoImpl implements DonneurDAO {
     }
 
     @Override
-    public boolean updateDonneur(Long id, Donneur donneur)  {
+    public boolean updateDonneur(Donneur donneur)  {
         try {
             init();
-            //idDonneur from user table?
-            //
-            //
-            req="update donneur set nom_donneur=?, prenom_donneur=?, addr_donneur=? where idDonneur=? ";
+            Long id = donneur.getIdDonneur();
+            req="update donneur set nom_donneur=?, prenom_donneur=?, addr_donneur=?, desc_donneur=?, ville_donneur=?, pays_donneur=? where idDonneur=? ";
             preparedStatement=connection.prepareStatement(req);
             preparedStatement.setString(1, donneur.getNomDonneur());
             preparedStatement.setString(2, donneur.getPrenomDonneur());
             preparedStatement.setString(3, donneur.getAddrDonneur());
-            preparedStatement.setLong(4, id);
+            preparedStatement.setString(4, donneur.getDesc_donneur());
+            preparedStatement.setString(5, donneur.getVille());
+            preparedStatement.setString(6, donneur.getPays());
+            preparedStatement.setLong(7, id);
             preparedStatement.execute();
             preparedStatement.close();
             return true;

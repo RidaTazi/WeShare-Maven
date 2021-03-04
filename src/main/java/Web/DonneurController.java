@@ -4,8 +4,11 @@ import Entities.Don;
 import Entities.Donneur;
 import Service.IDonneur;
 import ServiceImpl.DonneurImpl;
+
+import java.util.HashMap;
 import java.util.List;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("/donneur")
@@ -26,11 +29,12 @@ public class DonneurController {
 
     @POST
     @Path("/update")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Long updateDonneur(String data){
-        return iDonneur.updateDonneur(data);
+    @Consumes("text/plain")
+    @Produces("text/plain")
+    public String updateDonneur(String data){
+        return String.valueOf(iDonneur.updateDonneur(data));
     }
+
 
     @POST
     @Path("/add")

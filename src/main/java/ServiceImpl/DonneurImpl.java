@@ -49,20 +49,23 @@ public class DonneurImpl implements IDonneur {
     }
 
     @Override
-    public Long updateDonneur(String data) {
-        Donneur donneur=new Donneur();
+    public Boolean updateDonneur(String data) {
+        Donneur donneur = new Donneur();
         Gson gson = new Gson();
         com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
-        Long id =object.get("idDonneur").getAsLong();
-        donneur.setNomDonneur(object.get("nom_donneur").getAsString());
-        donneur.setPrenomDonneur(object.get("prenom_donneur").getAsString());
-        donneur.setAddrDonneur(object.get("addr_donneur").getAsString());
+        donneur.setIdDonneur(object.get("id_donneur").getAsLong());
+        donneur.setNomDonneur(object.get("nomField").getAsString());
+        donneur.setPrenomDonneur(object.get("prenomField").getAsString());
+        donneur.setAddrDonneur(object.get("addressField").getAsString());
+        donneur.setDesc_donneur(object.get("descField").getAsString());
+        donneur.setVille(object.get("villeField").getAsString());
+        donneur.setPays(object.get("paysField").getAsString());
         try {
-            donneurDAO.updateDonneur(id,donneur);
-            return id;
+            donneurDAO.updateDonneur(donneur);
+            return Boolean.TRUE;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            return -1L;
+            return Boolean.FALSE;
         }
     }
 
