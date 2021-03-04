@@ -1,0 +1,21 @@
+.cards{
+	display: flex;
+	flex-wrap: wrap;
+	align-content: space-between;
+}
+
+.card{
+	margin: 2%;
+}
+
+.space{
+	margin: 2%;
+}
+
+.card-title{
+	cursor: pointer;
+}
+
+.card-text{
+	cursor: pointer;
+}
