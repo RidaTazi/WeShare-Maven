@@ -36,6 +36,12 @@ export class DonneurService {
     return this.httpClient.post(SERVER_URL,don,{headers : HEADERS})
   }
 
+  public getUserchihaja(){
+
+    const SERVER_URL = SERVER_ADDRESS + `/donneur/${this.authService.userId}`;
+    const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
+    return this.httpClient.get(SERVER_URL, { headers: HEADERS });
+  }
   //methodes ici
 }
 
