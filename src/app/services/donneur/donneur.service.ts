@@ -42,7 +42,23 @@ export class DonneurService {
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
     return this.httpClient.get(SERVER_URL, { headers: HEADERS });
   }
-  //methodes ici
+  
+
+  post() {
+
+    const SERVER_URL = SERVER_ADDRESS + "erherh";
+    const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
+    const objet = {
+      username: "ergherher",
+      password: "erherher"
+    }
+
+    return this.httpClient.post(SERVER_URL, objet, { headers: HEADERS });
+
+  }
+
+
+
 }
 
 interface Don {
