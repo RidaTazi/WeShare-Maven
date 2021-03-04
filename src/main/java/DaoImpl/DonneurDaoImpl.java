@@ -76,6 +76,22 @@ public class DonneurDaoImpl implements DonneurDAO {
             return false;
         }
     }
+    @Override
+    public Long getNmbreDons(Long id){
+        try {
+            init();
+            req = "select count(*) from Don where donneurId = "+ id +";";
+            ResultSet rs = statement.executeQuery((req));
+            rs.next();
+            Long l = rs.getLong(1);
+            rs.close();
+            statement.close();
+            return l;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0L;
+        }
+    }
 
     @Override
     public Donneur getDonneurById(Long id) {
@@ -86,14 +102,15 @@ public class DonneurDaoImpl implements DonneurDAO {
             req="select * from donneur INNER JOIN User ON User.id_user=donneur.idDonneur where idDonneur = " + id + ";";
             ResultSet result = statement.executeQuery(req);
             result.next();
-            donneur.setNomDonneur(result.getObject("nom_donneur").toString());
-            donneur.setPrenomDonneur(result.getObject("prenom_donneur").toString());
-            donneur.setAddrDonneur(result.getObject("addr_donneur").toString());
-            donneur.setUsername(result.getObject("username_user").toString());
+            donneur.setNomDonneur((String) result.getObject("nom_donneur"));
+            donneur.setPrenomDonneur((String)result.getObject("prenom_donneur"));
+            donneur.setAddrDonneur((String) result.getObject("addr_donneur"));
+            donneur.setUsername((String) result.getObject("username_user"));
             donneur.setPays((String)result.getObject("pays_donneur"));
             donneur.setVille((String)result.getObject("ville_donneur"));
             donneur.setDesc_donneur((String) result.getObject("desc_donneur"));
             donneur.setEmail((String) result.getObject("email_user"));
+            donneur.setNmbrDons(getNmbreDons(id));
             result.close();
             statement.close();
             return donneur;

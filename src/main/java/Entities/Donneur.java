@@ -10,6 +10,7 @@ public class Donneur extends User {
 	private String desc_donneur;
 	private Long idDonneur;
     private List<Don> dons;
+	private Long nmbrDons;
     private String pays;
     private String ville;
 
@@ -66,8 +67,17 @@ public class Donneur extends User {
 	public void setDesc_donneur(String desc_donneur) {
 		this.desc_donneur = desc_donneur;
 	}
+
 	public String getPays() {
 		return pays;
+	}
+
+	public Long getNmbrDons() {
+		return nmbrDons;
+	}
+
+	public void setNmbrDons(Long nmbrDons) {
+		this.nmbrDons = nmbrDons;
 	}
 
 	public void setPays(String pays) {

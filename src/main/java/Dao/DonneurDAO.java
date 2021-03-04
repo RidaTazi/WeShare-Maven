@@ -11,4 +11,5 @@ public interface DonneurDAO {
     boolean deleteDonneur(Long id) throws SQLException;
     Donneur getDonneurById(Long id) throws SQLException;
     List<Donneur> getAllDonneur() throws SQLException;
+    Long getNmbreDons(Long id) throws SQLException;
 }
