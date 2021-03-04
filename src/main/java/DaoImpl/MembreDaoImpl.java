@@ -109,7 +109,7 @@ public class MembreDaoImpl implements MembreDao {
             result.next();
             idAssoc=result.getLong(1);
             statement.close();
-            System.out.println(idAssoc);
+            result.close();
             return idAssoc;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
