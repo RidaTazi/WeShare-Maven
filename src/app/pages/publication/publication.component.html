@@ -12,13 +12,15 @@
 
 <div class="cards" >
 	<div *ngFor="let pub of pubs" class="space">  	
-		<div class="card" style="width: 18rem;" id={{pub.id}} (click)="idClicked=[pub.id]">
-		    <div class="card-body">
-		      <h4 class="card-title" (click)="showDons()">{{pub.titre}}</h4>
-		      <p class="card-text"   (click)="showDons()">{{pub.desc}}</p>
+		<div class="card" style="width: 18rem;">
+		    <div class="card-body"   (click)="showDons(pub.id)">
+		      <h4 class="card-title" >{{pub.titre}}</h4>
+		      <p class="card-text">{{pub.desc}}</p>
 		      <h5 class="card-title">{{pub.date}}</h5>
-		      <a class="btn btn-primary">Supprimer</a>
-		      <a class="btn btn-primary">Modifier</a>
+		    </div>
+		    <div class="card-footer">
+				<a class="btn btn-primary">Supprimer</a>
+				<a class="btn btn-primary">Modifier</a>
 		    </div>
 	  	</div>
   </div>

@@ -3,6 +3,8 @@ import { AssociationService } from 'src/app/services/association/association.ser
 import {Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import {Publication} from 'src/app/models/publication';
+import {ExchangeService} from 'src/app/services/exchange.service';
+
 
 
 @Component({
@@ -12,8 +14,8 @@ import {Publication} from 'src/app/models/publication';
 })
 export class PublicationComponent implements OnInit {
 	public pubs: Publication[]=[]; 
-	public idClicked : number=-1;
-  constructor(private associationService: AssociationService,private router: Router) { }
+
+  constructor(private associationService: AssociationService,private router: Router, private exchange: ExchangeService) { }
 
   ngOnInit(): void {
   	this.associationService.getPubsByAssocId().subscribe(response=>{
@@ -23,10 +25,9 @@ export class PublicationComponent implements OnInit {
   	})
   }
 
-  showDons(){
-  	// this.router.navigate(["/publication-dons"]);
-  	console.log(this.idClicked[0]);
-
+  showDons(id: number){
+    this.exchange.data.pubId=id;
+  	this.router.navigate(["/publication-dons"]);
   }
 
 
