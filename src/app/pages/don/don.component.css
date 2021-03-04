@@ -1,0 +1,12 @@
+.dark-modal .modal-content {
+  background-color: #388dafef;
+  color: white;
+  height: 30em;
+}
+.dark-modal .close {
+  color: white;
+}
+.light-blue-backdrop {
+  background-color: #5cb3fd;
+}
+

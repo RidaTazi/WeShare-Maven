@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       token: string;
     } = JSON.parse(localStorage.getItem("userData"));
 
-    if (userData && userData.token) {
+    if (this.authService.token || (userData && userData.token)) {
       console.log("You are allowed to access the page");
       return true;
     }
