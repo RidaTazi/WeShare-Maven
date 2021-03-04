@@ -9,5 +9,18 @@
     </div>
   </div>
 </div>
-
-<h1>{{idPub}}</h1>
+<div class="cards" >
+	<div *ngFor="let don of dons" class="space">  	
+		<div class="card" style="width: 18rem;">
+		    <div class="card-body">
+		      <h4 class="card-title" >{{don.date}}</h4>
+		      <p class="card-text">{{don.desc}}</p>
+		      <h6 class="card-title ">Type: {{don.type}}</h6>
+		      <h5 class="card-title"></h5>
+		    </div>
+		    <div class="card-footer">
+				<a class="btn btn-primary">Accepter</a>
+				<a class="btn btn-primary">Refuser</a>
+		    </div>
+	  	</div>
+  </div>

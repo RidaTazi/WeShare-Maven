@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from 'src/app/authentication/services/auth.service';
 import { SERVER_ADDRESS } from 'src/environments/environment';
 import {Publication} from 'src/app/models/publication';
+import {ExchangeService} from 'src/app/services/exchange.service';
 
 
 @Injectable({
@@ -15,7 +16,7 @@ export class AssociationService {
     this.httpClient.get<RequestInformationVerification[]>(SERVER_URL, { headers: HEADERS })
   */
 
-  constructor(private authService: AuthService, private httpClient: HttpClient) { }
+  constructor(private authService: AuthService, private httpClient: HttpClient,private exchange: ExchangeService) { }
 
    getPubsByAssocId(){
    	const SERVER_URL = SERVER_ADDRESS + `/association/${this.authService.userId}/publications`;
@@ -27,6 +28,11 @@ export class AssociationService {
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
 
     return this.httpClient.get(SERVER_URL, { headers: HEADERS });
+  }
+  getDonsByPubId(){
+     const SERVER_URL = SERVER_ADDRESS + `/association/${this.exchange.data.pubId}/dons`;
+    const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
+    return this.httpClient.get<Publication[]>(SERVER_URL, { headers: HEADERS });
   }
   //methode ici
 }
