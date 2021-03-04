@@ -44,19 +44,12 @@ export class DonneurService {
   }
   
 
-  post() {
-
-    const SERVER_URL = SERVER_ADDRESS + "erherh";
+  public updateDonneurInfo(object) {
+    console.log(object);
+    const SERVER_URL = SERVER_ADDRESS + "/donneur/update";
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
-    const objet = {
-      username: "ergherher",
-      password: "erherher"
-    }
-
-    return this.httpClient.post(SERVER_URL, objet, { headers: HEADERS });
-
+    return this.httpClient.post(SERVER_URL, object, { headers: HEADERS });
   }
-
 
 
 }

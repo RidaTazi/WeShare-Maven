@@ -18,6 +18,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private authService: AuthService, private donneurService: DonneurService, private formBuilder: FormBuilder) { }
   
   checkoutForm = this.formBuilder.group({
+    id_donneur: this.authService.userId,
     usernameField: new FormControl(),
     prenomField: new FormControl(),
     nomField: new FormControl(),
@@ -29,10 +30,10 @@ export class UserProfileComponent implements OnInit {
   });
   
   onSubmit(): void {
-    console.log(this.checkoutForm.value.usernameField),
-    console.log(this.checkoutForm.value.descField);
-    console.log(this.checkoutForm.value.emailField)
+    console.log(this.checkoutForm.value);
+    this.donneurService.updateDonneurInfo(this.checkoutForm.value);
   }
+
   get email() { return this.checkoutForm.get('emailField').value; }
   get username() { return this.checkoutForm.get('usernameField').value; }
   get nom() { return this.checkoutForm.get('nomField').value; }
