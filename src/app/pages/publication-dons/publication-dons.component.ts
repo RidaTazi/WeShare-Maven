@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ExchangeService} from 'src/app/services/exchange.service';
 
 @Component({
   selector: 'app-publication-dons',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./publication-dons.component.css']
 })
 export class PublicationDonsComponent implements OnInit {
+	idPub: number;
 
-  constructor() { }
+  constructor(private exchange: ExchangeService) {}
 
   ngOnInit(): void {
+  	this.idPub=this.exchange.data.pubId;
   }
 
 }
