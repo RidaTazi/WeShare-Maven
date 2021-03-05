@@ -19,8 +19,8 @@
 		      <h5 class="card-title">{{pub.date}}</h5>
 		    </div>
 		    <div class="card-footer">
-				<a class="btn btn-primary">Supprimer</a>
-				<a class="btn btn-primary">Modifier</a>
+				<a (click)="deletePub(pub.id)" class="btn btn-primary">Supprimer</a>
+				<a (click)="updatePub(pub.id)" class="btn btn-primary">Modifier</a>
 		    </div>
 	  	</div>
   </div>
