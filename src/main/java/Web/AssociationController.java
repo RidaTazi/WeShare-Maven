@@ -105,7 +105,7 @@ public class AssociationController {
     
     
     @POST
-    @Path("/{idAssoc}/{idPub}/delete")
+    @Path("/{idPub}/deletePub")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public int deletePublication(@PathParam(value = "idPub") Long idPub){
