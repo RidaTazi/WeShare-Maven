@@ -47,6 +47,10 @@ export class PublicationComponent implements OnInit {
     this.modalService.open(content, { size: 'xl',centered: true, windowClass: 'dark-modal',backdropClass: 'light-blue-backdrop' });
   }
 
+  openX2(content) {
+    this.modalService.open(content, { size: 'xl',centered: true, windowClass: 'dark-modal',backdropClass: 'light-blue-backdrop' });
+  }
+
   updatePub(id: number,content){
     this.openXl(content);
     this.pubId=id;
@@ -71,7 +75,26 @@ export class PublicationComponent implements OnInit {
     this.ngOnInit();
   }
 
-  addPub(content){
+  addPub(content2){
+    this.openX2(content2);
     console.log("add");
+  }
+
+  onSubmit2(DonForm: NgForm) {
+
+    if (!DonForm.valid) {
+      return;
+    }
+    const body = {
+      titrePub : DonForm.value.titre,
+      descPub : DonForm.value.description,
+    }
+
+    this.associationService.addPub(body).subscribe(response => {
+      DonForm.reset();
+      this.modalService.dismissAll();
+      this.ngOnInit();
+    });
+    
   }
 }
