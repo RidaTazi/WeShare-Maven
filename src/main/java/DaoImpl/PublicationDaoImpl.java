@@ -117,9 +117,8 @@ public class PublicationDaoImpl implements PublicationDao{
 						  res.getInt(6)
 						  );
 				returnedList.add(returnedPub);
-				prepstatement.close();
 			}
-			
+			prepstatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

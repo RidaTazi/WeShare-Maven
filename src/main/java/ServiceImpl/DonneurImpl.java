@@ -164,7 +164,24 @@ public class DonneurImpl implements IDonneur {
         return donDao.updateDon(don);
 	}
 
-	@Override
+    @Override
+    public int donateToPublication(Long idPub, String data) {
+        Gson gson = new Gson();
+        com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
+        Long idDonneur=object.get("idDonneur").getAsLong();
+        String type=object.get("type").getAsString();
+        String desc=object.get("desc").getAsString();
+        try {
+            Don don=new Don (type,desc,donDao.idAssociationFromIdPub(idPub),idPub,donneurDAO.getDonneurById(idDonneur));
+            donDao.addDon(don);
+            return 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return -1;
+        }
+    }
+
+    @Override
 	public List<Don> getDons(Long id) {
 		Donneur donneur= null;
 		try {

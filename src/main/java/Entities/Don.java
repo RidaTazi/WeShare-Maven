@@ -14,6 +14,8 @@ public class Don implements Serializable {
 	private int etatInfo;
 	private Association association;
 	private Publication publication;
+	private Long idAssoc;
+	private Long idPub;
 	private Donneur donneur;
 	
 	
@@ -30,6 +32,19 @@ public class Don implements Serializable {
 		this.state = state;
 		etatInfo = 1;
 		this.donneur = donneur;
+	}
+
+		//full constuctor
+	public Don (String type, String desc,Long idAssoc,Long idPub, Donneur donneur){
+		this.type = type;
+		this.logo = "";
+		this.desc = desc;
+		this.date =	new Date(new java.util.Date().getTime());
+		this.state = "attente";
+		this.etatInfo = 1;
+		this.donneur = donneur;
+		this.idAssoc=idAssoc;
+		this.idPub=idPub;
 	}
 	
 	//use this constructor to retrieve a user's donations
@@ -134,6 +149,21 @@ public class Don implements Serializable {
 
 	public void setDonneur(Donneur donneur) {
 		this.donneur = donneur;
+	}
+	public Long getIdAssoc() {
+		return idAssoc;
+	}
+
+	public void setIdAssoc(Long idAssoc) {
+		this.idAssoc = idAssoc;
+	}
+
+	public Long getIdPub() {
+		return idPub;
+	}
+
+	public void setIdPub(Long idPub) {
+		this.idPub = idPub;
 	}
 
 	

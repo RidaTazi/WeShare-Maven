@@ -90,7 +90,7 @@ public class DonneurController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public int donateToPublication(@PathParam(value = "idPub") Long idPub, String data){
-        return iDonneur.donateToPub(idPub, data);
+        return iDonneur.donateToPublication(idPub, data);
     }
     
     @POST

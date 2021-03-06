@@ -2,6 +2,7 @@ package DaoImpl;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import Connection.DBConnection;
@@ -20,7 +21,6 @@ public class DonDaoImpl implements DonDao{
 	
 	
 	public DonDaoImpl() {
-		
 		this.connection = DBConnection.getInstance();
 	}
 
@@ -61,6 +61,29 @@ public class DonDaoImpl implements DonDao{
 			e.printStackTrace();
 		}
 		return status;
+	}
+
+	@Override
+	public int addDon(Don don) {
+		try {
+			req="insert into Don (typeDon,logoDon,descDon,dateDon,stateDon,etatInfo,associationId,publicationId,donneurId) VALUES (?,?,?,?,?,?,?,?,?)";
+			prepstatement=connection.prepareStatement(req);
+			prepstatement.setString(1, don.getType());
+			prepstatement.setString(2, "");
+			prepstatement.setString(3, don.getDesc());
+			prepstatement.setDate(4, don.getDate());
+			prepstatement.setString(5, don.getState());
+			prepstatement.setInt(6, don.getEtatInfo());
+			prepstatement.setLong(7, don.getIdAssoc());
+			prepstatement.setLong(8, don.getIdPub());
+			prepstatement.setLong(9, don.getDonneur().getIdDonneur());
+			prepstatement.execute();
+			prepstatement.close();
+			return 0;
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override
@@ -282,6 +305,14 @@ public class DonDaoImpl implements DonDao{
 		}
 	
 		return returnedList;
+	}
+	@Override
+	public Long idAssociationFromIdPub(Long id) throws SQLException {
+		Statement statement = connection.createStatement();
+		req="select associationId from Publication where idPub="+id;
+		ResultSet result= statement.executeQuery(req);
+		result.next();
+		return result.getLong(1);
 	}
 
 }
