@@ -90,11 +90,13 @@ public class AssociationController {
     }
 
     @GET
-    @Path("/{idAssoc}/acceptedDons")
+    @Path("/{idAssoc}/acceptedDons/{typeDon}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Don> getDonByAssociation(@PathParam(value = "idAssoc") Long idAssoc){
+    public List<Don> getDonByAssociation(@PathParam(value = "idAssoc") Long idAssoc,@PathParam(value = "typeDon") String typeDon){
         List<Don> acceptedDons=new ArrayList<>();
-        (iAssociation.findDonByAssociation(idAssoc).stream().filter(don -> don.getState().equals("accepted"))).forEach(acceptedDons::add);
+        (iAssociation.findDonByAssociation(idAssoc).stream().filter(don ->
+            don.getState().equals("accepted") && don.getType().equals(typeDon)
+        )).forEach(acceptedDons::add);
         return acceptedDons;
     }
     
