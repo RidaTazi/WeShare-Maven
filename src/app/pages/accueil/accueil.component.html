@@ -9,6 +9,56 @@
     </div>
   </div>
 </div>
+ 
+ <div class="cards" >
+	<div *ngFor="let pub of pubs" class="space">  	
+		<div class="card" style="width: 18rem;">
+		    <div class="card-body">
+		      <h4 class="card-title" >{{pub.titre}}</h4>
+		      <p class="card-text">{{pub.desc}}</p>
+		      <h5 class="card-title">{{pub.date}}</h5>
+		    </div>
+		<a (click)="donnate(pub.id,content)" class="btn btn-primary don">Faire un don</a>
+	  	</div>
+  </div>
+</div>
 
-
+<ng-template #content let-modal>
+<div class="modal-header">
+  <h4 class="modal-title">Faire un don</h4>
+  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+  	<span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #addDonForm="ngForm" (ngSubmit)="onSubmit(addDonForm)">
+    <div class="form-group mb-3">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Type</label>
+        </div>
+        <select class="custom-select form-control" id="inputGroupSelect01"
+        ngModel
+        name="type"
+        placeholder="choisit"
+        required>
+          <option *ngFor="let type of types; index as i">{{types[i]}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Description </span>
+        </div>
+        <textarea  ngModel class="form-control" name="description" style="height: 8em;" required ></textarea>
+      </div>
+    </div>
+  <div class="text-right">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Fermer</button>
+    <button [disabled]="!addDonForm.valid" type="submit" class="btn btn-info">Valider</button>
+  </div>
+  </form>
+</div>
+</ng-template>
 
