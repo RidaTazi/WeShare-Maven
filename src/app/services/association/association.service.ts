@@ -42,13 +42,6 @@ export class AssociationService {
     return this.httpClient.post(SERVER_URL, { headers: HEADERS });
   }
 
-  updatePubById(id: number){
-    //  const SERVER_URL = SERVER_ADDRESS + `/association/1/${id}/update`;
-    // const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
-    // return this.httpClient.get<Publication[]>(SERVER_URL, { headers: HEADERS });
-    console.log(`/association/1/${id}/update`)
-  }
-
   acceptDonById(id: number){
      const SERVER_URL = SERVER_ADDRESS + `/association/${id}/accept`;
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
@@ -66,6 +59,12 @@ export class AssociationService {
      const SERVER_URL = SERVER_ADDRESS + `/association/${this.authService.userId}/acceptedDons/${type}`;
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
     return this.httpClient.get<Don[]>(SERVER_URL, { headers: HEADERS });
+  }
+
+  public updatePubById(id:number, don){
+    const SERVER_URL = SERVER_ADDRESS + `/association/${id}/updatePub`;
+    const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
+    return this.httpClient.post(SERVER_URL,don,{headers : HEADERS})
   }
   //methode ici
 }

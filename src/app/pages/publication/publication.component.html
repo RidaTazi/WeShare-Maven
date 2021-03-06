@@ -20,8 +20,42 @@
 		    </div>
 		    <div class="card-footer">
 				<a (click)="deletePub(pub.id)" class="btn btn-primary">Supprimer</a>
-				<a (click)="updatePub(pub.id)" class="btn btn-primary">Modifier</a>
+				<a (click)="updatePub(pub.id,content)" class="btn btn-primary">Modifier</a>
 		    </div>
 	  	</div>
   </div>
 </div>
+<ng-template #content let-modal>
+<div class="modal-header">
+  <h4 class="modal-title">Modifier cette publication:</h4>
+  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+  	<span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #addDonForm="ngForm" (ngSubmit)="onSubmit(addDonForm)">
+    <div class="form-group mb-3">
+      <div class="input-group">
+      	<div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Titre</span>
+        </div>
+        <textarea  ngModel class="form-control" name="titre" style="height: 3em;" required ></textarea>
+      </div>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Description </span>
+        </div>
+        <textarea  ngModel class="form-control" name="description" style="height: 8em;" required ></textarea>
+      </div>
+    </div>
+  <div class="text-right">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Fermer</button>
+    <button [disabled]="!addDonForm.valid" type="submit" class="btn btn-info">Valider</button>
+  </div>
+  </form>
+</div>
+</ng-template>
