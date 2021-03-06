@@ -62,9 +62,8 @@ export class AssociationService {
   }
 
 
-//get all dons of a assoc!
-  getAcceptedDonsByPubId(){
-     const SERVER_URL = SERVER_ADDRESS + `/association/${this.authService.userId}/acceptedDons`;
+  getAcceptedDonsByPubId(type: String){
+     const SERVER_URL = SERVER_ADDRESS + `/association/${this.authService.userId}/acceptedDons/${type}`;
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
     return this.httpClient.get<Don[]>(SERVER_URL, { headers: HEADERS });
   }

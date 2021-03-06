@@ -9,17 +9,24 @@
     </div>
   </div>
 </div>
-<div class="cards" >
-<!-- 	<div *ngIf="dons.length==0"> 
-		<h1 class="nada" > Pas de dons pour le moment!</h1>
-	</div> -->
-	<div *ngFor="let don of dons" class="space">  	
-		<div class="card" style="width: 18rem;">
-		    <div class="card-body">
-		      <h4 class="card-title" >{{don.date}}</h4>
-		      <p class="card-text">{{don.desc}}</p>
-		      <h6 class="card-title ">Type: {{don.type}}</h6>
-		      <h5 class="card-title"></h5>
-		    </div>
+<a style="margin: 2em;"></a>
+<div *ngFor="let type of types; index as i">
+	<div class="category navbar navbar-horizontal " (click)="showOrHide(i)" style="height: {{sizes[i]}}">
+	<a class="navbar-brand">{{types[i]}}</a>
+	<a class="nav-link nav-link-icon nav-item">
+		<i class="ni {{icons[i]}}"></i>
+	</a>
+	</div>
+	<div class="cards" *ngIf="status[i]==1">
+		<div *ngFor="let don of dons[i]" class="space">  	
+			<div class="card" style="width: 18rem;">
+			    <div class="card-body">
+			      <h4 class="card-title" >{{don.date}}</h4>
+			      <p class="card-text">{{don.desc}}</p>
+			      <h5 class="card-title"></h5>
+			    </div>
+		  	</div>
 	  	</div>
-  </div>
+	</div>
+</div>
+
