@@ -10,19 +10,15 @@ declare interface RouteInfo {
 }
 
 export const AssociationRoutes: RouteInfo[] = [
-  { path: '/publication', title: 'Publications',  icon:'ni-circle-08 text-pink', class: '' },
-  { path: '/stock', title: 'Stock',  icon:'ni-single-02 text-yellow', class: '' },
-  { path: '/user-profile', title: 'Profile',  icon:'ni-single-02 text-yellow', class: '' },
-  { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
-  { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '' },
+  { path: '/publication', title: 'Publications',  icon:'ni-notification-70 text-pink', class: '' },
+  { path: '/stock', title: 'Stock',  icon:'ni-money-coins text-yellow', class: '' },
+  { path: '/user-profile', title: 'Profile',  icon:'ni-single-02 text-blue', class: '' },
 ];
 
 export const DonneurRoutes: RouteInfo[] = [
-  { path: '/accueil', title: 'Accueil',  icon:'ni-circle-08 text-pink', class: '' },
-  { path: '/don', title: 'Don',  icon:'ni-single-02 text-yellow', class: '' },
-  { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '' },
-  { path: '/user-profile', title: 'Profile',  icon:'ni-single-02 text-yellow', class: '' },
-  { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
+  { path: '/accueil', title: 'Accueil',  icon:'ni-notification-70 text-pink', class: '' },
+  { path: '/don', title: 'Don',  icon:'ni-satisfied text-yellow', class: '' },
+  { path: '/user-profile', title: 'Profile',  icon:'ni-single-02 text-blue', class: '' },
 ];
 
 

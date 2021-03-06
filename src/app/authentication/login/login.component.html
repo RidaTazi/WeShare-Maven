@@ -21,7 +21,7 @@
   <div class="row justify-content-center">
     <div class="col-lg-5 col-md-7">
       <div class="card bg-secondary shadow border-0">
-        <div class="card-header bg-transparent pb-5">
+<!--         <div class="card-header bg-transparent pb-5">
           <div class="text-muted text-center mt-2 mb-3"><small>Se connecter avec</small></div>
           <div class="btn-wrapper text-center">
             <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
@@ -33,7 +33,7 @@
               <span class="btn-inner--text">Google</span>
             </a>
           </div>
-        </div>
+        </div> -->
 
         <div *ngIf="this.exchangeService.data['isLoading']" class="progress">
           <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
@@ -45,7 +45,7 @@
         
         <div class="card-body px-lg-5 py-lg-5">
           <div class="text-center text-muted mb-4">
-            <small>Ou connectez-vous avec vos identifiants</small>
+            <small>Connectez-vous avec vos identifiants</small>
           </div>
           <form #authenticationFrom="ngForm" (ngSubmit)="onSubmit(authenticationFrom)">
             <div class="form-group mb-3">

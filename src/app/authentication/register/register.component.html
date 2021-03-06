@@ -21,7 +21,7 @@
   <div class="row justify-content-center">
     <div class="col-lg-6 col-md-8">
       <div class="card bg-secondary shadow border-0">
-        <div class="card-header bg-transparent pb-5">
+<!--         <div class="card-header bg-transparent pb-5">
           <div class="text-muted text-center mt-2 mb-4"><small>S'inscrire avec</small></div>
           <div class="text-center">
             <a href="javascript:void(0)" class="btn btn-neutral btn-icon mr-4">
@@ -33,7 +33,7 @@
               <span class="btn-inner--text">Google</span>
             </a>
           </div>
-        </div>
+        </div> -->
 
         <div *ngIf="this.exchangeService.data['registrationFailed']" class="alert alert-danger text-center" role="alert">
           Inscription échouée
@@ -45,7 +45,7 @@
         
         <div class="card-body px-lg-5 py-lg-5">
           <div class="text-center text-muted mb-4">
-            <small>Ou inscrivez-vous avec vos informations d'identification</small>
+            <small>Inscrivez-vous avec vos informations d'identification</small>
           </div>
           <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
             <div class="form-group">
