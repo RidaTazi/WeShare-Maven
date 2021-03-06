@@ -46,15 +46,11 @@ public class PublicationDaoImpl implements PublicationDao{
 		int status = 0;
 		try {
 			
-			prepstatement = connection.prepareStatement("UPDATE Publication SET titrePub = ?, descPub = ?, datePub = ?, typePub = ?, etatInfoPub = ?, associationId = ? WHERE idPub = ?" );
+			prepstatement = connection.prepareStatement("UPDATE Publication SET titrePub = ?, descPub = ? WHERE idPub = ?" );
 			
 			prepstatement.setString(1, p.getTitre());
 			prepstatement.setString(2, p.getDesc());
-			prepstatement.setDate(3, p.getDate());
-			prepstatement.setString(4, p.getType());
-			prepstatement.setInt(5, p.getEtatInfo());
-			prepstatement.setInt(6, p.getAssociation().getIdAssoc().intValue());
-			prepstatement.setInt(7, (int)p.getId());
+			prepstatement.setInt(3, (int)p.getId());
 			status = prepstatement.executeUpdate();
 			prepstatement.close();
 			

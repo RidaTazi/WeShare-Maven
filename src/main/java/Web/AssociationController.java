@@ -110,11 +110,11 @@ public class AssociationController {
     
     
     @POST
-    @Path("/{idAssoc}/{idPub}/update")
+    @Path("/{idPub}/updatePub")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public int updatePublication(@PathParam(value = "idAssoc") Long idAssoc,@PathParam(value = "idPub") Long idPub, String data){
-        return iAssociation.updatePublication(idAssoc, idPub,data);
+    public int updatePublication(@PathParam(value = "idPub") Long idPub, String data){
+        return iAssociation.updatePublication(idPub,data);
     }
     
     @POST

@@ -13,7 +13,7 @@ public interface IAssociation {
     Association getAssociationById(Long id);
     List<Publication> getPublications(Long id);
     int addPublication(Long id,String pub);
-    int updatePublication(Long idAssoc, Long idPub, String data);
+    int updatePublication(Long idPub, String data);
     int deletePublication(Long id);
     int acceptRefuseDon(String data);
     List<Publication> getAllPublications();

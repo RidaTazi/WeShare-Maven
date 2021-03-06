@@ -114,15 +114,15 @@ public class AssociationImpl implements IAssociation {
     }
 
 	@Override
-	public int addPublication(Long idAssoc,String data) {
+	public int addPublication(Long idMembre,String data) {
 		Gson gson = new Gson();
         com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
         String titre = object.get("titrePub").getAsString();
         String desc = object.get("descPub").getAsString();
-        String type = object.get("typePub").getAsString();
+//        String type = object.get("typePub").getAsString();
         
         try {
-        	Publication pub = new Publication(titre,desc, type, associationDao.getAssociationById(idAssoc));
+        	Publication pub = new Publication(titre,desc, "type", associationDao.getAssociationById(membreDao.getMembreById(idMembre).getIdAssoc()));
            return publicationDao.createPub(pub);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -131,23 +131,15 @@ public class AssociationImpl implements IAssociation {
 	}
 
 	@Override
-	public int updatePublication(Long idAssoc, Long idPub, String data) {
+	public int updatePublication( Long idPub, String data) {
 		Gson gson = new Gson();
         com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
         String titre = object.get("titrePub").getAsString();
         String desc = object.get("descPub").getAsString();
-        String type = object.get("typePub").getAsString();
-        int etatInfo = object.get("etatInfo").getAsInt();
-        try {
-        	Publication pub = new Publication(titre,desc, type, associationDao.getAssociationById(idAssoc));
-        	pub.setEtatInfo(etatInfo);
-        	pub.setId(idPub);
-           return publicationDao.updatePub(pub);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return -1;
-        }
-	}
+        Publication pub = new Publication(titre,desc, "type", null);
+        pub.setId(idPub);
+        return publicationDao.updatePub(pub);
+    }
 
 	@Override
 	public int deletePublication(Long id) {
