@@ -178,6 +178,25 @@ public class AssociationImpl implements IAssociation {
 	public List<Don> getDonsByPublication(Long pubId) {
 		return donDao.findByPublication(publicationDao.findById(pubId));
 	}
-	
-	
+
+    @Override
+    public long acceptDon(long id) {
+        return donDao.acceptDon(id);
+    }
+
+    @Override
+    public long refuseDon(long id) {
+        return donDao.refuseDon(id);
+    }
+
+    @Override
+    public List<Don> findDonByAssociation(Long id) {
+        try {
+            return donDao.findByAssociation(membreDao.getMembreById(id));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+
 }

@@ -8,6 +8,7 @@ import ServiceImpl.AssociationImpl;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -68,14 +69,33 @@ public class AssociationController {
     @Path("/{idPub}/dons")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Don> getDonsByPublications(@PathParam(value = "idPub") Long idPub){
-        return iAssociation.getDonsByPublication(idPub);
+        List<Don> dons=new ArrayList<>();
+        (iAssociation.getDonsByPublication(idPub).stream().filter(don -> don.getState().equals("attente"))).forEach(dons::add);
+        return dons;
     }
+
+//    @GET
+//    @Path("/{idMembre}/acceptedDons")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public List<Don> getAcceptedDons(@PathParam(value = "idMembre") Long idMembre){
+//        List<Don> dons=iAssociation.findDonByAssociation(idMembre);
+//        return dons;
+//    }
     
     @GET
     @Path("/{id}/publications")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Publication> getPublications(@PathParam(value = "id") Long id){
         return iAssociation.getPublications(id);
+    }
+
+    @GET
+    @Path("/{idAssoc}/acceptedDons")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Don> getDonByAssociation(@PathParam(value = "idAssoc") Long idAssoc){
+        List<Don> acceptedDons=new ArrayList<>();
+        (iAssociation.findDonByAssociation(idAssoc).stream().filter(don -> don.getState().equals("accepted"))).forEach(acceptedDons::add);
+        return acceptedDons;
     }
     
     @POST
@@ -96,13 +116,20 @@ public class AssociationController {
     }
     
     @POST
-    @Path("/acceptOrRefuse")
+    @Path("/{idDon}/accept")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public int AcceptRefuseDon(String data){
-        return iAssociation.acceptRefuseDon(data);          // we get the whole object don
+    public long AcceptDon(@PathParam(value = "idDon") long idDon){
+        return iAssociation.acceptDon(idDon);
     }
-    
+
+    @POST
+    @Path("/{idDon}/refuse")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public long RefuseDon(@PathParam(value = "idDon") long idDon){
+        return iAssociation.refuseDon(idDon);
+    }
     
     @POST
     @Path("/{idPub}/deletePub")

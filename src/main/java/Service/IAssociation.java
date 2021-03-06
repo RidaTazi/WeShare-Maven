@@ -18,4 +18,7 @@ public interface IAssociation {
     int acceptRefuseDon(String data);
     List<Publication> getAllPublications();
     List<Don> getDonsByPublication(Long pubId);
+    long acceptDon(long id);
+    long refuseDon(long id);
+    List<Don> findDonByAssociation(Long id);
 }

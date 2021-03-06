@@ -1,25 +1,22 @@
 package DaoImpl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Types;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import Connection.DBConnection;
 import Dao.DonDao;
-import Entities.Association;
-import Entities.Don;
-import Entities.Donneur;
-import Entities.Publication;
+import Entities.*;
 
 
 public class DonDaoImpl implements DonDao{
 	private final Connection connection;
 	private PreparedStatement prepstatement;
 	private ResultSet res;
+	private String req;
+
+
+
 	
 	
 	public DonDaoImpl() {
@@ -177,6 +174,38 @@ public class DonDaoImpl implements DonDao{
 	}
 
 	@Override
+	public long acceptDon(long id) {
+		try {
+			req="update Don set stateDon=? where idDon=? ";
+			prepstatement=connection.prepareStatement(req);
+			prepstatement.setString(1, "accepted");
+			prepstatement.setLong(2, id);
+			prepstatement.execute();
+			prepstatement.close();
+			return id;
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+			return -1L;
+		}
+	}
+
+	@Override
+	public long refuseDon(long id) {
+		try {
+			req="update Don set stateDon=? where idDon=? ";
+			prepstatement=connection.prepareStatement(req);
+			prepstatement.setString(1, "refused");
+			prepstatement.setLong(2, id);
+			prepstatement.execute();
+			prepstatement.close();
+			return id;
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+			return -1L;
+		}
+	}
+
+	@Override
 	public List<Don> findByDonneur(Donneur donneur) {
 		List<Don> returnedList = new ArrayList<>();
 		try {
@@ -229,11 +258,11 @@ public class DonDaoImpl implements DonDao{
 	}
 
 	@Override
-	public List<Don> findByAssociation(Association assoc) {
+	public List<Don> findByAssociation(MembreAssociation membreAssociation) {
 		List<Don> returnedList = new ArrayList<>();
 		try {
-			prepstatement = connection.prepareStatement("SELECT * FROM Don WHERE associationId = ?");
-			prepstatement.setInt(1,assoc.getIdAssoc().intValue());
+			prepstatement = connection.prepareStatement("SELECT * FROM Don WHERE associationId in ( select idAssoc from membreAssociation where idMembre= ? )");
+			prepstatement.setLong(1,membreAssociation.getIdMembre());
 			res = prepstatement.executeQuery();
 			while(res.next()) {
 				Don returnedDon = new Don(res.getInt(1),
@@ -247,7 +276,7 @@ public class DonDaoImpl implements DonDao{
 				returnedList.add(returnedDon);
 			}
 			prepstatement.close();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

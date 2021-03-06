@@ -1,23 +1,22 @@
 package Connection;
 
 import org.junit.Test;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class DBConnectionTest {
     @Test
-    public void testConnection() throws Exception {
+    public void testConnection(){
         Connection connection = DBConnection.getInstance();
-        assertEquals(connection != null, true);
+        assertNotNull(connection);
     }
 
     @Test
-    public void testDataInsertion() throws Exception{
+    public void testDataInsertion(){
 
         String data = "insert into donneur values ('tamtaoui', 'abdelwadoud', 'harhoura', 1, 999)";
         try{
