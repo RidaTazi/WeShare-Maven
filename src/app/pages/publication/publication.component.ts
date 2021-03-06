@@ -53,7 +53,7 @@ export class PublicationComponent implements OnInit {
     console.log(id);
   }
 
-    onSubmit(DonForm: NgForm) {
+  onSubmit(DonForm: NgForm) {
 
     if (!DonForm.valid) {
       return;
@@ -69,5 +69,9 @@ export class PublicationComponent implements OnInit {
       this.modalService.dismissAll();
     });
     this.ngOnInit();
+  }
+
+  addPub(content){
+    console.log("add");
   }
 }

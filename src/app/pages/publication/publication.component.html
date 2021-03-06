@@ -10,6 +10,10 @@
   </div>
 </div>
 
+<div class="card-footer">
+  <button (click)="addPub(content)" type="button" class="btn btn-secondary btn-lg btn-block">Ajouter une publication</button>
+</div>
+
 <div class="cards" >
 	<div *ngFor="let pub of pubs" class="space">  	
 		<div class="card" style="width: 18rem;">

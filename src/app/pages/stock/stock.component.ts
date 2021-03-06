@@ -29,7 +29,7 @@ export class StockComponent implements OnInit {
   }
 
   showOrHide(i: number){
-  	if(this.sizes[i]=="10em"){
+  	if(this.sizes[i]=="5em"){
   		this.sizes[i]="17em";
   		this.icons[i]="ni-bold-right";
   		this.status[i]=0;
@@ -37,7 +37,7 @@ export class StockComponent implements OnInit {
   		return;
   	}
   	if(this.sizes[i]=="17em"){
-  		this.sizes[i]="10em";
+  		this.sizes[i]="5em";
   		this.icons[i]="ni-bold-down";
   		this.status[i]=1;
   		this.getDons(i);
