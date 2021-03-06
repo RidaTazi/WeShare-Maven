@@ -34,9 +34,9 @@ export class PublicationComponent implements OnInit {
 
   deletePub(idPub: number){
     this.associationService.deletePubById(idPub).subscribe(res=>{
-    this.ngOnInit();
+      this.ngOnInit();
     },err=>{
-      alert("This Pub couldn't be deleteted, please try later!")
+      alert("This Pub couldn't be deleted, please try later!")
     });
   }
 

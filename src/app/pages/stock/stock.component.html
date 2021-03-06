@@ -1,1 +1,25 @@
-<p>stock works!</p>
+<div class="header pt-3 pt-lg-8 d-flex align-items-center" style="min-height: 100px; background-size: cover; background-position: center top;">
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center">
+    <div class="row">
+      <div class="col-lg-7 col-md-10">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cards" >
+<!-- 	<div *ngIf="dons.length==0"> 
+		<h1 class="nada" > Pas de dons pour le moment!</h1>
+	</div> -->
+	<div *ngFor="let don of dons" class="space">  	
+		<div class="card" style="width: 18rem;">
+		    <div class="card-body">
+		      <h4 class="card-title" >{{don.date}}</h4>
+		      <p class="card-text">{{don.desc}}</p>
+		      <h6 class="card-title ">Type: {{don.type}}</h6>
+		      <h5 class="card-title"></h5>
+		    </div>
+	  	</div>
+  </div>

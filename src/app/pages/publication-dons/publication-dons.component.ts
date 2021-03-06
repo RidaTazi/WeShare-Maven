@@ -22,4 +22,20 @@ export class PublicationDonsComponent implements OnInit {
   	});
   }
 
+  acceptDon(idDon: number){
+    this.associationService.acceptDonById(idDon).subscribe(res=>{
+      this.ngOnInit();
+    },err=>{
+      alert("This Donation couldn't be accepted, please try later!")
+    });
+  }
+
+  refuseDon(idDon: number){
+    this.associationService.refuseDonById(idDon).subscribe(res=>{
+      this.ngOnInit();
+    },err=>{
+      alert("This Donation couldn't be refused, please try later!")
+    });
+  }
+
 }

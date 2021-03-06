@@ -10,6 +10,9 @@
   </div>
 </div>
 <div class="cards" >
+<!-- 	<div *ngIf="dons.length==0"> 
+		<h1 class="nada" > Pas de dons pour le moment!</h1>
+	</div> -->
 	<div *ngFor="let don of dons" class="space">  	
 		<div class="card" style="width: 18rem;">
 		    <div class="card-body">
@@ -19,8 +22,8 @@
 		      <h5 class="card-title"></h5>
 		    </div>
 		    <div class="card-footer">
-				<a class="btn btn-primary">Accepter</a>
-				<a class="btn btn-primary">Refuser</a>
+				<a (click)="acceptDon(don.iD)" class="btn btn-primary">Accepter</a>
+				<a (click)="refuseDon(don.iD)" class="btn btn-primary">Refuser</a>
 		    </div>
 	  	</div>
   </div>
