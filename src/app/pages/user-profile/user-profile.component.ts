@@ -62,7 +62,7 @@ export class UserProfileComponent implements OnInit {
         password: string,	
         idUser: number	
       })=>{
-        console.log(response)
+        console.log(`response` + response)
         this.checkoutForm.patchValue({descField: response.desc_donneur}),
         this.checkoutForm.patchValue({emailField: response.email});
         this.checkoutForm.patchValue({usernameField: response.username});
@@ -79,6 +79,7 @@ export class UserProfileComponent implements OnInit {
     }
     else {
       //Association
+
     }
   }
 
