@@ -66,5 +66,11 @@ export class AssociationService {
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
     return this.httpClient.post(SERVER_URL,don,{headers : HEADERS})
   }
+
+    public addPub(don){
+    const SERVER_URL = SERVER_ADDRESS + `/association/${this.authService.userId}/addPublication`;
+    const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
+    return this.httpClient.post(SERVER_URL,don,{headers : HEADERS})
+  }
   //methode ici
 }
