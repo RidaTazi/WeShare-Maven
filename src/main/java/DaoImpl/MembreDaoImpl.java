@@ -66,13 +66,17 @@ public class MembreDaoImpl implements MembreDao {
         membreAssociation.setIdMembre(id);
         try {
             init();
-            req="select * from membreAssociation  where idMembre="+id+";";
+            req="select * from membreAssociation INNER JOIN User ON User.id_user=membreAssociation.idMembre where idMembre = "+id+";";
             ResultSet result = statement.executeQuery(req);
             result.next();
             membreAssociation.setNomMembre(result.getObject("nomMembre").toString());
             membreAssociation.setPrenomMembre(result.getObject("prenomMember").toString());
             membreAssociation.setPosteMembre(result.getObject("posteMembre").toString());
             membreAssociation.setIdAssoc(result.getLong("idAssoc"));
+            membreAssociation.setPays((String) result.getObject("pays"));
+            membreAssociation.setVille((String) result.getObject("ville"));
+            membreAssociation.setUsername((String) result.getObject("username_user"));
+            membreAssociation.setEmail((String) result.getObject("email_user"));
             result.close();
             statement.close();
             return membreAssociation;

@@ -11,6 +11,15 @@ public class MembreAssociation extends User implements Serializable {
 	private String posteMembre;
 	private Long idAssoc;
 	private Long idUser;
+    private String ville;
+    private String pays;
+
+
+
+    private String email;
+
+
+    private String username;
 
     public MembreAssociation() {
     }
@@ -22,7 +31,15 @@ public class MembreAssociation extends User implements Serializable {
         this.idAssoc = idAssoc;
         this.idUser = idUser;
     }
+    @Override
+    public String getEmail() {
+        return email;
+    }
 
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
+    }
     public Long getIdMembre() {
         return idMembre;
     }
@@ -70,4 +87,28 @@ public class MembreAssociation extends User implements Serializable {
     public void setIdUser(Long idUser) {
         this.idUser = idUser;
     }
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+    public String getPays() {
+        return pays;
+    }
+
+    public void setPays(String pays) {
+        this.pays = pays;
+    }
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 }

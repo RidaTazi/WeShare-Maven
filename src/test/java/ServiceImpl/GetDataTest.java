@@ -29,4 +29,5 @@ public class GetDataTest {
         Association result = associationDAOimpl.getAssociationById(id);
         assertEquals(id,result.getIdAssoc());
     }
+
 }
