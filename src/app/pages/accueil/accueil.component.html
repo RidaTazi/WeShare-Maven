@@ -9,10 +9,13 @@
     </div>
   </div>
 </div>
- 
+
  <div class="cards" >
-	<div *ngFor="let pub of pubs" class="space">  	
-		<div class="card" style="width: 18rem;">
+	<div *ngFor="let pub of pubs" class="space">
+		<div class="card" style="width: 18rem;" >
+      <div class="card-header">
+        <img src="../../../assets/img/theme/charity.png" alt="charity.png" style="width:14em;">
+      </div>
 		    <div class="card-body">
 		      <h4 class="card-title" >{{pub.titre}}</h4>
 		      <p class="card-text">{{pub.desc}}</p>
