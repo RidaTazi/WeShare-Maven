@@ -70,27 +70,86 @@
 
 
 <div class="container-fluid mt--5">
-  <!-- Table -->
   <div class="row">
     <div class="card-group">
-      <div class="col" *ngFor="let don of dons">
+      <div class="col" *ngFor="let don of dons;index as i">
         <div class="card" style="width: 25rem; margin-bottom: 5em;">
+          <div class="card-header">
+            <img src="../../../assets/img/theme/{{don.type}}.png" alt="{{don.type}}" style="width: 100%;height: 18em;">
+          </div>
           <div class="card-body">
-            <h5 class="card-title">{{don.type}}</h5>
+            <h5 class="card-title" style="font-family:Georgia, 'Times New Roman', Times, serif; font-size: medium;">{{don.type}}</h5>
             <p class="card-text">{{don.desc}}</p>
+            <h5 class="card-title">{{don.date}}</h5>
             <div class="row">
               <div class="col-md-4">
-                <a class="btn btn-outline-primary">Modifier</a>
+                <button class="btn btn-outline-primary" (click)="updateTemplate(i,content1)" [disabled]="don.state=='accepted'">Modifier</button>
               </div>
               <div class="col-md-4 offset-md-4">
-                <a  class="btn btn-outline-danger">Supprimer</a>
+                <button  class="btn btn-outline-danger" (click)="deleteDon(i)" [disabled]="don.state=='accepted'">Supprimer</button>
               </div>
-            </div>
 
+
+              <ng-template #content1 let-modal1 >
+                <div class="modal-header">
+                  <h4 class="modal-title">Modifier Don</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="modal1.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form #addDonForm="ngForm" (ngSubmit)="onUpdateSubmit(addDonForm,i)">
+                    <div class="form-group mb-3">
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="inputGroupSelect01">Type</label>
+                        </div>
+                        <select class="custom-select form-control" id="inputGroupSelect01"
+                        [(ngModel)]="don.type"
+                        name="type"
+                        placeholder="choisit"
+                        required>
+                          <option *ngFor="let type of types; index as i">{{types[i]}}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                      <div class="input-group mb-3">
+                        <div class="custom-file">
+                          <input type="file" name="image" [(ngModel)]="don.logo" class="custom-file-input form-control" id="inputGroupFile02">
+                          <label class="custom-file-label" for="inputGroupFile02">image </label>
+                        </div>
+                        <div class="input-group-append">
+                          <span class="input-group-text" id="">Upload</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Description </span>
+                        </div>
+                        <textarea [(ngModel)]="don.desc" class="form-control" name="description" style="height: 8em;" required ></textarea>
+                      </div>
+                    </div>
+                  <div class="text-right">
+                    <button type="button" class="btn btn-danger" (click)="modal1.close('Close click')">close</button>
+                    <button [disabled]="!addDonForm.valid" type="submit" class="btn btn-info">modifier</button>
+                  </div>
+
+                  </form>
+                </div>
+
+              </ng-template>
+
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 
