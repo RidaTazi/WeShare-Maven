@@ -3,6 +3,7 @@ package DaoImpl;
 import static org.junit.Assert.assertEquals;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,9 +15,6 @@ import Entities.Donneur;
 
 public class CRUDTest {
 	
-
-	
-
 	@Test
 	public void DonCRUDTest()
 	{
@@ -29,25 +27,28 @@ public class CRUDTest {
 		Donneur donneur = new Donneur();
 		donneur.setIdDonneur(Long.valueOf(1));
 		Don don = new Don(type, logo, desc, state, donneur);
+		List<Don> list ;
 		
 		assertEquals(1,donDao.createDon(don));        // createDao returns the number of rows processed
 		
 		//retrieve and update
+			 
+		list = donDao.findAll();              // retrieve 
+		don = list.get(list.size()-1);
 		
-		assertEquals(1,donDao.findAll().size());    // make sure the only Don is retrieved 
-		don = donDao.findAll().get(0);              // retrieve the only Don
+		assertEquals("ceci est une description",don.getDesc());
 		
-		don.setType("nouveau type");
+		don.setType("argent");
 		assertEquals(1,donDao.updateDon(don));  
 		
-		don = donDao.findAll().get(0);
+		don = donDao.findById(don.getiD());
 		
-		assertEquals("nouveau type",don.getType()); // to make sure 
+		assertEquals("argent",don.getType()); // to make sure 
 		
 		// delete 
 		
 		assertEquals(1,donDao.deleteDon(don.getiD()));
-		assertEquals(0, donDao.findAll().size());
+		assertEquals(list.size() - 1, donDao.findAll().size());
 		
 	}
 }
