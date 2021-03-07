@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/authentication/services/auth.service';
 import { DonneurService } from 'src/app/services/donneur/donneur.service';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { Don } from 'src/app/models/don';
+import {AssociationService} from 'src/app/services/association/association.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,8 +17,10 @@ export class UserProfileComponent implements OnInit {
   
 
 
-  constructor(private authService: AuthService, private donneurService: DonneurService, private formBuilder: FormBuilder) { }
-  
+  constructor(private authService: AuthService, private donneurService: DonneurService, private formBuilder: FormBuilder, private associationService: AssociationService) { }
+  public dons:Don[] = [];
+  public nDons: number;
+  //public idAssoc: number;
   checkoutForm = this.formBuilder.group({
     id_donneur: this.authService.userId,
     usernameField: new FormControl(),
@@ -39,36 +43,53 @@ export class UserProfileComponent implements OnInit {
   get nom() { return this.checkoutForm.get('nomField').value; }
   get prenom() { return this.checkoutForm.get('prenomField').value; }
   get desc() { return this.checkoutForm.get('descField').value; }
-  
+  get nmbDons() {return this.nDons;}
+
+
   ngOnInit() {
     this.checkoutForm.controls['usernameField'].disable();
-    this.donneurService.getUserchihaja().subscribe((response :{	
-      desc_donneur: string,
-      idDonneur: number,	
-      dons: string,	
-      pays: string,
-      ville: string,
-      nomDonneur: string,	
-      prenomDonneur: string,	
-      addrDonneur: string,	
-      roleUser: string,	
-      email:string,	
-      username: string,	
-      password: string,	
-      idUser: number	
-    })=>{
-      console.log(`role` + this.authService.role);
-      console.log(response)
-      this.checkoutForm.patchValue({descField: response.desc_donneur}),
-      this.checkoutForm.patchValue({emailField: response.email});
-      this.checkoutForm.patchValue({usernameField: response.username});
-      this.checkoutForm.patchValue({addressField: response.addrDonneur});
-      this.checkoutForm.patchValue({nomField: response.nomDonneur});
-      this.checkoutForm.patchValue({prenomField: response.prenomDonneur});
-      this.checkoutForm.patchValue({villeField: response.ville});
-      this.checkoutForm.patchValue({paysField: response.pays});
-    });
-    
-  }
+    if(this.authService.role == 'D') {
+      this.donneurService.getUserchihaja().subscribe((response :{	
+        desc_donneur: string,
+        idDonneur: number,	
+        dons: string,	
+        pays: string,
+        ville: string,
+        nomDonneur: string,	
+        prenomDonneur: string,	
+        addrDonneur: string,	
+        roleUser: string,	
+        email:string,	
+        username: string,	
+        password: string,	
+        idUser: number	
+      })=>{
+        console.log(`response` + response)
+        this.checkoutForm.patchValue({descField: response.desc_donneur}),
+        this.checkoutForm.patchValue({emailField: response.email});
+        this.checkoutForm.patchValue({usernameField: response.username});
+        this.checkoutForm.patchValue({addressField: response.addrDonneur});
+        this.checkoutForm.patchValue({nomField: response.nomDonneur});
+        this.checkoutForm.patchValue({prenomField: response.prenomDonneur});
+        this.checkoutForm.patchValue({villeField: response.ville});
+        this.checkoutForm.patchValue({paysField: response.pays});
+      });
+      this.donneurService.getUserDons().subscribe(response => {
+        this.dons = response;
+        this.nDons = response.length;
+      },err => console.log(err));
+    }
+    else {
+      //Association
+      this.associationService.getMembreAssocById().subscribe(
+          response => {console.log(response.toString)}
 
+      );
+      //console.log(`fpioqshnjdfpoqsijnfps` + this.idAssoc);
+      
+
+    }
   }
+}
+
+  
