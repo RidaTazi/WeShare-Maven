@@ -17,10 +17,10 @@ public class DBConnectionTest {
 
     @Test
     public void testDataInsertion(){
-
-        String data = "insert into donneur values ('tamtaoui', 'abdelwadoud', 'harhoura', 1, 999)";
+        Connection connection;
+        String data = "insert into donneur values ('tamtaoui', 'abdelwadoud', 'harhoura', 'rabat', 'maroc','yo', 1, 999)";
         try{
-            Connection connection;
+
             connection= DBConnection.getInstance();
             PreparedStatement preparedStatement;
             preparedStatement = connection.prepareStatement(data);
@@ -32,7 +32,6 @@ public class DBConnectionTest {
         }
         try{
             data = "select * from donneur  where idDonneur = 999;";
-            Connection connection;
             connection= DBConnection.getInstance();
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(data);
@@ -51,7 +50,18 @@ public class DBConnectionTest {
         catch (Exception e){
             e.printStackTrace();
         }
+        Statement statement;
+        try{
+            data = "delete from donneur where idDonneur = 999;";
+            connection= DBConnection.getInstance();
+            statement=connection.createStatement();
+            statement.executeUpdate(data);
+            statement.close();
 
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }
