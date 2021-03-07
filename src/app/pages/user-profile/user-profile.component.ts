@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/authentication/services/auth.service';
 import { DonneurService } from 'src/app/services/donneur/donneur.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Don } from 'src/app/models/don';
+import {AssociationService} from 'src/app/services/association/association.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,9 +17,10 @@ export class UserProfileComponent implements OnInit {
   
 
 
-  constructor(private authService: AuthService, private donneurService: DonneurService, private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService, private donneurService: DonneurService, private formBuilder: FormBuilder, private associationService: AssociationService) { }
   public dons:Don[] = [];
   public nDons: number;
+  //public idAssoc: number;
   checkoutForm = this.formBuilder.group({
     id_donneur: this.authService.userId,
     usernameField: new FormControl(),
@@ -79,8 +81,15 @@ export class UserProfileComponent implements OnInit {
     }
     else {
       //Association
+      this.associationService.getMembreAssocById().subscribe(
+          response => {console.log(response.toString)}
+
+      );
+      //console.log(`fpioqshnjdfpoqsijnfps` + this.idAssoc);
+      
 
     }
   }
+}
 
-  }
+  

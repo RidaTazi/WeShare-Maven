@@ -24,12 +24,13 @@ export class AssociationService {
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
     return this.httpClient.get<Publication[]>(SERVER_URL, { headers: HEADERS });
   }
-  public getAssociationById(){
-    const SERVER_URL = SERVER_ADDRESS + `/association/${this.authService.userId}`;
+  public getAssociationById(assocId: number){
+    const SERVER_URL = SERVER_ADDRESS + `/association/${assocId}`;
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
 
     return this.httpClient.get(SERVER_URL, { headers: HEADERS });
   }
+
   getDonsByPubId(){
      const SERVER_URL = SERVER_ADDRESS + `/association/${this.exchange.data.pubId}/dons`;
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
@@ -71,6 +72,11 @@ export class AssociationService {
     const SERVER_URL = SERVER_ADDRESS + `/association/${this.authService.userId}/addPublication`;
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
     return this.httpClient.post(SERVER_URL,don,{headers : HEADERS})
+  }
+  public getMembreAssocById(){
+    const SERVER_URL = SERVER_ADDRESS + `/membre/${this.authService.userId}`;
+    const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
+    return this.httpClient.get(SERVER_URL, { headers: HEADERS });
   }
   //methode ici
 }
