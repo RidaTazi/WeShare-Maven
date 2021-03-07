@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ExchangeService } from 'src/app/services/exchange.service';
-import { SERVER_ADDRESS } from 'src/environments/environment';
+import { SERVER_ADDRESS } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
