@@ -4,7 +4,8 @@ import { AuthService } from 'src/app/authentication/services/auth.service';
 import { DonneurService } from 'src/app/services/donneur/donneur.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Don } from 'src/app/models/don';
-import {AssociationService} from 'src/app/services/association/association.service';
+import { AssociationService } from 'src/app/services/association/association.service';
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,6 +21,8 @@ export class UserProfileComponent implements OnInit {
   constructor(private authService: AuthService, private donneurService: DonneurService, private formBuilder: FormBuilder, private associationService: AssociationService) { }
   public dons:Don[] = [];
   public nDons: number;
+  public id_assoc: number;
+
   //public idAssoc: number;
   checkoutForm = this.formBuilder.group({
     id_donneur: this.authService.userId,
@@ -64,7 +67,7 @@ export class UserProfileComponent implements OnInit {
         password: string,	
         idUser: number	
       })=>{
-        console.log(`response` + response)
+        console.log(response)
         this.checkoutForm.patchValue({descField: response.desc_donneur}),
         this.checkoutForm.patchValue({emailField: response.email});
         this.checkoutForm.patchValue({usernameField: response.username});
@@ -82,9 +85,48 @@ export class UserProfileComponent implements OnInit {
     else {
       //Association
       this.associationService.getMembreAssocById().subscribe(
-          response => {console.log(response.toString)}
-
-      );
+        (response :{	
+          idMembre: number,
+          nomMembre: string,
+          prenomMembre: string,
+          posteMembre: string,
+          idAssoc: number,
+          idUser: string,
+          ville: string;
+          pays: string,
+          password: string,
+          username: string,
+          roleUser: string,
+          email: string
+        })=>{
+          console.log(response)
+          this.checkoutForm.patchValue({emailField: response.email});
+          this.checkoutForm.patchValue({usernameField: response.username});
+          this.checkoutForm.patchValue({prenomField: response.prenomMembre});
+          this.checkoutForm.patchValue({nomField: response.nomMembre});
+          this.checkoutForm.patchValue({paysField: response.pays});
+          this.checkoutForm.patchValue({villeField: response.ville});
+          this.checkoutForm.patchValue({descField: response.posteMembre})
+          this.id_assoc = response.idAssoc;
+          this.associationService.getAssociationById(this.id_assoc).subscribe(
+            (response :{	
+              idAssoc: number,
+              nomAssoc: string,
+              codeAssoc: string,
+              descAssoc: string,
+              logoAssoc: string,
+              addrAssoc: string,
+              etatInfo: 1,
+              publications: string,
+              don: string	
+            })=>{
+              console.log(response)
+              //this.checkoutForm.patchValue({descField: response.descAssoc}),
+              //this.checkoutForm.patchValue({usernameField: response.nomAssoc});
+              this.checkoutForm.patchValue({addressField: response.addrAssoc});
+            });
+        });
+        
       //console.log(`fpioqshnjdfpoqsijnfps` + this.idAssoc);
       
 

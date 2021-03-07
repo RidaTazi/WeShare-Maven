@@ -76,7 +76,9 @@ export class AssociationService {
   public getMembreAssocById(){
     const SERVER_URL = SERVER_ADDRESS + `/membre/${this.authService.userId}`;
     const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
+    //console.log(`fsdqfsqdfsdqfsdq`+ this.httpClient.get(SERVER_URL, { headers: HEADERS }));
     return this.httpClient.get(SERVER_URL, { headers: HEADERS });
+    
   }
   //methode ici
 }
