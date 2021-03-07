@@ -1,7 +1,7 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from 'src/app/authentication/services/auth.service';
-import { SERVER_ADDRESS } from 'src/environments/environment';
+import { SERVER_ADDRESS } from 'src/environments/environment.prod';
 import {Publication} from 'src/app/models/publication';
 import {Don} from 'src/app/models/don';
 import {ExchangeService} from 'src/app/services/exchange.service';
