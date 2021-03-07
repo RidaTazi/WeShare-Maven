@@ -115,10 +115,11 @@ public class DonneurImpl implements IDonneur {
          com.google.gson.JsonObject object = gson.fromJson(data, JsonObject.class);
          String type=object.get("typeDon").getAsString();
          String logo=object.get("logoDon").getAsString();
+         String date=object.get("dateDon").getAsString();
          String desc=object.get("descDon").getAsString();
          String state=object.get("stateDon").getAsString();
          int etatInfo=object.get("etatInfo").getAsInt();
-         Don don=new Don(idDon,type, logo, desc, new Date(5), state, etatInfo); //the date doesn't change anyways
+         Don don=new Don(idDon,type, logo, desc, Date.valueOf(date), state, etatInfo); //the date doesn't change anyways
          donDao.updateDon(don);
          return 0;
        
